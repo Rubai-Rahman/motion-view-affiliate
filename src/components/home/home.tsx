@@ -1,6 +1,6 @@
 'use client';
 
-import { Navbar } from './navbar';
+import { HomeNavbar } from './home-navbar';
 import { Hero } from './hero';
 import { TrustStats } from './trust-stats';
 import { HowItWorks } from './how-it-works';
@@ -17,7 +17,7 @@ import { GlowDivider } from './motion-primitives';
 export default function HomePage() {
   return (
     <main className="landing-page min-h-screen overflow-x-hidden">
-      <Navbar />
+      <HomeNavbar />
       <Hero />
       <TrustStats />
       <GlowDivider />

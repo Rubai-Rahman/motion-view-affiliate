@@ -33,7 +33,7 @@ const links: { label: string; target: string }[] = [
 /* Navbar                                                                     */
 /* -------------------------------------------------------------------------- */
 
-export function Navbar() {
+export function HomeNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const scrollTo = useLenisScrollTo();
