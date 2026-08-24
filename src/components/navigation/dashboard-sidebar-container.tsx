@@ -109,7 +109,7 @@ export function DashboardSidebarContainer({
       <Sidebar state={mobileOpen ? 'open' : 'closed'}>
         <SidebarHeader>
           <SidebarLogo icon={logoIcon}>
-            <h1 className="font-bold text-lg bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="font-bold text-lg -linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Motion View
             </h1>
             <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -146,7 +146,7 @@ export function DashboardSidebarContainer({
         <SidebarFooter>
           <div className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800">
             <Avatar className="h-10 w-10">
-              <AvatarFallback className="bg-linear-to-br from-blue-500 to-purple-600 text-white">
+              <AvatarFallback className="-linear-to-br from-blue-500 to-purple-600 text-white">
                 {userInitials}
               </AvatarFallback>
             </Avatar>

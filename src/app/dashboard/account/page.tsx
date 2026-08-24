@@ -66,11 +66,11 @@ export default function AccountPage() {
       </div>
 
       {/* Profile Overview Card */}
-      <Card className="border-0 shadow-lg bg-linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+      <Card className="border-0 shadow-lg -linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
         <CardContent className="pt-6">
           <div className="flex items-center gap-6">
             <Avatar className="w-24 h-24 border-4 border-white dark:border-gray-700 shadow-lg">
-              <AvatarFallback className="bg-linear-to-br from-blue-500 to-purple-600 text-white text-2xl">
+              <AvatarFallback className="-linear-to-br from-blue-500 to-purple-600 text-white text-2xl">
                 JD
               </AvatarFallback>
             </Avatar>
@@ -252,7 +252,7 @@ export default function AccountPage() {
               <div className="flex justify-end pt-4">
                 <Button
                   onClick={handleProfileSave}
-                  className="bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                  className="-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
                 >
                   <Save className="h-4 w-4 mr-2" />
                   Save Changes
@@ -322,7 +322,7 @@ export default function AccountPage() {
               <div className="flex justify-end pt-4">
                 <Button
                   onClick={handlePasswordChange}
-                  className="bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                  className="-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
                 >
                   <Save className="h-4 w-4 mr-2" />
                   Update Password

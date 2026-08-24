@@ -126,14 +126,14 @@ export default function LeaderboardPage() {
       {/* Top 3 Podium */}
       <div className="grid gap-6 md:grid-cols-3">
         {/* 2nd Place */}
-        <Card className="border-0 shadow-lg bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 order-2 md:order-1">
+        <Card className="border-0 shadow-lg -linear-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 order-2 md:order-1">
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-gray-400 to-gray-500 mb-4 shadow-lg">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full -linear-to-br from-gray-400 to-gray-500 mb-4 shadow-lg">
                 <Medal className="h-8 w-8 text-white" />
               </div>
               <Avatar className="w-20 h-20 mx-auto mb-3 border-4 border-gray-300 dark:border-gray-600">
-                <AvatarFallback className="bg-linear-to-br from-gray-400 to-gray-500 text-white text-xl">
+                <AvatarFallback className="-linear-to-br from-gray-400 to-gray-500 text-white text-xl">
                   {topAffiliates[1].avatar}
                 </AvatarFallback>
               </Avatar>
@@ -167,14 +167,14 @@ export default function LeaderboardPage() {
         </Card>
 
         {/* 1st Place */}
-        <Card className="border-0 shadow-2xl bg-linear-to-br from-yellow-50 to-amber-100 dark:from-yellow-900/20 dark:to-amber-900/30 order-1 md:order-2">
+        <Card className="border-0 shadow-2xl -linear-to-br from-yellow-50 to-amber-100 dark:from-yellow-900/20 dark:to-amber-900/30 order-1 md:order-2">
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-linear-to-br from-yellow-400 to-amber-500 mb-4 shadow-xl">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full -linear-to-br from-yellow-400 to-amber-500 mb-4 shadow-xl">
                 <Trophy className="h-10 w-10 text-white" />
               </div>
               <Avatar className="w-24 h-24 mx-auto mb-3 border-4 border-yellow-400">
-                <AvatarFallback className="bg-linear-to-br from-yellow-400 to-amber-500 text-white text-2xl">
+                <AvatarFallback className="-linear-to-br from-yellow-400 to-amber-500 text-white text-2xl">
                   {topAffiliates[0].avatar}
                 </AvatarFallback>
               </Avatar>
@@ -210,14 +210,14 @@ export default function LeaderboardPage() {
         </Card>
 
         {/* 3rd Place */}
-        <Card className="border-0 shadow-lg bg-linear-to-br from-amber-50 to-orange-100 dark:from-amber-900/20 dark:to-orange-900/30 order-3">
+        <Card className="border-0 shadow-lg -linear-to-br from-amber-50 to-orange-100 dark:from-amber-900/20 dark:to-orange-900/30 order-3">
           <CardContent className="pt-6">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-amber-600 to-orange-600 mb-4 shadow-lg">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full -linear-to-br from-amber-600 to-orange-600 mb-4 shadow-lg">
                 <Award className="h-8 w-8 text-white" />
               </div>
               <Avatar className="w-20 h-20 mx-auto mb-3 border-4 border-amber-600">
-                <AvatarFallback className="bg-linear-to-br from-amber-600 to-orange-600 text-white text-xl">
+                <AvatarFallback className="-linear-to-br from-amber-600 to-orange-600 text-white text-xl">
                   {topAffiliates[2].avatar}
                 </AvatarFallback>
               </Avatar>
@@ -252,15 +252,15 @@ export default function LeaderboardPage() {
       </div>
 
       {/* Your Position */}
-      <Card className="border-2 border-blue-200 dark:border-blue-800 bg-linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+      <Card className="border-2 border-blue-200 dark:border-blue-800 -linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
         <CardContent className="pt-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-linear-to-br from-blue-500 to-purple-600">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full -linear-to-br from-blue-500 to-purple-600">
                 <span className="text-white font-bold">#{yourRank.rank}</span>
               </div>
               <Avatar className="w-14 h-14">
-                <AvatarFallback className="bg-linear-to-br from-blue-500 to-purple-600 text-white">
+                <AvatarFallback className="-linear-to-br from-blue-500 to-purple-600 text-white">
                   {yourRank.avatar}
                 </AvatarFallback>
               </Avatar>
@@ -324,7 +324,7 @@ export default function LeaderboardPage() {
                     {getRankIcon(affiliate.rank)}
                   </div>
                   <Avatar className="w-12 h-12">
-                    <AvatarFallback className="bg-linear-to-br from-blue-500 to-purple-600 text-white">
+                    <AvatarFallback className="-linear-to-br from-blue-500 to-purple-600 text-white">
                       {affiliate.avatar}
                     </AvatarFallback>
                   </Avatar>

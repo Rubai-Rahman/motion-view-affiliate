@@ -97,7 +97,7 @@ export default function DashboardPage() {
             Here's what's happening with your affiliate account today.
           </p>
         </div>
-        <Button className="bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg shadow-blue-500/25">
+        <Button className="-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg shadow-blue-500/25">
           <Link2 className="mr-2 h-4 w-4" />
           Get Affiliate Link
         </Button>
@@ -114,7 +114,7 @@ export default function DashboardPage() {
               <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 {stat.title}
               </CardTitle>
-              <div className={`p-2 rounded-lg bg-linear-to-br ${stat.color}`}>
+              <div className={`p-2 rounded-lg -linear-to-br ${stat.color}`}>
                 <stat.icon className="h-4 w-4 text-white" />
               </div>
             </CardHeader>
@@ -146,7 +146,7 @@ export default function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center bg-linear-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-lg">
+            <div className="h-64 flex items-center justify-center -linear-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-lg">
               <div className="text-center">
                 <TrendingUp className="h-12 w-12 text-blue-500 dark:text-blue-400 mx-auto mb-2" />
                 <p className="text-gray-600 dark:text-gray-400">

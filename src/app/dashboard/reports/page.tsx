@@ -136,12 +136,12 @@ export default function ReportsPage() {
 
       {/* Summary Stats */}
       <div className="grid gap-4 md:grid-cols-4">
-        <Card className="border-0 shadow-lg bg-linear-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20">
+        <Card className="border-0 shadow-lg -linear-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Total Clicks
             </CardTitle>
-            <div className="p-2 rounded-lg bg-linear-to-br from-blue-500 to-cyan-600">
+            <div className="p-2 rounded-lg -linear-to-br from-blue-500 to-cyan-600">
               <Link2 className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -156,12 +156,12 @@ export default function ReportsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
+        <Card className="border-0 shadow-lg -linear-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Conversions
             </CardTitle>
-            <div className="p-2 rounded-lg bg-linear-to-br from-green-500 to-emerald-600">
+            <div className="p-2 rounded-lg -linear-to-br from-green-500 to-emerald-600">
               <Users className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -176,12 +176,12 @@ export default function ReportsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg bg-linear-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+        <Card className="border-0 shadow-lg -linear-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Revenue
             </CardTitle>
-            <div className="p-2 rounded-lg bg-linear-to-br from-purple-500 to-pink-600">
+            <div className="p-2 rounded-lg -linear-to-br from-purple-500 to-pink-600">
               <TrendingUp className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -196,12 +196,12 @@ export default function ReportsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg bg-linear-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20">
+        <Card className="border-0 shadow-lg -linear-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Avg. Conversion Rate
             </CardTitle>
-            <div className="p-2 rounded-lg bg-linear-to-br from-orange-500 to-red-600">
+            <div className="p-2 rounded-lg -linear-to-br from-orange-500 to-red-600">
               <BarChart3 className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -301,7 +301,7 @@ export default function ReportsPage() {
                     className="flex items-center justify-between p-4 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-purple-600 text-white font-bold">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full -linear-to-br from-blue-500 to-purple-600 text-white font-bold">
                         {index + 1}
                       </div>
                       <div>
@@ -372,7 +372,7 @@ export default function ReportsPage() {
                     </div>
                     <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-linear-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-500"
+                        className="h-full -linear-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-500"
                         style={{ width: data.percentage }}
                       />
                     </div>

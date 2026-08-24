@@ -92,7 +92,7 @@ export default function AffiliateLinkPage() {
       </div>
 
       {/* Main Affiliate Link Card */}
-      <Card className="border-0 shadow-lg bg-linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+      <Card className="border-0 shadow-lg -linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100">
             Your Main Affiliate Link
@@ -101,7 +101,7 @@ export default function AffiliateLinkPage() {
         <CardContent className="space-y-4">
           <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 rounded-lg bg-linear-to-br from-blue-500 to-purple-600">
+              <div className="p-2 rounded-lg -linear-to-br from-blue-500 to-purple-600">
                 <Link2 className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -116,7 +116,7 @@ export default function AffiliateLinkPage() {
             <div className="flex gap-2">
               <Button
                 onClick={() => handleCopy('https://motionview.com?ref=johndoe')}
-                className="flex-1 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                className="flex-1 -linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
               >
                 {copied ? (
                   <>
@@ -309,7 +309,7 @@ export default function AffiliateLinkPage() {
               <Button
                 onClick={handleCreateLink}
                 disabled={!newLinkName.trim()}
-                className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                className="w-full -linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Create Affiliate Link
@@ -375,7 +375,7 @@ export default function AffiliateLinkPage() {
                     </div>
                     <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-linear-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-500"
+                        className="h-full -linear-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-500"
                         style={{
                           width: `${Math.min((link.clicks / Math.max(...links.map((l) => l.clicks))) * 100, 100)}%`,
                         }}
@@ -404,7 +404,7 @@ export default function AffiliateLinkPage() {
                       className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-linear-to-br from-blue-500 to-purple-600 text-white font-bold text-sm">
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full -linear-to-br from-blue-500 to-purple-600 text-white font-bold text-sm">
                           {index + 1}
                         </div>
                         <div>

@@ -132,12 +132,12 @@ export default function PaymentReportPage() {
 
       {/* Summary Cards */}
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="border-0 shadow-lg bg-linear-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
+        <Card className="border-0 shadow-lg -linear-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Total Paid
             </CardTitle>
-            <div className="p-2 rounded-lg bg-linear-to-br from-green-500 to-emerald-600">
+            <div className="p-2 rounded-lg -linear-to-br from-green-500 to-emerald-600">
               <CheckCircle className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -151,12 +151,12 @@ export default function PaymentReportPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg bg-linear-to-br from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20">
+        <Card className="border-0 shadow-lg -linear-to-br from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Pending
             </CardTitle>
-            <div className="p-2 rounded-lg bg-linear-to-br from-yellow-500 to-amber-600">
+            <div className="p-2 rounded-lg -linear-to-br from-yellow-500 to-amber-600">
               <Clock className="h-4 w-4 text-white" />
             </div>
           </CardHeader>
@@ -170,12 +170,12 @@ export default function PaymentReportPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg bg-linear-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+        <Card className="border-0 shadow-lg -linear-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
               Next Payout
             </CardTitle>
-            <div className="p-2 rounded-lg bg-linear-to-br from-blue-500 to-purple-600">
+            <div className="p-2 rounded-lg -linear-to-br from-blue-500 to-purple-600">
               <Calendar className="h-4 w-4 text-white" />
             </div>
           </CardHeader>

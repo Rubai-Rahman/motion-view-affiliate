@@ -16,10 +16,13 @@ const authCardVariants = cva(
     defaultVariants: {
       size: 'default',
     },
-  }
+  },
 );
 
-interface AuthCardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof authCardVariants> {
+interface AuthCardProps
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof authCardVariants> {
   logo?: React.ReactNode;
   title?: string;
   description?: string;
@@ -27,16 +30,19 @@ interface AuthCardProps extends React.HTMLAttributes<HTMLDivElement>, VariantPro
 }
 
 const AuthCard = React.forwardRef<HTMLDivElement, AuthCardProps>(
-  ({ className, size, logo, title, description, footer, children, ...props }, ref) => {
+  (
+    { className, size, logo, title, description, footer, children, ...props },
+    ref,
+  ) => {
     return (
-      <div ref={ref} className={cn(authCardVariants({ size }), className)} {...props}>
-        {logo && (
-          <div className="text-center mb-6">
-            {logo}
-          </div>
-        )}
+      <div
+        ref={ref}
+        className={cn(authCardVariants({ size }), className)}
+        {...props}
+      >
+        {logo && <div className="text-center mb-6">{logo}</div>}
         {title && (
-          <h2 className="text-3xl font-bold text-center mb-2 bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl font-bold text-center mb-2 -linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             {title}
           </h2>
         )}
@@ -53,7 +59,7 @@ const AuthCard = React.forwardRef<HTMLDivElement, AuthCardProps>(
         )}
       </div>
     );
-  }
+  },
 );
 AuthCard.displayName = 'AuthCard';
 
@@ -63,7 +69,10 @@ const AuthLogo = React.forwardRef<
 >(({ className, icon, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('mx-auto w-16 h-16 bg-linear-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg', className)}
+    className={cn(
+      'mx-auto w-16 h-16 -linear-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg',
+      className,
+    )}
     {...props}
   >
     {icon}

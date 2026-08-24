@@ -86,8 +86,8 @@ auth/
 
 ### 1. Tailwind CSS v4 Gradient Syntax
 
-**Issue:** `bg-gradient-to-*` deprecated in Tailwind v4
-**Fix:** Changed to `bg-linear-to-*` across all files
+**Issue:** `bg-linear-to-*` deprecated in Tailwind v4
+**Fix:** Changed to `-linear-to-*` across all files
 **Files Affected:** All page files and components with gradients
 
 ### 2. TypeScript Error in layout.tsx

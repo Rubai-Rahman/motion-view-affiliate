@@ -164,7 +164,7 @@ export default function HelpPage() {
           >
             <CardContent className="pt-6">
               <div className="flex flex-col items-center text-center space-y-3">
-                <div className="p-3 rounded-full bg-linear-to-br from-blue-500 to-purple-600">
+                <div className="p-3 rounded-full -linear-to-br from-blue-500 to-purple-600">
                   <method.icon className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-gray-100">
@@ -281,7 +281,7 @@ export default function HelpPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg bg-linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+          <Card className="border-0 shadow-lg -linear-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
             <CardContent className="pt-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30">
@@ -344,7 +344,7 @@ export default function HelpPage() {
                 </select>
               </div>
 
-              <Button className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
+              <Button className="w-full -linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
                 <MessageSquare className="h-4 w-4 mr-2" />
                 Send Message
               </Button>
