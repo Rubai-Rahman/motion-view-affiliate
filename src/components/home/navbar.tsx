@@ -1,44 +1,114 @@
 'use client';
 
-import { AnimatePresence, motion, useScroll, useTransform } from 'motion/react';
-import { Menu, Sparkles, X } from 'lucide-react';
-import { useState } from 'react';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from 'motion/react';
+import { ArrowRight, Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { MagneticButton, ease } from './motion-primitives';
 import { ModeToggle } from '../theme-toggle';
-import { ArrowRight } from 'lucide-react';
+import { useLenis, useLenisScrollTo } from '@/components/provider/smoothScroll';
 
-const links = [
-  ['How It Works', '#how-it-works'],
-  ['Benefits', '#benefits'],
-  ['Analytics', '#analytics'],
-  ['Commission', '#commission'],
-  ['FAQ', '#faq'],
+/* -------------------------------------------------------------------------- */
+/* Data                                                                       */
+/* -------------------------------------------------------------------------- */
+
+const links: { label: string; target: string }[] = [
+  { label: 'How It Works', target: '#how-it-works' },
+  { label: 'Benefits',     target: '#benefits' },
+  { label: 'Analytics',   target: '#analytics' },
+  { label: 'Commission',  target: '#commission' },
+  { label: 'FAQ',         target: '#faq' },
 ];
+
+/* -------------------------------------------------------------------------- */
+/* Navbar                                                                     */
+/* -------------------------------------------------------------------------- */
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { scrollY } = useScroll();
+  const scrollTo = useLenisScrollTo();
+  const lenis = useLenis();
 
-  const bgOpacity = useTransform(scrollY, [0, 100], [0, 1]);
-  const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.12]);
+  /* ---------------------------------------------------------------------- */
+  /* Sync Framer Motion scroll tracker with Lenis                           */
+  /* Framer's useScroll() reads window.scrollY via its own RAF loop, which  */
+  /* can lag behind Lenis's virtual scroll position. We drive a MotionValue */
+  /* directly from Lenis's scroll event so the navbar backdrop is always    */
+  /* in sync with the smooth-scroll position.                               */
+  /* ---------------------------------------------------------------------- */
+
+  const scrollY = useMotionValue(0);
+
+  useEffect(() => {
+    if (!lenis) return;
+
+    const onScroll = ({ scroll }: { scroll: number }) => {
+      scrollY.set(scroll);
+    };
+
+    lenis.on('scroll', onScroll);
+    return () => lenis.off('scroll', onScroll);
+  }, [lenis, scrollY]);
+
+  /* Spring-smoothed for silky backdrop transitions */
+  const scrollYSpring = useSpring(scrollY, { stiffness: 120, damping: 24 });
+
+  const bgOpacity = useTransform(scrollYSpring, [0, 100], [0, 1]);
+  const borderOpacity = useTransform(scrollYSpring, [0, 100], [0, 0.12]);
+
+  /* ---------------------------------------------------------------------- */
+  /* Click handler — smooth scroll, no hash                                 */
+  /* ---------------------------------------------------------------------- */
+
+  const handleNavClick = (
+    e: React.MouseEvent,
+    target: string,
+  ) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    scrollTo(target);
+  };
+
+  /* ---------------------------------------------------------------------- */
+  /* Logo click — scroll to top via Lenis                                   */
+  /* ---------------------------------------------------------------------- */
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.6 });
+    }
+  };
+
+  /* ---------------------------------------------------------------------- */
+  /* Render                                                                  */
+  /* ---------------------------------------------------------------------- */
 
   return (
     <motion.header className="fixed left-0 top-0 z-50 w-full">
-      {/* Blurred background that fades in on scroll */}
+      {/* Scroll-driven backdrop */}
       <motion.div
         style={{ opacity: bgOpacity }}
         className="absolute inset-0 bg-(--hero-background)/90 backdrop-blur-2xl"
       />
+      {/* Scroll-driven bottom border */}
       <motion.div
         style={{ opacity: borderOpacity }}
         className="absolute inset-x-0 bottom-0 h-px bg-(--hero-foreground)"
       />
 
       <div className="relative mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-5 sm:px-8">
-        {/* Logo */}
+
+        {/* ---- Logo ---- */}
         <motion.a
-          href="#"
+          href="/"
+          onClick={handleLogoClick}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease }}
@@ -51,6 +121,7 @@ export function Navbar() {
             className="relative flex size-9 items-center justify-center rounded-[11px] bg-(--landing-accent) font-black text-(--landing-accent-foreground) shadow-lg shadow-(--landing-accent)/30"
           >
             M
+            {/* Pulse ring */}
             <motion.div
               animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
               transition={{ duration: 3, repeat: Infinity }}
@@ -73,17 +144,18 @@ export function Navbar() {
           </div>
         </motion.a>
 
-        {/* Desktop Nav */}
+        {/* ---- Desktop nav ---- */}
         <motion.nav
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease }}
           className="hidden items-center gap-7 lg:flex"
         >
-          {links.map(([label, href], i) => (
+          {links.map(({ label, target }, i) => (
             <motion.a
               key={label}
-              href={href}
+              href={target}
+              onClick={(e) => handleNavClick(e, target)}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15 + i * 0.05, ease }}
@@ -101,7 +173,7 @@ export function Navbar() {
           ))}
         </motion.nav>
 
-        {/* Right Actions */}
+        {/* ---- Right actions ---- */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -127,16 +199,18 @@ export function Navbar() {
           </MagneticButton>
         </motion.div>
 
-        {/* Mobile Toggle */}
+        {/* ---- Mobile hamburger ---- */}
         <motion.button
           whileTap={{ scale: 0.9 }}
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
           className="relative flex size-10 items-center justify-center rounded-xl border border-(--hero-line) text-(--hero-muted) lg:hidden"
+          aria-label="Toggle menu"
         >
           <AnimatePresence mode="wait" initial={false}>
             {mobileOpen ? (
-              <motion.div key="close"
+              <motion.div
+                key="close"
                 initial={{ rotate: -90, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 exit={{ rotate: 90, opacity: 0 }}
@@ -145,7 +219,8 @@ export function Navbar() {
                 <X className="size-5" />
               </motion.div>
             ) : (
-              <motion.div key="menu"
+              <motion.div
+                key="menu"
                 initial={{ rotate: 90, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 exit={{ rotate: -90, opacity: 0 }}
@@ -158,7 +233,7 @@ export function Navbar() {
         </motion.button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* ---- Mobile drawer ---- */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -169,14 +244,14 @@ export function Navbar() {
             className="relative overflow-hidden border-t border-(--hero-line) bg-(--hero-background)/95 backdrop-blur-2xl lg:hidden"
           >
             <nav className="space-y-1 p-4">
-              {links.map(([label, href], i) => (
+              {links.map(({ label, target }, i) => (
                 <motion.a
                   key={label}
-                  href={href}
+                  href={target}
+                  onClick={(e) => handleNavClick(e, target)}
                   initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  onClick={() => setMobileOpen(false)}
                   className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-(--hero-muted) hover:bg-white/5 hover:text-(--hero-foreground)"
                 >
                   <span className="size-1 rounded-full bg-(--landing-accent)" />
@@ -184,7 +259,7 @@ export function Navbar() {
                 </motion.a>
               ))}
 
-              <div className="mt-3 flex gap-2 px-4 pt-3 border-t border-(--hero-line)">
+              <div className="mt-3 flex gap-2 border-t border-(--hero-line) px-4 pt-3">
                 <Button
                   variant="outline"
                   className="flex-1 border-(--hero-line) bg-transparent text-(--hero-muted)"

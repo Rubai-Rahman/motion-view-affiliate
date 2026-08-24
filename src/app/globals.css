@@ -246,7 +246,7 @@
   --landing-accent-foreground: oklch(0.16 0.012 160);
 
   /* Hero */
-  --hero-background: oklch(0.1 0.008 240);
+  --hero-background: oklch(0.2 0 100);
   --hero-foreground: oklch(0.985 0 0);
   --hero-muted: oklch(0.68 0.015 150);
   --hero-line: oklch(1 0 0 / 10%);

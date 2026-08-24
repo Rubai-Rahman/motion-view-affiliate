@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { MagneticButton, ease, reveal } from './motion-primitives';
 import { HeroDashboard } from './hero-dashboard';
+import { useLenisScrollTo } from '@/components/provider/smoothScroll';
 
 const staggerContainer = {
   hidden: {},
@@ -16,6 +17,7 @@ const staggerContainer = {
 
 export function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const scrollTo = useLenisScrollTo();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothX = useSpring(mouseX, { stiffness: 60, damping: 20 });
@@ -176,9 +178,7 @@ export function Hero() {
                 size="lg"
                 variant="outline"
                 onClick={() => {
-                  document
-                    .querySelector('#how-it-works')
-                    ?.scrollIntoView({ behavior: 'smooth' });
+                  scrollTo('#how-it-works');
                 }}
                 className="group h-12 border-border bg-white/3 px-7 text-foreground/40 backdrop-blur-xl hover:bg-muted hover:text-foreground"
               >
