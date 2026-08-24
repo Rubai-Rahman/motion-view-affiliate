@@ -1,5 +1,4 @@
 import { DashboardSidebarContainer } from '@/components/navigation/dashboard-sidebar-container';
-import { ThemeToggle } from '@/components/theme-toggle';
 
 export default function DashboardLayout({
   children,
@@ -34,7 +33,6 @@ export default function DashboardLayout({
                 Affiliate Dashboard
               </h1>
             </div>
-            <ThemeToggle />
           </div>
         </div>
         <div className="p-6">{children}</div>

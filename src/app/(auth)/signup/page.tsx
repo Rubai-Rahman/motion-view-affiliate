@@ -1,23 +1,11 @@
-'use client';
+import SignupContainer from './signup-container';
+import { Metadata } from 'next';
 
-import { SignupContainer } from '@/components/auth';
-import { useRouter } from 'next/navigation';
+export const metadata: Metadata = {
+  title: 'Sign Up',
+  description: 'Sign up for an account',
+};
 
-export default function SignupPage() {
-  const router = useRouter();
-
-  const handleSubmit = (data: {
-    name: string;
-    email: string;
-    password: string;
-  }) => {
-    console.log('Signup:', data);
-    // Add your signup logic here
-  };
-
-  const handleLogin = () => {
-    router.push('/auth/login');
-  };
-
-  return <SignupContainer onSubmit={handleSubmit} onLogin={handleLogin} />;
+export default function page() {
+  return <SignupContainer />;
 }

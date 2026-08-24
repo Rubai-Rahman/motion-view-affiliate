@@ -13,7 +13,7 @@ import Link from 'next/link';
 
 import { Button, buttonVariants } from '@/components/ui/button';
 import { ease } from './motion-primitives';
-import { ModeToggle } from '../theme-toggle';
+import { ModeToggle } from '../common/theme-toggle';
 import { useLenis, useLenisScrollTo } from '@/components/provider/smoothScroll';
 import { cn } from '@/lib/utils';
 
