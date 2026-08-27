@@ -1,5 +1,6 @@
 import { LoginForm } from '@/components/auth/login-form';
 import { GalleryVerticalEnd } from 'lucide-react';
+import Image from 'next/image';
 
 const LoginContainer = () => {
   return (
@@ -20,10 +21,12 @@ const LoginContainer = () => {
         </div>
       </div>
       <div className="relative hidden bg-muted lg:block">
-        <img
-          src="/placeholder.svg"
+        <Image
+          src="/images/login.webp"
           alt="Image"
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          width={1920}
+          height={1080}
         />
       </div>
     </div>

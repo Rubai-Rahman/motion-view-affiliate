@@ -99,7 +99,7 @@ export function HomeNavbar() {
       {/* Scroll-driven backdrop */}
       <motion.div
         style={{ opacity: bgOpacity }}
-        className="absolute inset-0 bg-(--hero-background)/90 backdrop-blur-2xl"
+        className="absolute inset-0 bg-(--background)/90 backdrop-blur-2xl"
       />
 
       {/* Scroll-driven border */}
@@ -238,7 +238,7 @@ export function HomeNavbar() {
           </Link>
 
           <Link
-            className="flex h-9 items-center gap-2 rounded bg-motion px-5 text-sm text-motion-foreground shadow-lg shadow-motion/25 hover:bg-motion/30"
+            className="flex h-9 items-center gap-2 rounded bg-primary px-5 text-sm text-primary-foreground shadow-lg shadow-primary/25 hover:bg-primary/30"
             href="/signup"
           >
             Become an Affiliate
@@ -324,7 +324,7 @@ export function HomeNavbar() {
               duration: 0.3,
               ease,
             }}
-            className="relative overflow-hidden border-t border-(--hero-line) bg-(--hero-background)/95 backdrop-blur-2xl lg:hidden"
+            className="relative overflow-hidden border-t border-(--hero-line) bg-(--background)/95 backdrop-blur-2xl lg:hidden"
           >
             <nav className="space-y-1 p-4">
               {links.map(({ label, target }, i) => (

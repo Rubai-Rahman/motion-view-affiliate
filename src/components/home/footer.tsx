@@ -50,7 +50,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-(--hero-background) text-(--hero-muted)">
+    <footer className="relative bg-(--background) text-(--hero-muted)">
       {/* Top glow line */}
       <div className="h-px bg-linear-to-r from-transparent via-(--landing-accent)/20 to-transparent" />
 

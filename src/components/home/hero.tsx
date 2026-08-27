@@ -33,7 +33,7 @@ export function Hero() {
         mouseX.set(e.clientX - rect.left);
         mouseY.set(e.clientY - rect.top);
       }}
-      className="relative min-h-screen overflow-hidden bg-(--hero-background)"
+      className="relative min-h-screen overflow-hidden bg-(--background)"
     >
       {/* Mouse-tracking glow */}
       <motion.div
@@ -237,7 +237,7 @@ export function Hero() {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 inset-x-0 h-24 bg-linear-to-b from-transparent to-(--hero-background)" />
+      <div className="absolute bottom-0 inset-x-0 h-24 bg-linear-to-b from-transparent to-(--background)" />
       <div className="h-px bg-linear-to-r from-transparent via-white/[0.08] to-transparent" />
     </section>
   );

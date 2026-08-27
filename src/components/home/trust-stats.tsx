@@ -66,7 +66,7 @@ function AnimatedNumber({
 
 export function TrustStats() {
   return (
-    <section className="relative overflow-hidden bg-(--hero-background)">
+    <section className="relative overflow-hidden bg-(--background)">
       {/* Subtle top shimmer */}
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/[0.08] to-transparent" />
 

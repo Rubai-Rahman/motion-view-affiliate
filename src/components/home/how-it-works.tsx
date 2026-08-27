@@ -51,7 +51,7 @@ export function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative overflow-hidden bg-(--hero-background) py-28 sm:py-32 lg:py-40"
+      className="relative overflow-hidden bg-(--background) py-28 sm:py-32 lg:py-40"
     >
       {/* Background decoration */}
       <div className="absolute left-1/2 top-0 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--landing-accent)/5 blur-[120px]" />
@@ -171,7 +171,7 @@ export function HowItWorks() {
                       type: 'spring',
                       stiffness: 400,
                     }}
-                    className="absolute -top-[44px] left-1/2 hidden size-3 -translate-x-1/2 rounded-full border-2 border-(--landing-accent) bg-(--hero-background) lg:block"
+                    className="absolute -top-[44px] left-1/2 hidden size-3 -translate-x-1/2 rounded-full border-2 border-(--landing-accent) bg-(--background) lg:block"
                   />
                 </motion.div>
               );

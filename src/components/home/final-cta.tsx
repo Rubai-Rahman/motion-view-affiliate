@@ -9,7 +9,7 @@ import { useLenisScrollTo } from '@/components/provider/smoothScroll';
 export function FinalCTA() {
   const scrollTo = useLenisScrollTo();
   return (
-    <section className="relative overflow-hidden bg-(--hero-background) py-28 sm:py-32 lg:py-40">
+    <section className="relative overflow-hidden bg-(--background) py-28 sm:py-32 lg:py-40">
       {/* Ambient glows */}
       <motion.div
         animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.35, 0.15] }}
@@ -109,7 +109,9 @@ export function FinalCTA() {
                   <Button
                     size="lg"
                     variant="outline"
-                    onClick={() => { scrollTo('#faq'); }}
+                    onClick={() => {
+                      scrollTo('#faq');
+                    }}
                     className="h-12 border-white/10 bg-white/[0.03] px-7 text-slate-300 hover:bg-white/[0.07] hover:text-white"
                   >
                     আরও জানুন
