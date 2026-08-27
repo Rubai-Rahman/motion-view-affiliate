@@ -1,7 +1,16 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Check, ChevronRight, CircleDollarSign, Link2, Package, ShoppingBag, Sparkles, Wallet } from 'lucide-react';
+import {
+  Check,
+  ChevronRight,
+  CircleDollarSign,
+  Link2,
+  Package,
+  ShoppingBag,
+  Sparkles,
+  Wallet,
+} from 'lucide-react';
 import { ease, Reveal, SectionHeading } from './motion-primitives';
 
 const flow = [
@@ -51,7 +60,7 @@ export function CommissionSection() {
   return (
     <section
       id="commission"
-      className="landing-light relative overflow-hidden bg-(--landing-soft) py-28 sm:py-32 lg:py-40"
+      className="landing-light relative overflow-hidden bg-(--secondary-background) py-28 sm:py-32 lg:py-40"
     >
       {/* Accent decoration */}
       <div className="absolute -left-40 top-1/2 size-[400px] -translate-y-1/2 rounded-full bg-(--landing-accent)/[0.05] blur-[100px]" />
@@ -72,10 +81,12 @@ export function CommissionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.7, ease }}
-              className="mt-10 rounded-2xl border border-(--landing-line) bg-(--landing-surface) p-6 shadow-sm"
+              className="mt-10 rounded-2xl border border-(--landing-line) bg-(--card) p-6 shadow-sm"
             >
               <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-(--landing-ink)">Example commission</p>
+                <p className="text-sm font-medium text-(--landing-ink)">
+                  Example commission
+                </p>
                 <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600">
                   +৳349
                 </span>
@@ -88,18 +99,25 @@ export function CommissionSection() {
                   ['Commission rate', '7%'],
                   ['Your earning', '৳349'],
                 ].map(([key, val]) => (
-                  <div key={key} className="flex items-center justify-between text-sm">
+                  <div
+                    key={key}
+                    className="flex items-center justify-between text-sm"
+                  >
                     <span className="text-(--landing-muted)">{key}</span>
-                    <span className="font-medium text-(--landing-ink)">{val}</span>
+                    <span className="font-medium text-(--landing-ink)">
+                      {val}
+                    </span>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-4 flex items-center gap-2 rounded-xl bg-(--landing-soft) p-3">
+              <div className="mt-4 flex items-center gap-2 rounded-xl bg-(--secondary-background) p-3">
                 <div className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10">
                   <Check className="size-3.5 text-emerald-600" />
                 </div>
-                <p className="text-xs text-(--landing-muted)">Sample transaction tracked successfully</p>
+                <p className="text-xs text-(--landing-muted)">
+                  Sample transaction tracked successfully
+                </p>
               </div>
             </motion.div>
           </div>
@@ -125,20 +143,32 @@ export function CommissionSection() {
                   <Reveal key={step.number} delay={i * 0.1}>
                     <motion.div
                       whileHover={{ x: 6 }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                      className="group relative flex items-start gap-5 rounded-2xl border border-(--landing-line) bg-(--landing-surface) p-5 pl-16 transition-colors hover:border-(--landing-accent)/20 sm:p-6 sm:pl-20"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                      className="group relative flex items-start gap-5 rounded-2xl border border-(--landing-line) bg-(--card) p-5 pl-16 transition-colors hover:border-(--landing-accent)/20 sm:p-6 sm:pl-20"
                     >
                       {/* Icon sitting on the connector */}
-                      <div className={`absolute left-2.5 top-1/2 -translate-y-1/2 flex size-[42px] items-center justify-center rounded-xl border border-(--landing-line) bg-(--landing-surface) transition-colors group-hover:border-(--landing-accent)/20 sm:left-3.5 ${step.bg}`}>
+                      <div
+                        className={`absolute left-2.5 top-1/2 -translate-y-1/2 flex size-[42px] items-center justify-center rounded-xl border border-(--landing-line) bg-(--card) transition-colors group-hover:border-(--landing-accent)/20 sm:left-3.5 ${step.bg}`}
+                      >
                         <Icon className={`size-4 ${step.color}`} />
                       </div>
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-3">
                           <div>
-                            <p className="font-mono text-[10px] font-semibold tracking-[0.14em] text-(--landing-accent)">{step.number}</p>
-                            <h3 className="mt-0.5 font-semibold text-(--landing-ink)">{step.title}</h3>
-                            <p className="mt-1 text-sm text-(--landing-muted)">{step.description}</p>
+                            <p className="font-mono text-[10px] font-semibold tracking-[0.14em] text-(--landing-accent)">
+                              {step.number}
+                            </p>
+                            <h3 className="mt-0.5 font-semibold text-(--landing-ink)">
+                              {step.title}
+                            </h3>
+                            <p className="mt-1 text-sm text-(--landing-muted)">
+                              {step.description}
+                            </p>
                           </div>
                           <ChevronRight className="mt-1 size-4 shrink-0 text-(--landing-muted) opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
                         </div>

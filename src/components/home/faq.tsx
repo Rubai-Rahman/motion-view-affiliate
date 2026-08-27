@@ -52,7 +52,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="landing-light relative overflow-hidden bg-(--landing-surface) py-28 sm:py-32 lg:py-40"
+      className="landing-light relative overflow-hidden bg-(--card) py-28 sm:py-32 lg:py-40"
     >
       {/* Background element */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,oklch(0.72_0.16_65_/_0.04),transparent_50%)]" />
@@ -76,9 +76,11 @@ export function FAQ() {
               ].map(([val, label]) => (
                 <div
                   key={label}
-                  className="rounded-xl border border-(--landing-line) bg-(--landing-soft) p-4"
+                  className="rounded-xl border border-(--landing-line) bg-(--secondary-background) p-4"
                 >
-                  <p className="text-2xl font-semibold text-(--landing-ink)">{val}</p>
+                  <p className="text-2xl font-semibold text-(--landing-ink)">
+                    {val}
+                  </p>
                   <p className="mt-1 text-xs text-(--landing-muted)">{label}</p>
                 </div>
               ))}
@@ -98,14 +100,16 @@ export function FAQ() {
                 >
                   <AccordionItem
                     value={`faq-${i}`}
-                    className="overflow-hidden rounded-2xl border border-(--landing-line) bg-(--landing-soft) px-6 data-[state=open]:border-(--landing-accent)/25 data-[state=open]:bg-(--landing-surface)"
+                    className="overflow-hidden rounded-2xl border border-(--landing-line) bg-(--secondary-background) px-6 data-[state=open]:border-(--landing-accent)/25 data-[state=open]:bg-(--card)"
                   >
                     <AccordionTrigger className="py-5 text-left hover:no-underline [&[data-state=open]]:text-(--landing-accent)">
                       <div className="pr-4">
                         <p className="font-medium text-(--landing-ink) group-data-[state=open]:text-(--landing-accent)">
                           {faq.question}
                         </p>
-                        <p className="mt-0.5 text-xs font-medium text-(--landing-accent)">{faq.bangla}</p>
+                        <p className="mt-0.5 text-xs font-medium text-(--landing-accent)">
+                          {faq.bangla}
+                        </p>
                       </div>
                     </AccordionTrigger>
 

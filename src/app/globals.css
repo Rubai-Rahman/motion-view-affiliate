@@ -12,6 +12,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+  --color-secondary-background: var(--secondary-background);
+  --color-secondary-background-foreground: var(
+    --secondary-background-foreground
+  );
+
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
@@ -88,8 +93,7 @@
 
   --color-landing-ink: var(--landing-ink);
   --color-landing-muted: var(--landing-muted);
-  --color-landing-soft: var(--landing-soft);
-  --color-landing-surface: var(--landing-surface);
+
   --color-landing-line: var(--landing-line);
 
   --color-glass: var(--glass-background);
@@ -103,6 +107,9 @@
 :root {
   --background: oklch(0.97 0.012 150);
   --foreground: oklch(0.18 0.015 170);
+
+  --secondary-background: oklch(0.97 0.008 150);
+  --secondary-background-foreground: oklch(0.18 0.015 170);
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -154,8 +161,7 @@
 
   --landing-ink: oklch(0.18 0.015 170);
   --landing-muted: oklch(0.48 0.02 170);
-  --landing-soft: oklch(0.97 0.008 150);
-  --landing-surface: oklch(1 0 0);
+
   --landing-line: oklch(0.18 0.015 170 / 12%);
 
   /*
@@ -182,6 +188,8 @@
 .dark {
   --background: oklch(0.2 0 100);
   --foreground: oklch(0.985 0 0);
+  --secondary-background: oklch(0.16 0.012 160);
+  --secondary-background-foreground: oklch(0.97 0.008 150);
 
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -231,8 +239,7 @@
 
   --landing-ink: oklch(0.95 0.01 150);
   --landing-muted: oklch(0.68 0.015 150);
-  --landing-soft: oklch(0.16 0.012 160);
-  --landing-surface: oklch(0.19 0.012 160);
+
   --landing-line: oklch(0.95 0.01 150 / 12%);
 
   --landing-accent: oklch(0.76 0.17 65);
@@ -241,7 +248,7 @@
 
   /* Hero */
 
-  --hero-muted: oklch(0.68 0.015 150);
+  --hero-muted: oklch(67.193% 0.00876 36.135);
   --hero-line: oklch(1 0 0 / 10%);
   --hero-grid: oklch(1 0 0 / 30%);
 
@@ -274,7 +281,7 @@
 
 @layer components {
   .landing-page {
-    background: var(--landing-surface);
+    background: var(--card);
     color: var(--landing-ink);
   }
 
@@ -290,7 +297,7 @@
   }
 
   .landing-light {
-    background: var(--landing-soft);
+    background: var(--secondary-background);
     color: var(--landing-ink);
   }
 
@@ -311,13 +318,13 @@
 
   .landing-light .bg-white,
   .landing-light .bg-\[\#fafaf9\] {
-    background-color: var(--landing-surface);
+    background-color: var(--card);
   }
 
   .landing-light .bg-\[\#efeee9\] {
     background-color: color-mix(
       in oklch,
-      var(--landing-soft),
+      var(--secondary-background),
       var(--landing-accent) 5%
     );
   }
