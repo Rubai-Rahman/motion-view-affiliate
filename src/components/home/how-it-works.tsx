@@ -42,8 +42,8 @@ const steps = [
     description: 'সফল অর্ডার হলে আপনার commission automatically track হবে।',
     icon: CircleDollarSign,
     color: 'from-amber-500/20 to-amber-500/5',
-    iconColor: 'text-(--landing-accent)',
-    iconBg: 'bg-(--landing-accent)/10',
+    iconColor: 'text-secondary',
+    iconBg: 'bg-secondary/10',
   },
 ];
 
@@ -51,12 +51,12 @@ export function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative overflow-hidden bg-(--background) py-28 sm:py-32 lg:py-40"
+      className="relative overflow-hidden bg-background py-28 sm:py-32 lg:py-40"
     >
       {/* Background decoration */}
-      <div className="absolute left-1/2 top-0 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--landing-accent)/5 blur-[120px]" />
+      <div className="absolute left-1/2 top-0 size-150 -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary/5 blur-[120px]" />
 
-      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
+      <div className="relative mx-auto max-w-350 px-5 sm:px-8">
         <div className="flex flex-col items-start gap-4 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
             eyebrow="Creator journey"
@@ -88,7 +88,7 @@ export function HowItWorks() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.6, delay: 0.3, ease }}
-              className="absolute inset-0 origin-left bg-linear-to-r from-(--landing-accent) via-(--landing-accent)/50 to-transparent"
+              className="absolute inset-0 origin-left bg-linear-to-r from-secondary via-secondary/50 to-transparent"
             />
           </div>
 
@@ -146,7 +146,7 @@ export function HowItWorks() {
                       <motion.div
                         className={`mt-5 h-px origin-left ${step.iconBg} rounded-full`}
                         style={{
-                          background: `var(--landing-accent)`,
+                          background: `var(--secondary)`,
                           opacity: 0.3,
                         }}
                         initial={{ scaleX: 0 }}
@@ -171,7 +171,7 @@ export function HowItWorks() {
                       type: 'spring',
                       stiffness: 400,
                     }}
-                    className="absolute -top-[44px] left-1/2 hidden size-3 -translate-x-1/2 rounded-full border-2 border-(--landing-accent) bg-(--background) lg:block"
+                    className="absolute -top-11 left-1/2 hidden size-3 -translate-x-1/2 rounded-full border-2 border-secondary bg-background lg:block"
                   />
                 </motion.div>
               );

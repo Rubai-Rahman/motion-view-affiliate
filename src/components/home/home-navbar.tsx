@@ -99,16 +99,16 @@ export function HomeNavbar() {
       {/* Scroll-driven backdrop */}
       <motion.div
         style={{ opacity: bgOpacity }}
-        className="absolute inset-0 bg-(--background)/90 backdrop-blur-2xl"
+        className="absolute inset-0 bg-background/90 backdrop-blur-2xl"
       />
 
       {/* Scroll-driven border */}
       <motion.div
         style={{ opacity: borderOpacity }}
-        className="absolute inset-x-0 bottom-0 h-px bg-(--hero-foreground)"
+        className="absolute inset-x-0 bottom-0 h-px bg-foreground"
       />
 
-      <div className="relative mx-auto flex h-[72px] max-w-[1400px] items-center justify-between px-5 sm:px-8">
+      <div className="relative mx-auto flex h-18 max-w-350 items-center justify-between px-5 sm:px-8">
         {/* ---------------------------------------------------------------- */}
         {/* Logo                                                              */}
         {/* ---------------------------------------------------------------- */}
@@ -130,7 +130,7 @@ export function HomeNavbar() {
                 stiffness: 400,
                 damping: 15,
               }}
-              className="relative flex size-9 items-center justify-center rounded-[11px] bg-(--landing-accent) font-black text-(--landing-accent-foreground) shadow-lg shadow-(--landing-accent)/30"
+              className="relative flex size-9 items-center justify-center rounded-[11px] bg-secondary font-black text-secondary-foreground shadow-lg shadow-secondary/30"
             >
               M{/* Pulse ring */}
               <motion.div
@@ -142,12 +142,12 @@ export function HomeNavbar() {
                   duration: 3,
                   repeat: Infinity,
                 }}
-                className="absolute inset-0 rounded-[11px] bg-(--landing-accent)"
+                className="absolute inset-0 rounded-[11px] bg-secondary"
               />
             </motion.div>
 
             <div>
-              <p className="text-sm font-semibold tracking-tight text-(--hero-foreground)">
+              <p className="text-sm font-semibold tracking-tight text-foreground">
                 Motion View
               </p>
 
@@ -195,12 +195,12 @@ export function HomeNavbar() {
                 ease,
               }}
               whileHover={{ y: -2 }}
-              className="group relative text-sm text-(--hero-muted) transition-colors hover:text-(--hero-foreground)"
+              className="group relative text-sm text-foreground transition-colors hover:text-primary"
             >
               {label}
 
               <motion.span
-                className="absolute -bottom-1 left-0 h-px w-full origin-left bg-(--landing-accent)"
+                className="absolute -bottom-1 left-0 h-px w-full origin-left bg-primary"
                 initial={{ scaleX: 0 }}
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.25 }}
@@ -231,7 +231,7 @@ export function HomeNavbar() {
               buttonVariants({
                 variant: 'ghost',
               }),
-              'text-sm text-(--hero-muted) hover:bg-white/5 hover:text-(--hero-foreground)',
+              'text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground',
             )}
           >
             Login
@@ -254,7 +254,7 @@ export function HomeNavbar() {
           whileTap={{ scale: 0.9 }}
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          className="relative flex size-10 items-center justify-center rounded-xl border border-(--hero-line) text-(--hero-muted) lg:hidden"
+          className="relative flex size-10 items-center justify-center rounded-xl border border-border text-muted-foreground lg:hidden"
           aria-label="Toggle menu"
         >
           <AnimatePresence mode="wait" initial={false}>
@@ -343,17 +343,17 @@ export function HomeNavbar() {
                   transition={{
                     delay: i * 0.05,
                   }}
-                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-(--hero-muted) hover:bg-white/5 hover:text-(--hero-foreground)"
+                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground"
                 >
-                  <span className="size-1 rounded-full bg-(--landing-accent)" />
+                  <span className="size-1 rounded-full bg-secondary" />
 
                   {label}
                 </motion.a>
               ))}
 
-              <div className="mt-3 flex gap-2 border-t border-(--hero-line) px-4 pt-3">
+              <div className="mt-3 flex gap-2 border-t border-border px-4 pt-3">
                 <Link
-                  className="flex-1 border-(--hero-line) bg-transparent text-(--hero-muted)"
+                  className="flex-1 border-border bg-transparent text-muted-foreground"
                   href="/login"
                   onClick={() => setMobileOpen(false)}
                 >
@@ -361,7 +361,7 @@ export function HomeNavbar() {
                 </Link>
 
                 <Link
-                  className="flex-1 bg-(--landing-accent) text-(--landing-accent-foreground)"
+                  className="flex-1 bg-secondary text-secondary-foreground"
                   href="/signup"
                   onClick={() => setMobileOpen(false)}
                 >

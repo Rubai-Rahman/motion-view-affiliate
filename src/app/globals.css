@@ -5,10 +5,6 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* ---------------------------------------------------------------------- */
-  /* Core shadcn tokens                                                     */
-  /* ---------------------------------------------------------------------- */
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -82,22 +78,6 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-
-  /* ---------------------------------------------------------------------- */
-  /* Motion View landing page                                               */
-  /* ---------------------------------------------------------------------- */
-
-  --color-motion: var(--landing-accent);
-  --color-motion-soft: var(--landing-accent-soft);
-  --color-motion-foreground: var(--landing-accent-foreground);
-
-  --color-landing-ink: var(--landing-ink);
-  --color-landing-muted: var(--landing-muted);
-
-  --color-landing-line: var(--landing-line);
-
-  --color-glass: var(--glass-background);
-  --color-glass-border: var(--glass-border);
 }
 
 /* ========================================================================= */
@@ -120,7 +100,7 @@
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
 
-  --secondary: oklch(0.97 0 0);
+  --secondary: oklch(0.76 0.17 65);
   --secondary-foreground: oklch(0.205 0 0);
 
   --muted: oklch(0.97 0 0);
@@ -132,6 +112,7 @@
   --destructive: oklch(0.577 0.245 27.325);
 
   --border: oklch(0.922 0 0);
+  --secondary-border: oklch(0.85 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
 
@@ -154,27 +135,6 @@
 
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-
-  /* ---------------------------------------------------------------------- */
-  /* Motion View                                                            */
-  /* ---------------------------------------------------------------------- */
-
-  --landing-ink: oklch(0.18 0.015 170);
-  --landing-muted: oklch(0.48 0.02 170);
-
-  --landing-line: oklch(0.18 0.015 170 / 12%);
-
-  /*
-   * Motion View orange
-   * Approximate #F29120
-   */
-  --landing-accent: oklch(0.72 0.16 65);
-  --landing-accent-soft: oklch(0.72 0.16 65 / 12%);
-  --landing-accent-foreground: oklch(1 0 0);
-
-  --hero-muted: oklch(0.48 0.02 170);
-  --hero-line: oklch(0.18 0.015 170 / 14%);
-  --hero-grid: oklch(0.18 0.015 170 / 24%);
 
   /* Glass */
   --glass-background: oklch(1 0 0 / 5%);
@@ -200,7 +160,7 @@
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
 
-  --secondary: oklch(0.269 0 0);
+  --secondary: oklch(0.76 0.17 65);
   --secondary-foreground: oklch(0.985 0 0);
 
   --muted: oklch(0.269 0 0);
@@ -232,25 +192,6 @@
 
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-
-  /* ---------------------------------------------------------------------- */
-  /* Motion View                                                            */
-  /* ---------------------------------------------------------------------- */
-
-  --landing-ink: oklch(0.95 0.01 150);
-  --landing-muted: oklch(0.68 0.015 150);
-
-  --landing-line: oklch(0.95 0.01 150 / 12%);
-
-  --landing-accent: oklch(0.76 0.17 65);
-  --landing-accent-soft: oklch(0.76 0.17 65 / 14%);
-  --landing-accent-foreground: oklch(0.16 0.012 160);
-
-  /* Hero */
-
-  --hero-muted: oklch(67.193% 0.00876 36.135);
-  --hero-line: oklch(1 0 0 / 10%);
-  --hero-grid: oklch(1 0 0 / 30%);
 
   /* Glass */
   --glass-background: oklch(1 0 0 / 6%);
@@ -325,36 +266,28 @@
     background-color: color-mix(
       in oklch,
       var(--secondary-background),
-      var(--landing-accent) 5%
+      var(--secondary) 5%
     );
   }
 
   .landing-page .bg-\[\#F29120\] {
-    background-color: var(--landing-accent);
+    background-color: var(--secondary);
   }
 
   .landing-page .text-\[\#F29120\] {
-    color: var(--landing-accent);
-  }
-
-  .landing-page .bg-\[\#F29120\]\/10 {
-    background-color: var(--landing-accent-soft);
+    color: var(--secondary);
   }
 
   .landing-page .bg-\[\#F29120\]\/5 {
-    background-color: color-mix(
-      in oklch,
-      var(--landing-accent),
-      transparent 95%
-    );
+    background-color: color-mix(in oklch, var(--secondary), transparent 95%);
   }
 
   .landing-page .text-\[\#F29120\]\/80 {
-    color: color-mix(in oklch, var(--landing-accent), transparent 20%);
+    color: color-mix(in oklch, var(--secondary), transparent 20%);
   }
 
   .landing-page .border-\[\#F29120\]\/20 {
-    border-color: color-mix(in oklch, var(--landing-accent), transparent 80%);
+    border-color: color-mix(in oklch, var(--secondary), transparent 80%);
   }
 
   /* Glass utility */
@@ -367,12 +300,12 @@
 
   /* Motion button utility */
   .landing-motion {
-    background: var(--landing-accent);
+    background: var(--secondary);
     color: white;
   }
 
   .landing-motion:hover {
-    background: color-mix(in oklch, var(--landing-accent), black 8%);
+    background: color-mix(in oklch, var(--secondary), black 8%);
   }
 
   /* Scroll positioning */

@@ -55,10 +55,10 @@ export function Benefits() {
   return (
     <section
       id="benefits"
-      className="landing-light relative overflow-hidden bg-(--secondary-background) py-28 sm:py-32 lg:py-40"
+      className="landing-light relative overflow-hidden bg-secondary-background py-28 sm:py-32 lg:py-40"
     >
       {/* Accent blob */}
-      <div className="absolute -right-40 top-1/2 size-[500px] -translate-y-1/2 rounded-full bg-(--landing-accent)/[0.06] blur-[120px]" />
+      <div className="absolute -right-40 top-1/2 size-[500px] -translate-y-1/2 rounded-full bg-secondary/6 blur-[120px]" />
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid gap-20 lg:grid-cols-[0.65fr_1.35fr] lg:items-start">
@@ -77,17 +77,17 @@ export function Benefits() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.7, ease }}
-              className="mt-10 overflow-hidden rounded-2xl border border-(--landing-line) bg-(--card) p-6 shadow-sm"
+              className="mt-10 overflow-hidden rounded-2xl border border-secondary bg-card p-6 shadow-sm"
             >
               <div className="flex items-center gap-4">
-                <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-(--landing-accent)/10">
-                  <Zap className="size-5 text-(--landing-accent)" />
+                <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-secondary/10">
+                  <Zap className="size-5 text-secondary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-(--landing-ink)">
+                  <p className="font-semibold text-landing-ink">
                     আপনার workflow-এর জন্য তৈরি
                   </p>
-                  <p className="mt-0.5 text-sm text-(--landing-muted)">
+                  <p className="mt-0.5 text-sm text-muted">
                     আপনার content workflow-এর সাথে সহজেই মানিয়ে যায়।
                   </p>
                 </div>
@@ -105,9 +105,9 @@ export function Benefits() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 + i * 0.08, ease }}
-                    className="flex items-center gap-2.5 text-sm text-(--landing-muted)"
+                    className="flex items-center gap-2.5 text-sm text-muted"
                   >
-                    <span className="size-1.5 rounded-full bg-(--landing-accent)" />
+                    <span className="size-1.5 rounded-full bg-" />
                     {item}
                   </motion.div>
                 ))}
@@ -128,7 +128,7 @@ export function Benefits() {
                     boxShadow: '0 12px 40px -8px oklch(0.72 0.16 65 / 0.12)',
                   }}
                   transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                  className="group relative overflow-hidden rounded-2xl border border-(--landing-line) bg-(--card) p-7 transition-colors hover:border-(--landing-accent)/20"
+                  className="group relative overflow-hidden rounded-2xl border border-secondary bg-card p-7 transition-colors hover:border-secondary/20"
                 >
                   {/* Hover glow */}
                   <div
@@ -147,18 +147,18 @@ export function Benefits() {
                         stiffness: 350,
                         damping: 15,
                       }}
-                      className="flex size-11 items-center justify-center rounded-2xl border border-(--landing-line) bg-(--secondary-background) shadow-sm transition-colors group-hover:border-(--landing-accent)/20 group-hover:bg-(--landing-accent)/5"
+                      className="flex size-11 items-center justify-center rounded-2xl border border-secondary bg-secondary-background shadow-sm transition-colors group-hover:border-secondary/20 group-hover:bg-secondary/5"
                     >
-                      <Icon className="size-5 text-(--landing-accent)" />
+                      <Icon className="size-5 text-secondary" />
                     </motion.div>
 
-                    <h3 className="mt-5 font-semibold text-(--landing-ink)">
+                    <h3 className="mt-5 font-semibold text-secondary">
                       {b.title}
                     </h3>
-                    <p className="mt-0.5 text-xs font-medium text-(--landing-accent)">
+                    <p className="mt-0.5 text-xs font-medium text-secondary">
                       {b.bangla}
                     </p>
-                    <p className="mt-2.5 text-sm leading-6 text-(--landing-muted)">
+                    <p className="mt-2.5 text-sm leading-6 text-muted">
                       {b.description}
                     </p>
                   </div>

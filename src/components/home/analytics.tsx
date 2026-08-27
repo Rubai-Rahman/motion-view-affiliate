@@ -18,10 +18,10 @@ export function Analytics() {
   return (
     <section
       id="analytics"
-      className="relative overflow-hidden bg-(--background) py-28 sm:py-32 lg:py-40"
+      className="relative overflow-hidden bg-background py-28 sm:py-32 lg:py-40"
     >
       {/* Background glow */}
-      <div className="absolute right-[-100px] top-[8%] size-[500px] rounded-full bg-(--landing-accent)/[0.07] blur-[140px]" />
+      <div className="absolute right-[-100px] top-[8%] size-[500px] rounded-full bg-(--secondary)/[0.07] blur-[140px]" />
       <div className="absolute left-[-150px] bottom-[10%] size-[400px] rounded-full bg-violet-500/[0.04] blur-[120px]" />
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
@@ -59,7 +59,7 @@ export function Analytics() {
               {/* Sidebar */}
               <aside className="hidden border-r border-white/[0.05] bg-[#080a0b] p-4 lg:block">
                 <div className="flex items-center gap-2.5 px-1">
-                  <div className="flex size-7 items-center justify-center rounded-xl bg-(--landing-accent) text-[9px] font-black text-(--landing-accent-foreground)">
+                  <div className="flex size-7 items-center justify-center rounded-xl bg-secondary text-[9px] font-black text-secondary-foreground">
                     M
                   </div>
                   <p className="text-[10px] font-semibold text-white">
@@ -85,7 +85,7 @@ export function Analytics() {
                       key={label}
                       className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-[10px] transition-colors ${
                         active
-                          ? 'bg-(--landing-accent)/12 text-(--landing-accent)'
+                          ? 'bg-secondary/12 text-secondary'
                           : 'text-slate-600 hover:text-slate-400'
                       }`}
                     >
@@ -104,7 +104,7 @@ export function Analytics() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="button"
-                    className="mt-3 w-full rounded-lg bg-(--landing-accent) py-2 text-[8px] font-semibold text-(--landing-accent-foreground) transition-opacity hover:opacity-90"
+                    className="mt-3 w-full rounded-lg bg-secondary py-2 text-[8px] font-semibold text-secondary-foreground transition-opacity hover:opacity-90"
                   >
                     Withdraw
                   </motion.button>
@@ -178,7 +178,7 @@ export function Analytics() {
                           Commission earned over time
                         </p>
                       </div>
-                      <Badge className="border-(--landing-accent)/10 bg-(--landing-accent)/5 text-[8px] text-(--landing-accent) hover:bg-(--landing-accent)/5">
+                      <Badge className="border-secondary/10 bg-secondary/5 text-[8px] text-secondary hover:bg-secondary/5">
                         30 days
                       </Badge>
                     </div>
@@ -199,12 +199,12 @@ export function Analytics() {
                           >
                             <stop
                               offset="0%"
-                              stopColor="var(--landing-accent)"
+                              stopColor="var(--secondary)"
                               stopOpacity=".22"
                             />
                             <stop
                               offset="100%"
-                              stopColor="var(--landing-accent)"
+                              stopColor="var(--secondary)"
                               stopOpacity="0"
                             />
                           </linearGradient>
@@ -227,20 +227,20 @@ export function Analytics() {
                         <path
                           d="M0 195 C70 190 95 168 155 178 C215 188 245 138 305 150 C360 162 400 118 455 130 C510 143 548 90 605 103 C665 118 695 72 750 83 C810 96 845 48 900 22"
                           fill="none"
-                          stroke="var(--landing-accent)"
+                          stroke="var(--secondary)"
                           strokeWidth="3.5"
                         />
                         <circle
                           cx="900"
                           cy="22"
                           r="5"
-                          fill="var(--landing-accent)"
+                          fill="var(--secondary)"
                         />
                         <circle
                           cx="900"
                           cy="22"
                           r="9"
-                          fill="var(--landing-accent)"
+                          fill="var(--secondary)"
                           opacity="0.2"
                         />
                       </svg>
@@ -290,7 +290,7 @@ export function Analytics() {
                                     duration: 0.7,
                                     ease,
                                   }}
-                                  className="h-full rounded-full bg-(--landing-accent)"
+                                  className="h-full rounded-full bg-secondary"
                                 />
                               </div>
                             </div>

@@ -66,7 +66,7 @@ function AnimatedNumber({
 
 export function TrustStats() {
   return (
-    <section className="relative overflow-hidden bg-(--background)">
+    <section className="relative overflow-hidden bg-background">
       {/* Subtle top shimmer */}
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/[0.08] to-transparent" />
 
@@ -81,7 +81,7 @@ export function TrustStats() {
           >
             {/* Vertical divider (not on last) */}
             {i < stats.length - 1 && (
-              <div className="absolute right-0 top-1/4 h-1/2 w-px bg-white/[0.06]" />
+              <div className="absolute right-0 top-1/4 h-1/2 w-px bg-white/6" />
             )}
 
             {/* Accent bar that grows in */}
@@ -90,7 +90,7 @@ export function TrustStats() {
               whileInView={{ width: 28 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 + 0.2, duration: 0.7, ease }}
-              className="mb-5 h-[2px] rounded-full bg-(--landing-accent)"
+              className="mb-5 h-0.5 rounded-full bg-secondary"
             />
 
             <p className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
@@ -98,7 +98,7 @@ export function TrustStats() {
                 value={stat.value}
                 isFloat={!Number.isInteger(stat.value)}
               />
-              <span className="text-(--landing-accent)">{stat.suffix}</span>
+              <span className="text-secondary">{stat.suffix}</span>
             </p>
 
             <p className="mt-2 text-sm font-medium text-foreground/40">
@@ -108,7 +108,7 @@ export function TrustStats() {
 
             {/* Hover underline */}
             <motion.div
-              className="absolute inset-x-0 bottom-0 h-px origin-left bg-(--landing-accent)/50"
+              className="absolute inset-x-0 bottom-0 h-px origin-left bg-secondary/50"
               initial={{ scaleX: 0 }}
               whileHover={{ scaleX: 1 }}
               transition={{ duration: 0.35 }}
@@ -117,7 +117,7 @@ export function TrustStats() {
         ))}
       </Stagger>
 
-      <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/[0.06] to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
     </section>
   );
 }

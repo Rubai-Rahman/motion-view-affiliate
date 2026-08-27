@@ -24,8 +24,8 @@ const testimonials = [
     quote:
       'I can share products that fit my audience and track every result in one calm workspace. No clutter, no guesswork.',
     stat: '৳48K+ earned',
-    color: 'from-(--landing-accent)/10 to-transparent',
-    avatarBg: 'bg-(--landing-accent)/10 text-(--landing-accent)',
+    color: 'from-(--secondary)/10 to-transparent',
+    avatarBg: 'bg-(--secondary)/10 text-(--secondary)',
   },
   {
     initials: 'CC',
@@ -71,17 +71,17 @@ export function Testimonials() {
               <div className="relative">
                 {/* Quote icon */}
                 <div className="flex items-center justify-between">
-                  <Quote className="size-7 text-(--landing-accent)/25 -scale-x-100" />
+                  <Quote className="size-7 text-secondary/25 -scale-x-100" />
                   <Badge
                     variant="outline"
-                    className="border-(--landing-line) text-[9px] font-normal text-(--landing-muted)"
+                    className="border-landing-line text-[9px] font-normal text-landing-muted"
                   >
                     Creator preview
                   </Badge>
                 </div>
 
                 {/* Quote text */}
-                <p className="mt-5 text-[15px] leading-[1.8] text-(--landing-muted)">
+                <p className="mt-5 text-[15px] leading-[1.8] text-muted">
                   "{item.quote}"
                 </p>
 
@@ -91,16 +91,16 @@ export function Testimonials() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2, ease }}
-                  className="mt-6 inline-flex items-center gap-2 rounded-xl bg-(--landing-accent)/8 px-3 py-1.5"
+                  className="mt-6 inline-flex items-center gap-2 rounded-xl bg-secondary/8 px-3 py-1.5"
                 >
-                  <span className="size-1.5 rounded-full bg-(--landing-accent)" />
-                  <span className="text-xs font-semibold text-(--landing-accent)">
+                  <span className="size-1.5 rounded-full bg-secondary" />
+                  <span className="text-xs font-semibold text-secondary">
                     {item.stat}
                   </span>
                 </motion.div>
 
                 {/* Author */}
-                <div className="mt-6 flex items-center gap-3 border-t border-(--landing-line) pt-5">
+                <div className="mt-6 flex items-center gap-3 border-t border-landing-line pt-5">
                   <Avatar className="size-10">
                     <AvatarFallback
                       className={`text-xs font-semibold ${item.avatarBg}`}
@@ -109,10 +109,10 @@ export function Testimonials() {
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="text-sm font-semibold text-(--landing-ink)">
+                    <p className="text-sm font-semibold text-ink">
                       {item.name}
                     </p>
-                    <p className="text-xs text-(--landing-muted)">
+                    <p className="text-xs text-muted">
                       {item.role}
                     </p>
                   </div>
@@ -128,7 +128,7 @@ export function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, ease }}
-          className="mt-14 flex flex-wrap items-center justify-center gap-6 text-sm text-(--landing-muted)"
+          className="mt-14 flex flex-wrap items-center justify-center gap-6 text-sm text-muted"
         >
           {[
             '50,000+ customers',
@@ -136,7 +136,7 @@ export function Testimonials() {
             '4.8★ average rating',
           ].map((item) => (
             <div key={item} className="flex items-center gap-2">
-              <span className="size-1.5 rounded-full bg-(--landing-accent)" />
+              <span className="size-1.5 rounded-full bg-secondary" />
               <span>{item}</span>
             </div>
           ))}

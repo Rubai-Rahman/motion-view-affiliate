@@ -9,19 +9,19 @@ import { useLenisScrollTo } from '@/components/provider/smoothScroll';
 export function FinalCTA() {
   const scrollTo = useLenisScrollTo();
   return (
-    <section className="relative overflow-hidden bg-(--background) py-28 sm:py-32 lg:py-40">
+    <section className="relative overflow-hidden bg-background py-28 sm:py-32 lg:py-40">
       {/* Ambient glows */}
       <motion.div
         animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.35, 0.15] }}
         transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -right-40 -top-40 size-[700px] rounded-full bg-(--landing-accent)/15 blur-[160px]"
+        className="absolute -right-40 -top-40 size-175 rounded-full bg-secondary/15 blur-[160px]"
       />
-      <div className="absolute -left-20 bottom-[-100px] size-[400px] rounded-full bg-violet-500/[0.05] blur-[120px]" />
+      <div className="absolute -left-20 -bottom-25 size-100 rounded-full bg-violet-500/5 blur-[120px]" />
 
-      <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
-        <div className="relative overflow-hidden rounded-[32px] border border-white/[0.08] bg-white/[0.025] backdrop-blur-2xl">
+      <div className="relative mx-auto max-w-350 px-5 sm:px-8">
+        <div className="relative overflow-hidden rounded-[32px] border border-white/8 bg-white/2.5 backdrop-blur-2xl">
           {/* Inner glow border */}
-          <div className="absolute inset-0 rounded-[32px] bg-bg-linear-to-br from-white/[0.04] via-transparent to-(--landing-accent)/[0.04]" />
+          <div className="absolute inset-0 rounded-[32px] bg-bg-linear-to-br from-white/4 via-transparent to-secondary/4" />
 
           {/* Giant background letter */}
           <div
@@ -39,7 +39,7 @@ export function FinalCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ ease }}
-                className="text-[10px] font-semibold uppercase tracking-[0.22em] text-(--landing-accent)"
+                className="text-[10px] font-semibold uppercase tracking-[0.22em] text-secondary"
               >
                 Your next revenue stream
               </motion.p>
@@ -49,14 +49,14 @@ export function FinalCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, duration: 0.9, ease }}
-                className="mt-5 text-4xl font-semibold tracking-[-0.055em] text-(--hero-foreground) sm:text-5xl lg:text-[62px] lg:leading-[0.97]"
+                className="mt-5 text-4xl font-semibold tracking-[-0.055em] text-foreground sm:text-5xl lg:text-[62px] lg:leading-[0.97]"
               >
                 আপনার content-এর value আছে।
                 <br />
                 <motion.span
                   animate={{ opacity: [0.65, 1, 0.65] }}
                   transition={{ duration: 3.5, repeat: Infinity }}
-                  className="text-(--landing-accent)"
+                  className="text-secondary"
                 >
                   এবার সেটিকে কাজে লাগান।
                 </motion.span>
@@ -67,7 +67,7 @@ export function FinalCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, ease }}
-                className="mt-5 text-base font-medium text-(--landing-accent)"
+                className="mt-5 text-base font-medium text-secondary"
               >
                 আপনার content-এর value থেকে নতুন income stream তৈরি করুন।
               </motion.p>
@@ -77,7 +77,7 @@ export function FinalCTA() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.25, ease }}
-                className="mt-3 max-w-lg text-base leading-7 text-(--hero-muted)"
+                className="mt-3 max-w-lg text-base leading-7 text-muted-foreground"
               >
                 Motion View affiliate community-তে যোগ দিন এবং product
                 recommendation-কে measurable income-এ পরিণত করুন।
@@ -96,7 +96,7 @@ export function FinalCTA() {
                   onClick={() => {
                     window.location.href = '/auth/signup';
                   }}
-                  className="h-12 bg-(--landing-accent) px-7 text-(--landing-accent-foreground) shadow-2xl shadow-(--landing-accent)/25 hover:bg-(--landing-accent)"
+                  className="h-12 bg-secondary px-7 text-secondary-foreground shadow-2xl shadow-secondary/25 hover:bg-secondary"
                 >
                   Affiliate হিসেবে শুরু করুন
                   <ArrowRight className="size-4" />
@@ -125,7 +125,7 @@ export function FinalCTA() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.45 }}
-                className="mt-5 text-[11px] text-slate-600"
+                className="mt-5 text-[11px] text-muted-foreground"
               >
                 Free to join · No monthly fees · Withdraw anytime
               </motion.p>
@@ -152,22 +152,24 @@ export function FinalCTA() {
                   <p className="mt-2 text-2xl font-semibold text-motion">
                     {value}
                   </p>
-                  <p className="mt-0.5 text-[10px] text-slate-600">{label}</p>
+                  <p className="mt-0.5 text-[10px] text-muted-foreground">
+                    {label}
+                  </p>
                 </div>
               ))}
             </motion.div>
           </div>
 
           {/* Bottom accent strip */}
-          <div className="h-px bg-bg-linear-to-r from-transparent via-(--landing-accent)/30 to-transparent" />
+          <div className="h-px bg-bg-linear-to-r from-transparent via-secondary/30 to-transparent" />
           <div className="flex items-center justify-center gap-3 py-4">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}
-                className="size-3.5 fill-current text-(--landing-accent)/40"
+                className="size-3.5 fill-current text-secondary/40"
               />
             ))}
-            <span className="text-[10px] text-slate-600">
+            <span className="text-[10px] text-muted-foreground">
               Trusted by creators across Bangladesh
             </span>
           </div>

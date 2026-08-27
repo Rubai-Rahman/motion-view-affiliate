@@ -52,7 +52,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="landing-light relative overflow-hidden bg-(--card) py-28 sm:py-32 lg:py-40"
+      className="landing-light relative overflow-hidden bg-card py-28 sm:py-32 lg:py-40"
     >
       {/* Background element */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,oklch(0.72_0.16_65_/_0.04),transparent_50%)]" />
@@ -76,12 +76,12 @@ export function FAQ() {
               ].map(([val, label]) => (
                 <div
                   key={label}
-                  className="rounded-xl border border-(--landing-line) bg-(--secondary-background) p-4"
+                  className="rounded-xl border border-landing-line bg-secondary-background p-4"
                 >
-                  <p className="text-2xl font-semibold text-(--landing-ink)">
+                  <p className="text-2xl font-semibold text-landing-ink">
                     {val}
                   </p>
-                  <p className="mt-1 text-xs text-(--landing-muted)">{label}</p>
+                  <p className="mt-1 text-xs text-landing-muted">{label}</p>
                 </div>
               ))}
             </div>
@@ -89,7 +89,7 @@ export function FAQ() {
 
           {/* Right — accordion */}
           <div>
-            <Accordion type="single" collapsible className="space-y-3">
+            <Accordion>
               {faqs.map((faq, i) => (
                 <motion.div
                   key={faq.question}
@@ -100,20 +100,20 @@ export function FAQ() {
                 >
                   <AccordionItem
                     value={`faq-${i}`}
-                    className="overflow-hidden rounded-2xl border border-(--landing-line) bg-(--secondary-background) px-6 data-[state=open]:border-(--landing-accent)/25 data-[state=open]:bg-(--card)"
+                    className="overflow-hidden rounded-2xl border border-landing-line bg-secondary-background px-6 data-[state=open]:border-secondary/25 data-[state=open]:bg-card"
                   >
-                    <AccordionTrigger className="py-5 text-left hover:no-underline [&[data-state=open]]:text-(--landing-accent)">
+                    <AccordionTrigger className="py-5 text-left hover:no-underline data-[state=open]:text-secondary">
                       <div className="pr-4">
-                        <p className="font-medium text-(--landing-ink) group-data-[state=open]:text-(--landing-accent)">
+                        <p className="font-medium text-landing-ink data-[state=open]:text-secondary">
                           {faq.question}
                         </p>
-                        <p className="mt-0.5 text-xs font-medium text-(--landing-accent)">
+                        <p className="mt-0.5 text-xs font-medium text-secondary">
                           {faq.bangla}
                         </p>
                       </div>
                     </AccordionTrigger>
 
-                    <AccordionContent className="pb-5 pr-8 text-sm leading-[1.8] text-(--landing-muted)">
+                    <AccordionContent className="pb-5 pr-8 text-sm leading-[1.8] text-landing-muted">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>

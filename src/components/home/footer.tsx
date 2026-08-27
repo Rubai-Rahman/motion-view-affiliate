@@ -50,11 +50,11 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative bg-(--background) text-(--hero-muted)">
+    <footer className="relative bg-background text-muted">
       {/* Top glow line */}
-      <div className="h-px bg-linear-to-r from-transparent via-(--landing-accent)/20 to-transparent" />
+      <div className="h-px bg-linear-to-r from-transparent via-muted/20 to-transparent" />
 
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+      <div className="mx-auto max-w-350 px-5 sm:px-8">
         <div className="grid gap-14 py-16 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
@@ -62,22 +62,22 @@ export function Footer() {
               whileHover={{ scale: 1.02 }}
               className="flex items-center gap-3"
             >
-              <div className="flex size-10 items-center justify-center rounded-[11px] bg-(--landing-accent) text-base font-black text-(--landing-accent-foreground) shadow-lg shadow-(--landing-accent)/20">
+              <div className="flex size-10 items-center justify-center rounded-[11px] bg-secondary text-base font-black text-secondary-foreground shadow-lg shadow-secondary/20">
                 M
               </div>
 
               <div>
-                <p className="text-sm font-semibold text-(--hero-foreground)">
+                <p className="text-sm font-semibold text-foreground">
                   Motion View
                 </p>
 
-                <p className="text-[9px] uppercase tracking-[0.18em] text-slate-700">
+                <p className="text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
                   Affiliate
                 </p>
               </div>
             </motion.div>
 
-            <p className="mt-6 max-w-[260px] text-sm leading-[1.75] text-slate-600">
+            <p className="mt-6 max-w-65 text-sm leading-[1.75] text-muted-foreground">
               Promote products you love. Earn from qualifying sales. Track
               everything in one place.
             </p>
@@ -96,7 +96,7 @@ export function Footer() {
                 className="size-2 rounded-full bg-emerald-500"
               />
 
-              <span className="text-[11px] text-slate-600">
+              <span className="text-[11px] text-muted-foreground">
                 All systems operational
               </span>
             </div>
@@ -105,7 +105,7 @@ export function Footer() {
           {/* Navigation columns */}
           {columns.map((col, ci) => (
             <div key={col.heading}>
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-(--hero-foreground)">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-foreground">
                 {col.heading}
               </p>
 
@@ -128,7 +128,7 @@ export function Footer() {
                         <a
                           href={href}
                           onClick={(e) => handleScrollLink(e, href)}
-                          className="group flex items-center gap-1 text-sm text-slate-600 transition-colors hover:text-white"
+                          className="group flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
                         >
                           {label}
 
@@ -137,7 +137,7 @@ export function Footer() {
                       ) : (
                         <Link
                           href={href}
-                          className="group flex items-center gap-1 text-sm text-slate-600 transition-colors hover:text-white"
+                          className="group flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
                         >
                           {label}
 
@@ -152,15 +152,15 @@ export function Footer() {
           ))}
         </div>
 
-        <Separator className="bg-white/[0.06]" />
+        <Separator className="bg-white/6" />
 
-        <div className="flex flex-col gap-2 py-7 text-[11px] text-slate-700 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 py-7 text-[11px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Motion View. All rights reserved.</p>
 
           <div className="flex items-center gap-4">
             <p>Motion View Affiliate Program</p>
 
-            <span className="size-1 rounded-full bg-slate-700" />
+            <span className="size-1 rounded-full bg-muted-foreground" />
 
             <p>Bangladesh</p>
           </div>

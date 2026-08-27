@@ -33,19 +33,19 @@ export function Hero() {
         mouseX.set(e.clientX - rect.left);
         mouseY.set(e.clientY - rect.top);
       }}
-      className="relative min-h-screen overflow-hidden bg-(--background)"
+      className="relative min-h-screen overflow-hidden bg-background"
     >
       {/* Mouse-tracking glow */}
       <motion.div
         style={{ x: glowX, y: glowY }}
-        className="pointer-events-none absolute left-0 top-0 size-[600px] rounded-full bg-(--landing-accent)/[0.06] blur-[140px]"
+        className="pointer-events-none absolute left-0 top-0 size-150 rounded-full bg-secondary/6 blur-[140px]"
       />
 
       {/* Static ambient orbs */}
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute left-1/2 top-[-250px] size-[800px] -translate-x-1/2 rounded-full bg-(--landing-accent)/8 blur-[180px]"
+        className="absolute left-1/2 top-[-250px] size-[800px] -translate-x-1/2 rounded-full bg-secondary/8 blur-[180px]"
       />
       <div className="absolute right-[-100px] bottom-[-100px] size-[400px] rounded-full bg-blue-500/[0.04] blur-[120px]" />
 
@@ -85,14 +85,14 @@ export function Hero() {
             <motion.span
               animate={{ rotate: [0, 12, -12, 0], scale: [1, 1.2, 1] }}
               transition={{ duration: 3.5, repeat: Infinity }}
-              className="flex size-5 items-center justify-center rounded-full bg-(--landing-accent)"
+              className="flex size-5 items-center justify-center rounded-full bg-secondary"
             >
               <Sparkles className="size-3 text-white" />
             </motion.span>
             <span className="text-[11px] font-medium text-slate-400">
               Motion View Affiliate Program
             </span>
-            <span className="rounded-full bg-(--landing-accent)/15 px-2 py-0.5 text-[9px] font-semibold text-(--landing-accent)">
+            <span className="rounded-full bg-secondary/15 px-2 py-0.5 text-[9px] font-semibold text-secondary">
               New
             </span>
           </motion.div>
@@ -100,14 +100,14 @@ export function Hero() {
           {/* Headline */}
           <motion.h1
             variants={reveal}
-            className="mt-8 text-[52px] font-semibold leading-[0.94] tracking-[-0.06em] text-(--hero-foreground) sm:text-6xl lg:text-[80px]"
+            className="mt-8 text-[52px] font-semibold leading-[0.94] tracking-[-0.06em] text-foreground sm:text-6xl lg:text-[80px]"
           >
             আপনার Audience
             <br />
             থেকেই{' '}
             <span className="relative inline-block">
               <motion.span
-                className="text-(--landing-accent)"
+                className="text-secondary"
                 animate={{
                   textShadow: [
                     '0 0 0px oklch(0.72 0.16 65 / 0)',
@@ -130,7 +130,7 @@ export function Hero() {
               >
                 <motion.path
                   d="M2 8 C60 2 120 11 180 5 C240 -1 290 9 318 4"
-                  stroke="var(--landing-accent)"
+                  stroke="var(--secondary)"
                   strokeWidth="3"
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
@@ -143,7 +143,7 @@ export function Hero() {
 
           <motion.p
             variants={reveal}
-            className="mt-5 text-lg font-medium text-(--landing-accent)"
+            className="mt-5 text-lg font-medium text-secondary"
           >
             আপনার পছন্দের পণ্য share করুন, প্রতিটি successful order থেকে
             commission আয় করুন।
@@ -151,7 +151,7 @@ export function Hero() {
 
           <motion.p
             variants={reveal}
-            className="mt-3 text-base leading-[1.75] text-(--hero-muted)"
+            className="mt-3 text-base leading-[1.75] text-muted-foreground"
           >
             Motion View-এর smart gadgets, electronics ও lifestyle products আপনার
             audience-এর সাথে share করুন এবং সবকিছু এক dashboard থেকে track করুন।
@@ -164,7 +164,7 @@ export function Hero() {
           >
             <MagneticButton
               size="lg"
-              className="h-12 bg-(--landing-accent) px-7 text-(--landing-accent-foreground) shadow-2xl shadow-(--landing-accent)/25 hover:bg-(--landing-accent)"
+              className="h-12 bg-secondary px-7 text-secondary-foreground shadow-2xl shadow-secondary/25 hover:bg-secondary"
               onClick={() => {
                 window.location.href = '/auth/signup';
               }}
@@ -216,9 +216,9 @@ export function Hero() {
                     type: 'spring',
                     stiffness: 400,
                   }}
-                  className="flex size-4 items-center justify-center rounded-full bg-(--landing-accent)/15"
+                  className="flex size-4 items-center justify-center rounded-full bg-secondary/15"
                 >
-                  <Check className="size-2.5 text-(--landing-accent)" />
+                  <Check className="size-2.5 text-secondary" />
                 </motion.span>
                 {item}
               </motion.div>
@@ -237,8 +237,8 @@ export function Hero() {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 inset-x-0 h-24 bg-linear-to-b from-transparent to-(--background)" />
-      <div className="h-px bg-linear-to-r from-transparent via-white/[0.08] to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-24 bg-linear-to-b from-transparent to-background" />
+      <div className="h-px bg-linear-to-r from-transparent via-white/8 to-transparent" />
     </section>
   );
 }

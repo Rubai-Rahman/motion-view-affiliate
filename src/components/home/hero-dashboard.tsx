@@ -20,7 +20,7 @@ function MiniBar({ height, delay }: { height: number; delay: number }) {
       animate={{ scaleY: 1 }}
       transition={{ delay, duration: 0.6, ease }}
       style={{ height: `${height}%` }}
-      className="w-full origin-bottom rounded-sm bg-(--landing-accent)/60"
+      className="w-full origin-bottom rounded-sm bg-secondary/60"
     />
   );
 }
@@ -48,8 +48,8 @@ export function HeroDashboard() {
         className="absolute -left-6 top-12 z-30 hidden w-48 rounded-2xl border border-border bg-foreground/90 p-3.5 shadow-2xl backdrop-blur-xl sm:block lg:-left-10"
       >
         <div className="flex items-center gap-3">
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-(--landing-accent)/15">
-            <TrendingUp className="size-4 text-(--landing-accent)" />
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-secondary/15">
+            <TrendingUp className="size-4 text-secondary" />
           </div>
           <div>
             <p className="text-[9px] text-slate-500">Today's revenue</p>
@@ -121,7 +121,7 @@ export function HeroDashboard() {
           {/* Sidebar */}
           <aside className="hidden border-r border-white/[0.05] bg-[#0a0c0d] p-3 sm:block">
             <div className="flex items-center gap-2 px-1 py-1">
-              <div className="flex size-6 items-center justify-center rounded-lg bg-(--landing-accent) text-[8px] font-black text-(--landing-accent-foreground)">
+              <div className="flex size-6 items-center justify-center rounded-lg bg-secondary text-[8px] font-black text-secondary-foreground">
                 M
               </div>
               <p className="text-[10px] font-semibold text-white">Affiliate</p>
@@ -144,7 +144,7 @@ export function HeroDashboard() {
                   key={label}
                   className={`flex items-center gap-2 rounded-lg px-2.5 py-2 text-[9px] transition-colors ${
                     active
-                      ? 'bg-(--landing-accent)/12 text-(--landing-accent)'
+                      ? 'bg-secondary/12 text-secondary'
                       : 'text-slate-600 hover:text-slate-400'
                   }`}
                 >
@@ -154,15 +154,15 @@ export function HeroDashboard() {
               ))}
             </div>
 
-            <div className="mt-6 rounded-xl border border-white/[0.05] bg-white/[0.02] p-2.5">
+            <div className="mt-6 rounded-xl border border-white/5 bg-white/2 p-2.5">
               <p className="text-[7px] text-slate-700">Available</p>
               <p className="mt-1 text-xs font-semibold text-white">৳24,680</p>
-              <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/[0.05]">
+              <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/5">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: '68%' }}
                   transition={{ delay: 1.2, duration: 0.8, ease }}
-                  className="h-full rounded-full bg-(--landing-accent)"
+                  className="h-full rounded-full bg-secondary"
                 />
               </div>
             </div>
@@ -202,7 +202,7 @@ export function HeroDashboard() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 + i * 0.08, ease }}
-                  className="rounded-xl border border-white/[0.05] bg-[#0a0c0d] p-2.5"
+                  className="rounded-xl border border-white/5 bg-[#0a0c0d] p-2.5"
                 >
                   <p className="text-[7px] text-slate-600">{label}</p>
                   <p className="mt-1 text-sm font-semibold text-white">
@@ -214,10 +214,10 @@ export function HeroDashboard() {
             </div>
 
             {/* Chart */}
-            <div className="mt-3 rounded-xl border border-white/[0.05] bg-[#0a0c0d] p-3">
+            <div className="mt-3 rounded-xl border border-white/5 bg-[#0a0c0d] p-3">
               <div className="flex items-center justify-between">
                 <p className="text-[9px] font-medium text-slate-400">Revenue</p>
-                <span className="rounded-full bg-(--landing-accent)/10 px-2 py-0.5 text-[7px] text-(--landing-accent)">
+                <span className="rounded-full bg-secondary/10 px-2 py-0.5 text-[7px] text-secondary">
                   ৳48,250
                 </span>
               </div>
@@ -237,12 +237,12 @@ export function HeroDashboard() {
                     >
                       <stop
                         offset="0%"
-                        stopColor="var(--landing-accent)"
+                        stopColor="var(--secondary)"
                         stopOpacity=".3"
                       />
                       <stop
                         offset="100%"
-                        stopColor="var(--landing-accent)"
+                        stopColor="var(--secondary)"
                         stopOpacity="0"
                       />
                     </linearGradient>
@@ -265,15 +265,15 @@ export function HeroDashboard() {
                   <path
                     d="M0 100 C50 96 70 80 110 87 C150 94 175 65 220 73 C265 82 295 52 335 60 C375 70 405 42 445 50 C485 60 515 30 555 38 C580 43 595 14 600 10"
                     fill="none"
-                    stroke="var(--landing-accent)"
+                    stroke="var(--secondary)"
                     strokeWidth="2.5"
                   />
-                  <circle cx="600" cy="10" r="4" fill="var(--landing-accent)" />
+                  <circle cx="600" cy="10" r="4" fill="var(--secondary)" />
                   <circle
                     cx="600"
                     cy="10"
                     r="7"
-                    fill="var(--landing-accent)"
+                    fill="var(--secondary)"
                     opacity="0.25"
                   />
                 </svg>
@@ -288,10 +288,10 @@ export function HeroDashboard() {
 
             {/* Bottom row */}
             <div className="mt-2 grid grid-cols-2 gap-2">
-              <div className="rounded-xl border border-white/[0.05] bg-[#0a0c0d] p-2.5">
+              <div className="rounded-xl border border-white/0.05 bg-[#0a0c0d] p-2.5">
                 <div className="flex items-center gap-2">
-                  <div className="flex size-7 items-center justify-center rounded-lg bg-(--landing-accent)/10">
-                    <Package className="size-3 text-(--landing-accent)" />
+                  <div className="flex size-7 items-center justify-center rounded-lg bg-secondary/10">
+                    <Package className="size-3 text-secondary" />
                   </div>
                   <div>
                     <p className="text-[7px] text-slate-600">Top product</p>
@@ -301,7 +301,7 @@ export function HeroDashboard() {
                   </div>
                 </div>
               </div>
-              <div className="rounded-xl border border-white/[0.05] bg-[#0a0c0d] p-2.5">
+              <div className="rounded-xl border border-white/5 bg-[#0a0c0d] p-2.5">
                 <div className="flex items-center gap-2">
                   <div className="flex size-7 items-center justify-center rounded-lg bg-emerald-400/10">
                     <CircleDollarSign className="size-3 text-emerald-400" />

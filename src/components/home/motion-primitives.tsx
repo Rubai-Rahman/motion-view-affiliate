@@ -184,11 +184,11 @@ export function SectionHeading({
         transition={{ duration: 0.6, ease }}
         className={`flex items-center gap-3 ${centered ? 'justify-center' : ''}`}
       >
-        <span className="h-px w-8 bg-(--landing-accent)" />
-        <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-(--landing-accent)">
+        <span className="h-px w-8 bg-secondary" />
+        <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-secondary">
           {eyebrow}
         </span>
-        {centered && <span className="h-px w-8 bg-(--landing-accent)" />}
+        {centered && <span className="h-px w-8 bg-secondary" />}
       </motion.div>
 
       <motion.h2
@@ -197,7 +197,7 @@ export function SectionHeading({
         whileInView="visible"
         viewport={{ once: true }}
         className={`mt-5 text-4xl font-semibold tracking-[-0.055em] sm:text-5xl lg:text-[56px] lg:leading-[1.02] ${
-          light ? 'text-(--hero-foreground)' : 'text-(--landing-ink)'
+          light ? 'text-(--hero-foreground)' : 'text-landing-ink'
         }`}
       >
         {title}
@@ -210,7 +210,7 @@ export function SectionHeading({
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="mt-4 text-base font-medium text-(--landing-accent)"
+          className="mt-4 text-base font-medium text-secondary"
         >
           {bangla}
         </motion.p>
@@ -224,7 +224,7 @@ export function SectionHeading({
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
           className={`mt-4 max-w-2xl text-base leading-7 sm:text-lg ${
-            light ? 'text-(--hero-muted)' : 'text-(--landing-muted)'
+            light ? 'text-(--hero-muted)' : 'text-landing-muted'
           } ${centered ? 'mx-auto' : ''}`}
         >
           {description}
@@ -245,7 +245,7 @@ export function GlowDivider() {
       <motion.div
         animate={{ x: ['-10%', '110%'] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
-        className="absolute top-1/2 size-24 -translate-y-1/2 rounded-full bg-(--landing-accent)/30 blur-xl"
+        className="absolute top-1/2 size-24 -translate-y-1/2 rounded-full bg-secondary/30 blur-xl"
       />
     </div>
   );

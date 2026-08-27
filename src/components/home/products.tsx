@@ -48,14 +48,14 @@ const products = [
     price: '৳3,290',
     initials: 'GC',
     gradient: 'from-amber-500/20 via-orange-500/10 to-transparent',
-    accent: 'text-(--landing-accent)',
+    accent: 'text-secondary',
     badge: 'Popular',
   },
 ];
 
 export function Products() {
   return (
-    <section className="landing-light relative overflow-hidden bg-(--card) py-28 sm:py-32 lg:py-40">
+    <section className="landing-light relative overflow-hidden bg-card py-28 sm:py-32 lg:py-40">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,oklch(0.72_0.16_65_/_0.04),transparent_60%)]" />
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
@@ -76,7 +76,7 @@ export function Products() {
           >
             <Button
               variant="outline"
-              className="w-fit border-(--landing-line) bg-transparent text-(--landing-ink) hover:bg-(--landing-accent)/5 hover:border-(--landing-accent)/30"
+              className="w-fit border-landing-line bg-transparent text-landing-ink hover:bg-secondary/5 hover:border-secondary/30"
             >
               সব পণ্য দেখুন
               <ArrowRight className="size-4" />
@@ -92,15 +92,15 @@ export function Products() {
           transition={{ delay: 0.15, ease }}
           className="mt-12 flex flex-col gap-2 sm:flex-row"
         >
-          <div className="flex h-12 flex-1 items-center gap-3 rounded-xl border border-(--landing-line) bg-(--card) px-4 transition-colors focus-within:border-(--landing-accent)/40">
-            <Search className="size-4 shrink-0 text-(--landing-muted)" />
-            <span className="text-sm text-(--landing-muted)">
+          <div className="flex h-12 flex-1 items-center gap-3 rounded-xl border border-landing-line bg-card px-4 transition-colors focus-within:border-secondary/40">
+            <Search className="size-4 shrink-0 text-landing-muted" />
+            <span className="text-sm text-landing-muted">
               Promote করার জন্য product খুঁজুন...
             </span>
           </div>
           <Button
             variant="outline"
-            className="h-12 border-(--landing-line) bg-(--card) text-(--landing-ink)"
+            className="h-12 border-landing-line bg-card text-landing-ink"
           >
             সব category
             <ChevronDown className="size-4" />
@@ -115,10 +115,10 @@ export function Products() {
               variants={cardReveal}
               whileHover={{ y: -8 }}
               transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-              className="group overflow-hidden rounded-2xl border border-(--landing-line) bg-(--card) shadow-sm transition-shadow hover:shadow-xl hover:shadow-(--landing-accent)/[0.07]"
+              className="group overflow-hidden rounded-2xl border border-landing-line bg-card shadow-sm transition-shadow hover:shadow-xl hover:shadow-landing-secondary/[0.07]"
             >
               {/* Product image area */}
-              <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-(--secondary-background)">
+              <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-secondary-background">
                 {/* Gradient bg */}
                 <div
                   className={`absolute inset-0 bg-bg-linear-to-br ${product.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
@@ -128,7 +128,7 @@ export function Products() {
                 <motion.div
                   whileHover={{ scale: 1.08, rotate: 2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-                  className="relative flex size-24 items-center justify-center rounded-[24px] border border-(--landing-line) bg-(--card) shadow-lg"
+                  className="relative flex size-24 items-center justify-center rounded-[24px] border border-landing-line bg-card shadow-lg"
                 >
                   <span className={`text-2xl font-bold ${product.accent}`}>
                     {product.initials}
@@ -140,11 +140,11 @@ export function Products() {
 
                 {/* Top badges */}
                 <div className="absolute left-4 top-4 flex items-center gap-2">
-                  <Badge className="border-0 bg-(--card)/80 text-[10px] text-(--landing-ink) backdrop-blur-sm">
+                  <Badge className="border-0 bg-card/80 text-[10px] text-landing-ink backdrop-blur-sm">
                     {product.category}
                   </Badge>
                   {product.badge && (
-                    <Badge className="border-0 bg-(--landing-accent)/90 text-[10px] text-(--landing-accent-foreground)">
+                    <Badge className="border-0 bg-secondary/90 text-[10px] text-landing-accent-foreground">
                       {product.badge}
                     </Badge>
                   )}
@@ -155,7 +155,7 @@ export function Products() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   type="button"
-                  className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full border border-(--landing-line) bg-(--card)/80 text-(--landing-muted) backdrop-blur-sm transition-colors hover:text-(--landing-accent)"
+                  className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full border border-landing-line bg-card/80 text-landing-muted backdrop-blur-sm transition-colors hover:text-secondary"
                   aria-label={`Copy link for ${product.name}`}
                 >
                   <Link2 className="size-4" />
@@ -164,21 +164,21 @@ export function Products() {
 
               {/* Card body */}
               <div className="p-5">
-                <h3 className="font-semibold tracking-tight text-(--landing-ink)">
+                <h3 className="font-semibold tracking-tight text-landing-ink">
                   {product.name}
                 </h3>
-                <p className="mt-0.5 text-xs text-(--landing-muted)">
+                <p className="mt-0.5 text-xs text-landing-muted">
                   Promote করার জন্য প্রস্তুত
                 </p>
 
-                <Separator className="my-4 bg-(--landing-line)" />
+                <Separator className="my-4 bg-landing-line" />
 
                 <div className="flex items-end justify-between">
                   <div>
-                    <p className="text-lg font-semibold text-(--landing-ink)">
+                    <p className="text-lg font-semibold text-landing-ink">
                       {product.price}
                     </p>
-                    <p className="mt-0.5 text-[10px] text-(--landing-muted)">
+                    <p className="mt-0.5 text-[10px] text-landing-muted">
                       Commission product অনুযায়ী
                     </p>
                   </div>
@@ -187,7 +187,7 @@ export function Products() {
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
                     type="button"
-                    className="flex items-center gap-1.5 rounded-xl bg-(--landing-ink) px-3.5 py-2 text-xs font-semibold text-(--card) transition-colors hover:bg-(--landing-accent)"
+                    className="flex items-center gap-1.5 rounded-xl bg-landing-ink px-3.5 py-2 text-xs font-semibold text-card transition-colors hover:bg-secondary"
                   >
                     Link তৈরি করুন
                     <Copy className="size-3" />
@@ -206,11 +206,9 @@ export function Products() {
           transition={{ delay: 0.3, ease }}
           className="mt-10 flex justify-center"
         >
-          <p className="text-sm text-(--landing-muted)">
-            <span className="font-semibold text-(--landing-ink)">
-              10+ brands
-            </span>
-            , hundreds of products — more added regularly.
+          <p className="text-sm text-landing-muted">
+            <span className="font-semibold text-landing-ink">10+ brands</span>,
+            hundreds of products — more added regularly.
           </p>
         </motion.div>
       </div>
