@@ -45,9 +45,9 @@ export function Hero() {
       <motion.div
         animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute left-1/2 top-[-250px] size-[800px] -translate-x-1/2 rounded-full bg-secondary/8 blur-[180px]"
+        className="absolute left-1/2 top-[-62.5] size-200 -translate-x-1/2 rounded-full bg-secondary/8 blur-[180px]"
       />
-      <div className="absolute right-[-100px] bottom-[-100px] size-[400px] rounded-full bg-blue-500/[0.04] blur-[120px]" />
+      <div className="absolute right-[-25] bottom-[-25] size-100 rounded-full bg-blue-500/4 blur-[120px]" />
 
       {/* Animated dot grid */}
       <motion.div
@@ -56,7 +56,7 @@ export function Hero() {
         className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            'radial-gradient(circle, var(--hero-grid) 1px, transparent 1px)',
+            'radial-gradient(circle, primary-foreground 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
       />
@@ -69,7 +69,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative mx-auto grid max-w-[1400px] items-center gap-16 px-5 pb-24 pt-32 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:pb-36 lg:pt-36">
+      <div className="relative mx-auto grid max-w-350 items-center gap-16 px-5 pb-24 pt-32 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:pb-36 lg:pt-36">
         {/* Copy */}
         <motion.div
           initial="hidden"
@@ -80,7 +80,7 @@ export function Hero() {
           {/* Badge */}
           <motion.div
             variants={reveal}
-            className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 backdrop-blur-xl"
+            className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/4 px-3.5 py-1.5 backdrop-blur-xl"
           >
             <motion.span
               animate={{ rotate: [0, 12, -12, 0], scale: [1, 1.2, 1] }}

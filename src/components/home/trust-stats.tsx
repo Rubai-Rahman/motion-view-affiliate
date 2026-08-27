@@ -68,9 +68,9 @@ export function TrustStats() {
   return (
     <section className="relative overflow-hidden bg-background">
       {/* Subtle top shimmer */}
-      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-white/[0.08] to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-secondary-background to-transparent" />
 
-      <Stagger className="relative mx-auto grid max-w-[1400px] grid-cols-2 px-5 sm:px-8 lg:grid-cols-4">
+      <Stagger className="relative mx-auto grid max-w-350 grid-cols-2 px-5 sm:px-8 lg:grid-cols-4 shadow-2xl bg-background">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}

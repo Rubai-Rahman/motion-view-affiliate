@@ -41,7 +41,7 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="landing-light relative overflow-hidden bg-(--secondary-background) py-28 sm:py-32 lg:py-40">
+    <section className="background relative overflow-hidden bg--secondary-background py-28 sm:py-32 lg:py-40">
       {/* Background radial */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,oklch(0.72_0.16_65_/_0.04),transparent_55%)]" />
 
@@ -61,7 +61,7 @@ export function Testimonials() {
               variants={cardReveal}
               whileHover={{ y: -8 }}
               transition={{ type: 'spring', stiffness: 250, damping: 18 }}
-              className="group relative overflow-hidden rounded-2xl border border-(--landing-line) bg-(--card) p-7 shadow-sm sm:p-8"
+              className="group relative overflow-hidden rounded-2xl border border-(--border) bg-(--card) p-7 shadow-sm sm:p-8"
             >
               {/* Gradient blob on hover */}
               <div
@@ -74,14 +74,14 @@ export function Testimonials() {
                   <Quote className="size-7 text-secondary/25 -scale-x-100" />
                   <Badge
                     variant="outline"
-                    className="border-landing-line text-[9px] font-normal text-landing-muted"
+                    className="border-border text-[9px] font-normal text-muted"
                   >
                     Creator preview
                   </Badge>
                 </div>
 
                 {/* Quote text */}
-                <p className="mt-5 text-[15px] leading-[1.8] text-muted">
+                <p className="mt-5 text-[15px] leading-[1.8] text-muted-foreground">
                   "{item.quote}"
                 </p>
 
@@ -100,7 +100,7 @@ export function Testimonials() {
                 </motion.div>
 
                 {/* Author */}
-                <div className="mt-6 flex items-center gap-3 border-t border-landing-line pt-5">
+                <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
                   <Avatar className="size-10">
                     <AvatarFallback
                       className={`text-xs font-semibold ${item.avatarBg}`}
@@ -112,9 +112,7 @@ export function Testimonials() {
                     <p className="text-sm font-semibold text-ink">
                       {item.name}
                     </p>
-                    <p className="text-xs text-muted">
-                      {item.role}
-                    </p>
+                    <p className="text-xs text-muted">{item.role}</p>
                   </div>
                 </div>
               </div>
@@ -128,7 +126,7 @@ export function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, ease }}
-          className="mt-14 flex flex-wrap items-center justify-center gap-6 text-sm text-muted"
+          className="mt-14 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground"
         >
           {[
             '50,000+ customers',

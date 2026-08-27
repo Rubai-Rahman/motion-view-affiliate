@@ -196,9 +196,7 @@ export function SectionHeading({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className={`mt-5 text-4xl font-semibold tracking-[-0.055em] sm:text-5xl lg:text-[56px] lg:leading-[1.02] ${
-          light ? 'text-(--hero-foreground)' : 'text-landing-ink'
-        }`}
+        className="mt-5 text-4xl font-semibold tracking-[-0.055em] sm:text-5xl lg:text-[56px] lg:leading-[1.02] text-muted-foreground"
       >
         {title}
       </motion.h2>
@@ -223,9 +221,7 @@ export function SectionHeading({
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className={`mt-4 max-w-2xl text-base leading-7 sm:text-lg ${
-            light ? 'text-(--hero-muted)' : 'text-landing-muted'
-          } ${centered ? 'mx-auto' : ''}`}
+          className="mt-4 max-w-2xl text-base leading-7 sm:text-lg text-muted-foreground"
         >
           {description}
         </motion.p>

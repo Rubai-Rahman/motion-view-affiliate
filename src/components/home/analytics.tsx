@@ -119,7 +119,7 @@ export function Analytics() {
                     <p className="text-[9px] text-slate-600">
                       Affiliate Overview
                     </p>
-                    <h3 className="mt-0.5 text-base font-semibold text-white">
+                    <h3 className="mt-0.5 text-base font-semibold text-foreground">
                       Your performance
                     </h3>
                   </div>

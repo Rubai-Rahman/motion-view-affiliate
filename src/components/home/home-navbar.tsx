@@ -324,7 +324,7 @@ export function HomeNavbar() {
               duration: 0.3,
               ease,
             }}
-            className="relative overflow-hidden border-t border-(--hero-line) bg-(--background)/95 backdrop-blur-2xl lg:hidden"
+            className="relative overflow-hidden border-t border-border bg-background/95 backdrop-blur-2xl lg:hidden"
           >
             <nav className="space-y-1 p-4">
               {links.map(({ label, target }, i) => (

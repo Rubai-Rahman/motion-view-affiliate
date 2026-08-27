@@ -55,7 +55,7 @@ export function Benefits() {
   return (
     <section
       id="benefits"
-      className="landing-light relative overflow-hidden bg-secondary-background py-28 sm:py-32 lg:py-40"
+      className="bg-secondary-background relative overflow-hidden py-28 sm:py-32 lg:py-40"
     >
       {/* Accent blob */}
       <div className="absolute -right-40 top-1/2 size-[500px] -translate-y-1/2 rounded-full bg-secondary/6 blur-[120px]" />
@@ -77,17 +77,17 @@ export function Benefits() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.7, ease }}
-              className="mt-10 overflow-hidden rounded-2xl border border-secondary bg-card p-6 shadow-sm"
+              className="mt-10 overflow-hidden rounded-2xl border border-secondary bg-secondary-background p-6 shadow-sm"
             >
               <div className="flex items-center gap-4">
                 <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-secondary/10">
                   <Zap className="size-5 text-secondary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-landing-ink">
+                  <p className="font-semibold text-foreground">
                     আপনার workflow-এর জন্য তৈরি
                   </p>
-                  <p className="mt-0.5 text-sm text-muted">
+                  <p className="mt-0.5 text-sm text-muted-foreground">
                     আপনার content workflow-এর সাথে সহজেই মানিয়ে যায়।
                   </p>
                 </div>
@@ -105,9 +105,9 @@ export function Benefits() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 + i * 0.08, ease }}
-                    className="flex items-center gap-2.5 text-sm text-muted"
+                    className="flex items-center gap-2.5 text-sm text-muted-foreground"
                   >
-                    <span className="size-1.5 rounded-full bg-" />
+                    <span className="size-1.5 rounded-full bg-secondary" />
                     {item}
                   </motion.div>
                 ))}
@@ -128,7 +128,7 @@ export function Benefits() {
                     boxShadow: '0 12px 40px -8px oklch(0.72 0.16 65 / 0.12)',
                   }}
                   transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                  className="group relative overflow-hidden rounded-2xl border border-secondary bg-card p-7 transition-colors hover:border-secondary/20"
+                  className="group relative overflow-hidden rounded-2xl border border-border bg-secondary-background p-7 transition-colors hover:border-secondary/20 hover:bg-card/60"
                 >
                   {/* Hover glow */}
                   <div
@@ -152,13 +152,13 @@ export function Benefits() {
                       <Icon className="size-5 text-secondary" />
                     </motion.div>
 
-                    <h3 className="mt-5 font-semibold text-secondary">
+                    <h3 className="mt-5 font-semibold text-foreground">
                       {b.title}
                     </h3>
-                    <p className="mt-0.5 text-xs font-medium text-secondary">
+                    <p className="mt-0.5 text-xs font-medium text-secondary-foreground">
                       {b.bangla}
                     </p>
-                    <p className="mt-2.5 text-sm leading-6 text-muted">
+                    <p className="mt-2.5 text-sm leading-6 text-muted-foreground">
                       {b.description}
                     </p>
                   </div>

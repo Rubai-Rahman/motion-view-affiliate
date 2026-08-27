@@ -16,7 +16,7 @@ import { GlowDivider } from './motion-primitives';
 
 export default function HomePage() {
   return (
-    <main className="landing-page min-h-screen overflow-x-hidden">
+    <main className="background min-h-screen overflow-x-hidden">
       <HomeNavbar />
       <Hero />
       <TrustStats />

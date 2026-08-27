@@ -60,10 +60,10 @@ export function CommissionSection() {
   return (
     <section
       id="commission"
-      className="landing-light relative overflow-hidden bg-secondary-background py-28 sm:py-32 lg:py-40"
+      className="bg-secondary-background relative overflow-hidden py-28 sm:py-32 lg:py-40"
     >
       {/* Accent decoration */}
-      <div className="absolute -left-40 top-1/2 size-[400px] -translate-y-1/2 rounded-full bg-secondary/[0.05] blur-[100px]" />
+      <div className="absolute -left-40 top-1/2 size-[400px] -translate-y-1/2 rounded-full bg-secondary/5 blur-[100px]" />
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
         <div className="grid gap-16 lg:grid-cols-[0.65fr_1.35fr] lg:items-start">
@@ -84,7 +84,7 @@ export function CommissionSection() {
               className="mt-10 rounded-2xl border border-secondary/20 bg-card p-6 shadow-sm"
             >
               <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-landing-ink">
+                <p className="text-sm font-medium text-foreground">
                   Example commission
                 </p>
                 <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600">
@@ -103,10 +103,8 @@ export function CommissionSection() {
                     key={key}
                     className="flex items-center justify-between text-sm"
                   >
-                    <span className="text-landing-muted">{key}</span>
-                    <span className="font-medium text-landing-ink">
-                      {val}
-                    </span>
+                    <span className="text-foreground">{key}</span>
+                    <span className="font-medium text-foreground">{val}</span>
                   </div>
                 ))}
               </div>
@@ -115,7 +113,7 @@ export function CommissionSection() {
                 <div className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10">
                   <Check className="size-3.5 text-emerald-600" />
                 </div>
-                <p className="text-xs text-landing-muted">
+                <p className="text-xs text-muted">
                   Sample transaction tracked successfully
                 </p>
               </div>
@@ -126,7 +124,7 @@ export function CommissionSection() {
           <div className="relative">
             {/* Vertical connector */}
             <div className="absolute left-5 top-5 bottom-5 w-px overflow-hidden sm:left-[26px]">
-              <div className="h-full bg-landing-line" />
+              <div className="h-full bg-border" />
               <motion.div
                 initial={{ scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
@@ -148,11 +146,11 @@ export function CommissionSection() {
                         stiffness: 300,
                         damping: 20,
                       }}
-                      className="group relative flex items-start gap-5 rounded-2xl border border-landing-line bg-card p-5 pl-16 transition-colors hover:border-secondary/20 sm:p-6 sm:pl-20"
+                      className="group relative flex items-start gap-5 rounded-2xl border border-border bg-card p-5 pl-16 transition-colors hover:border-secondary/20 sm:p-6 sm:pl-20"
                     >
                       {/* Icon sitting on the connector */}
                       <div
-                        className={`absolute left-2.5 top-1/2 -translate-y-1/2 flex size-[42px] items-center justify-center rounded-xl border border-landing-line bg-card transition-colors group-hover:border-secondary/20 sm:left-3.5 ${step.bg}`}
+                        className={`absolute left-2.5 top-1/2 -translate-y-1/2 flex size-[42px] items-center justify-center rounded-xl border border-border bg-card transition-colors group-hover:border-secondary/20 sm:left-3.5 ${step.bg}`}
                       >
                         <Icon className={`size-4 ${step.color}`} />
                       </div>
@@ -166,11 +164,11 @@ export function CommissionSection() {
                             <h3 className="mt-0.5 font-semibold text-secondary">
                               {step.title}
                             </h3>
-                            <p className="mt-1 text-sm text-landing-muted">
+                            <p className="mt-1 text-sm text-foreground">
                               {step.description}
                             </p>
                           </div>
-                          <ChevronRight className="mt-1 size-4 shrink-0 text-landing-muted opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
+                          <ChevronRight className="mt-1 size-4 shrink-0 text-muted opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
                         </div>
                       </div>
                     </motion.div>

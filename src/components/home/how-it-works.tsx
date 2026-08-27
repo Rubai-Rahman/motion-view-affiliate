@@ -104,7 +104,7 @@ export function HowItWorks() {
                   className="group relative"
                 >
                   {/* Card */}
-                  <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.03] p-6 backdrop-blur-sm transition-colors duration-300 hover:bg-white/[0.06] hover:border-white/[0.12]">
+                  <div className="relative overflow-hidden rounded-2xl border border-border bg-white/3 p-6 backdrop-blur-sm transition-colors duration-300 hover:bg-white/6 hover:border-white/12">
                     {/* Gradient bg */}
                     <div
                       className={`absolute inset-0 bg-linear-to-br ${step.color} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
