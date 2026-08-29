@@ -1,13 +1,48 @@
+'use client';
+
 import { LoginForm } from '@/components/auth/login-form';
 import Image from 'next/image';
+import { useMutation } from '@tanstack/react-query';
+import { loginAction } from '@/serverAction/authAction';
+import { toast } from '@/components/ui/toast';
+import { useRouter } from 'next/navigation';
 
 const LoginContainer = () => {
+  const router = useRouter();
+
+  const {
+    mutate: loginMutation,
+    isPending,
+  } = useMutation({
+    mutationFn: async (data: any) => {
+      const result = await loginAction(data);
+      if (result.success) {
+        toast.add({
+          title: 'Login Successful',
+          description: 'Welcome back! You have been logged in successfully.',
+          type: 'success',
+        });
+        router.push('/dashboard');
+      } else {
+        toast.add({
+          title: 'Login Failed',
+          description: result.message || 'An error occurred during login.',
+          type: 'error',
+        });
+      }
+      return result;
+    },
+  });
+
+  const handleLogin = (formdata: any) => {
+    loginMutation(formdata);
+  };
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs border border-border rounded-lg p-6">
-            <LoginForm />
+            <LoginForm onSubmit={handleLogin} />
           </div>
         </div>
       </div>

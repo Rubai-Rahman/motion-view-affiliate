@@ -1,143 +1,159 @@
+'use client';
+
 import {
-  BarChart3,
   LayoutDashboard,
-  LifeBuoy,
-  Link2,
-  LogOut,
-  ScrollText,
   Trophy,
-  UserRound,
   Wallet,
+  BarChart3,
+  Link2,
+  UserRound,
+  LifeBuoy,
+  ScrollText,
+  LogOut,
 } from 'lucide-react';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuItem,
   SidebarMenuButton,
-  useSidebar,
-  SidebarFooter,
+  SidebarMenuItem,
 } from '@/components/ui/sidebar';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 
 const primaryNav = [
-  { to: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { to: '/leaderboard', label: 'Leaderboard', icon: Trophy },
-  { to: '/payments', label: 'Payments', icon: Wallet },
-  { to: '/reports', label: 'Reports', icon: BarChart3 },
-  { to: '/affiliate-link', label: 'Affiliate Link', icon: Link2 },
+  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/dashboard/leaderboard', label: 'Leaderboard', icon: Trophy },
+  { to: '/dashboard/payment-report', label: 'Payments', icon: Wallet },
+  { to: '/dashboard/reports', label: 'Reports', icon: BarChart3 },
+  { to: '/dashboard/affiliate-link', label: 'Affiliate Link', icon: Link2 },
 ] as const;
 
 const secondaryNav = [
-  { to: '/account', label: 'My Account', icon: UserRound },
-  { to: '/help', label: 'Help & Support', icon: LifeBuoy },
-  { to: '/terms', label: 'Terms & Conditions', icon: ScrollText },
+  { to: '/dashboard/account', label: 'My Account', icon: UserRound },
+  { to: '/dashboard/help', label: 'Help & Support', icon: LifeBuoy },
+  { to: '/dashboard/terms', label: 'Terms & Conditions', icon: ScrollText },
 ] as const;
 
-export function AppSidebar() {
-  const { open } = useSidebar();
+function NavItem({
+  item,
+}: {
+  item: (typeof primaryNav)[number] | (typeof secondaryNav)[number];
+}) {
   const pathname = usePathname();
 
+  const isActive = pathname === item.to;
+
+  const Icon = item.icon;
+
   return (
-    <Sidebar
-      collapsible="icon"
-      className={`border-r border-border/50 bg-linear-to-b from-background to-muted/20 transition-all duration-300 ${
-        open ? 'w-64' : 'w-16'
-      }`}
-    >
-      <SidebarContent className="bg-linear-to-b from-background to-muted/20">
-        {/* Primary Navigation */}
+    <SidebarMenuItem>
+      <SidebarMenuButton
+        tooltip={item.label}
+        isActive={isActive}
+        className="h-10"
+        render={
+          <Link
+            href={item.to}
+            className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center"
+          >
+            <Icon className="size-4 shrink-0" />
+            <span className="text-sm font-medium group-data-[collapsible=icon]:hidden">
+              {item.label}
+            </span>
+          </Link>
+        }
+      />
+    </SidebarMenuItem>
+  );
+}
+
+export function AppSidebar() {
+  return (
+    <Sidebar collapsible="icon" className="border-r border-border bg-sidebar">
+      <SidebarContent className="bg-sidebar">
+        {/* Logo */}
+        <div className="px-4 py-6">
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-brand">
+              <span className="size-3 rotate-45 bg-brand-foreground" />
+            </span>
+
+            <span className="text-sm font-semibold tracking-tight text-foreground group-data-[collapsible=icon]:hidden">
+              Motion View
+              <span className="ml-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                Affiliates
+              </span>
+            </span>
+          </div>
+        </div>
+
+        {/* Performance */}
         <SidebarGroup>
-          {open && (
-            <SidebarGroupLabel className="px-4 py-6 text-lg font-bold text-transparent bg-clip-text bg-gradient-primary">
-              MotionView
-            </SidebarGroupLabel>
-          )}
+          <SidebarGroupLabel className="px-6 pb-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+            Performance
+          </SidebarGroupLabel>
 
           <SidebarGroupContent>
             <SidebarMenu className="space-y-1 px-2">
               {primaryNav.map((item) => (
-                <SidebarMenuItem key={item.to}>
-                  <SidebarMenuButton asChild>
-                    <Link
-                      href={item.to}
-                      className={`flex items-center gap-3 ${
-                        open ? 'px-4' : 'justify-center px-2'
-                      } rounded-lg py-3 transition-all duration-300 ${
-                        pathname === item.to
-                          ? 'bg-gradient-primary text-white shadow-elegant'
-                          : 'text-foreground/80 hover:bg-muted/50 hover:text-foreground'
-                      }`}
-                    >
-                      <item.icon className="h-5 w-5 shrink-0" />
-
-                      {open && (
-                        <span className="font-medium">{item.label}</span>
-                      )}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                <NavItem key={item.to} item={item} />
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Secondary Navigation */}
+        {/* Account */}
         <SidebarGroup className="mt-auto">
-          {open && (
-            <SidebarGroupLabel className="px-4 text-xs font-semibold uppercase text-muted-foreground">
-              General
-            </SidebarGroupLabel>
-          )}
+          <SidebarGroupLabel className="px-6 pb-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+            Account
+          </SidebarGroupLabel>
 
           <SidebarGroupContent>
             <SidebarMenu className="space-y-1 px-2">
               {secondaryNav.map((item) => (
-                <SidebarMenuItem key={item.to}>
-                  <SidebarMenuButton asChild>
-                    <Link
-                      href={item.to}
-                      className={`flex items-center gap-3 ${
-                        open ? 'px-4' : 'justify-center px-2'
-                      } rounded-lg py-3 transition-all duration-300 ${
-                        pathname === item.to
-                          ? 'bg-gradient-primary text-white shadow-elegant'
-                          : 'text-foreground/80 hover:bg-muted/50 hover:text-foreground'
-                      }`}
-                    >
-                      <item.icon className="h-5 w-5 shrink-0" />
-
-                      {open && (
-                        <span className="font-medium">{item.label}</span>
-                      )}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                <NavItem key={item.to} item={item} />
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
-      {/* Logout */}
-      <SidebarFooter className="border-t border-border/50 bg-linear-to-b from-background to-muted/20 p-2">
-        <Button
-          variant="ghost"
-          className={`w-full gap-3 text-destructive transition-all duration-300 hover:bg-destructive/10 hover:text-destructive ${
-            !open ? 'justify-center px-2' : 'justify-start px-4'
-          }`}
-        >
-          <LogOut className="h-5 w-5 shrink-0" />
+      {/* User + Logout */}
+      <SidebarFooter className="border-t border-border p-2">
+        <div className="space-y-2">
+          <div className="flex items-center gap-3 rounded-xl border border-border bg-surface-2 p-3 group-data-[collapsible=icon]:justify-center">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand/15 font-mono text-xs font-semibold text-brand">
+              MV
+            </span>
 
-          {open && <span className="font-medium">লগআউট</span>}
-        </Button>
+            <div className="min-w-0 group-data-[collapsible=icon]:hidden">
+              <p className="truncate text-xs font-semibold text-foreground">
+                Motion View
+              </p>
+
+              <p className="truncate font-mono text-[10px] text-muted-foreground">
+                Affiliate
+              </p>
+            </div>
+          </div>
+
+          <Button
+            variant="ghost"
+            className="w-full justify-start gap-3 px-3 text-destructive hover:bg-destructive/10 hover:text-destructive group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0"
+          >
+            <LogOut className="size-4" />
+            <span className="group-data-[collapsible=icon]:hidden">লগআউট</span>
+          </Button>
+        </div>
       </SidebarFooter>
     </Sidebar>
   );

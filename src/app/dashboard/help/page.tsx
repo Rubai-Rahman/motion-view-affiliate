@@ -13,10 +13,10 @@ import {
   ChevronRight,
   ExternalLink,
 } from 'lucide-react';
-import { useState } from 'react';
+
 
 export default function HelpPage() {
-  const [searchQuery, setSearchQuery] = useState('');
+
 
   const faqs = [
     {

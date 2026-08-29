@@ -17,11 +17,12 @@ export default async function Providers({
         enableSystem
         disableTransitionOnChange
       >
-        <SmoothScroll>
-          {children}
-          <Toaster />
-          <TooltipProvider />
-        </SmoothScroll>
+        <TooltipProvider>
+          <SmoothScroll>
+            {children}
+            <Toaster />
+          </SmoothScroll>
+        </TooltipProvider>
       </ThemeProvider>
     </QueryProvider>
   );

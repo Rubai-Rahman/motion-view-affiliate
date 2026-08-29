@@ -45,9 +45,13 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export function LoginForm({ className }: { className?: string }) {
-  const [showPassword, setShowPassword] = useState(false);
-
+export function LoginForm({
+  onSubmit,
+  isPending = false,
+}: {
+  onSubmit: (data: { login: string; password: string }) => void;
+  isPending?: boolean;
+}) {
   const {
     control,
     handleSubmit,
@@ -60,17 +64,18 @@ export function LoginForm({ className }: { className?: string }) {
     },
   });
 
-  const onSubmit = async (data: LoginFormValues) => {
-    console.log(data);
-
-    // Login API / server action
-    // await login(data);
+  const onSubmitHandler = async (data: LoginFormValues) => {
+    const payload = {
+      login: data.identifier,
+      password: data.password,
+    };
+    onSubmit(payload);
   };
 
   return (
     <form
-      className={cn('flex flex-col gap-6', className)}
-      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-6"
+      onSubmit={handleSubmit(onSubmitHandler)}
     >
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
@@ -117,8 +122,12 @@ export function LoginForm({ className }: { className?: string }) {
         />
 
         <Field>
-          <Button type="submit" disabled={isSubmitting} className="w-full">
-            {isSubmitting ? 'Logging in...' : 'Login'}
+          <Button
+            type="submit"
+            disabled={isSubmitting || isPending}
+            className="w-full"
+          >
+            {isSubmitting || isPending ? 'Logging in...' : 'Login'}
           </Button>
         </Field>
 
