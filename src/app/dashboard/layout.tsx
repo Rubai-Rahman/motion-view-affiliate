@@ -1,42 +1,45 @@
-import { DashboardSidebarContainer } from '@/components/navigation/dashboard-sidebar-container';
+'use client';
+
+import { AppSidebar } from '@/components/navigation/app-sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { SidebarTrigger } from '@/components/ui/sidebar';
+import { Menu, Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { theme, setTheme } = useTheme();
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <DashboardSidebarContainer />
-      <main className="lg:pl-64">
-        <div className="sticky top-0 z-30 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="lg:hidden">
-              <div className="w-10 h-10 -linear-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-              </div>
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full bg-linear-to-br from-background via-background to-muted/20">
+        <AppSidebar />
+        <div className="flex-1 flex flex-col">
+          <header className="sticky top-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-lg">
+            <div className="flex h-16 items-center justify-between px-6">
+              <SidebarTrigger className="hover:bg-muted/50 transition-colors duration-300 rounded-lg p-2">
+                <Menu className="h-5 w-5" />
+              </SidebarTrigger>
+              {theme === 'dark' ? (
+                <button onClick={toggleTheme}>
+                  <Sun className="h-5 w-5" />
+                </button>
+              ) : (
+                <button onClick={toggleTheme}>
+                  <Moon className="h-5 w-5" />
+                </button>
+              )}
             </div>
-            <div className="flex-1 lg:ml-0">
-              <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-                Affiliate Dashboard
-              </h1>
-            </div>
-          </div>
+          </header>
+          <main className="flex-1 overflow-auto mx-4 ">{children}</main>
         </div>
-        <div className="p-6">{children}</div>
-      </main>
-    </div>
+      </div>
+    </SidebarProvider>
   );
 }
