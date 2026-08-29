@@ -53,10 +53,10 @@ export function Hero() {
       <motion.div
         animate={{ backgroundPosition: ['0px 0px', '48px 48px'] }}
         transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-        className="absolute inset-0 opacity-[0.06]"
+        className="absolute inset-0 opacity-[0.07] dark:opacity-[0.06]"
         style={{
           backgroundImage:
-            'radial-gradient(circle, primary-foreground 1px, transparent 1px)',
+            'radial-gradient(circle, oklch(0.13 0.015 50) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
       />
@@ -80,7 +80,7 @@ export function Hero() {
           {/* Badge */}
           <motion.div
             variants={reveal}
-            className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/4 px-3.5 py-1.5 backdrop-blur-xl"
+            className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card/80 px-3.5 py-1.5 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/4"
           >
             <motion.span
               animate={{ rotate: [0, 12, -12, 0], scale: [1, 1.2, 1] }}
@@ -89,7 +89,7 @@ export function Hero() {
             >
               <Sparkles className="size-3 text-white" />
             </motion.span>
-            <span className="text-[11px] font-medium text-slate-400">
+            <span className="text-[11px] font-medium text-foreground/70 dark:text-slate-400">
               Motion View Affiliate Program
             </span>
             <span className="rounded-full bg-secondary/15 px-2 py-0.5 text-[9px] font-semibold text-secondary">
@@ -180,10 +180,10 @@ export function Hero() {
                 onClick={() => {
                   scrollTo('#how-it-works');
                 }}
-                className="group h-12 border-border bg-white/3 px-7 text-foreground/40 backdrop-blur-xl hover:bg-muted hover:text-foreground"
+                className="group h-12 border-border bg-card/60 px-7 text-foreground/70 backdrop-blur-xl hover:bg-muted hover:text-foreground dark:bg-white/3 dark:text-foreground/40 dark:border-white/10"
               >
                 <motion.span
-                  className="flex size-7 items-center justify-center rounded-full border border-white/15 bg-white/4 mr-1"
+                  className="flex size-7 items-center justify-center rounded-full border border-border bg-secondary/10 mr-1 dark:border-white/15 dark:bg-white/4"
                   whileHover={{ scale: 1.1 }}
                 >
                   <Play className="size-3 fill-current ml-0.5" />
@@ -206,7 +206,7 @@ export function Hero() {
               <motion.div
                 key={item}
                 whileHover={{ y: -2 }}
-                className="flex items-center gap-1.5 text-[11px] text-slate-600"
+                className="flex items-center gap-1.5 text-[11px] text-foreground/60 dark:text-slate-500"
               >
                 <motion.span
                   initial={{ scale: 0 }}
@@ -238,7 +238,7 @@ export function Hero() {
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 inset-x-0 h-24 bg-linear-to-b from-transparent to-background" />
-      <div className="h-px bg-linear-to-r from-transparent via-white/8 to-transparent" />
+      <div className="h-px bg-linear-to-r from-transparent via-border to-transparent" />
     </section>
   );
 }

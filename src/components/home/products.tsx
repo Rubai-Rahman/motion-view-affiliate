@@ -76,7 +76,7 @@ export function Products() {
           >
             <Button
               variant="outline"
-              className="w-fit border-border bg-transparent text-secondary-background hover:bg-secondary/5 hover:border-secondary/30"
+              className="w-fit border-border bg-secondary-background text-secondary-background-foreground border hover:border-border"
             >
               সব পণ্য দেখুন
               <ArrowRight className="size-4" />
@@ -93,14 +93,14 @@ export function Products() {
           className="mt-12 flex flex-col gap-2 sm:flex-row"
         >
           <div className="flex h-12 flex-1 items-center gap-3 rounded-xl border border-border bg-card px-4 transition-colors focus-within:border-secondary/40">
-            <Search className="size-4 shrink-0 text-muted" />
-            <span className="text-sm text-muted">
+            <Search className="size-4 shrink-0 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">
               Promote করার জন্য product খুঁজুন...
             </span>
           </div>
           <Button
             variant="outline"
-            className="h-12 border-border bg-card text-secondary-background"
+            className="h-12 border-border bg-card text-secondary-background-foreground"
           >
             সব category
             <ChevronDown className="size-4" />
@@ -140,11 +140,11 @@ export function Products() {
 
                 {/* Top badges */}
                 <div className="absolute left-4 top-4 flex items-center gap-2">
-                  <Badge className="border-0 bg-card/80 text-[10px] text-secondary-background backdrop-blur-sm">
+                  <Badge className="border-border bg-card/10 text-[10px] text-secondary-background-foreground backdrop-blur-lg">
                     {product.category}
                   </Badge>
                   {product.badge && (
-                    <Badge className="border-0 bg-secondary/90 text-[10px] text-accent-foreground">
+                    <Badge className="border-border bg-secondary/90 text-[10px] text-accent-foreground">
                       {product.badge}
                     </Badge>
                   )}
@@ -155,7 +155,7 @@ export function Products() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   type="button"
-                  className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full border border-border bg-card/80 text-muted backdrop-blur-sm transition-colors hover:text-secondary"
+                  className="absolute right-4 top-4 flex size-9 items-center justify-center rounded-full border border-border bg-card/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-secondary"
                   aria-label={`Copy link for ${product.name}`}
                 >
                   <Link2 className="size-4" />
@@ -164,10 +164,10 @@ export function Products() {
 
               {/* Card body */}
               <div className="p-5">
-                <h3 className="font-semibold tracking-tight text-secondary-background">
+                <h3 className="font-semibold tracking-tight text-secondary-background-foreground">
                   {product.name}
                 </h3>
-                <p className="mt-0.5 text-xs text-muted">
+                <p className="mt-0.5 text-xs text-muted-foreground">
                   Promote করার জন্য প্রস্তুত
                 </p>
 
@@ -175,10 +175,10 @@ export function Products() {
 
                 <div className="flex items-end justify-between">
                   <div>
-                    <p className="text-lg font-semibold text-secondary-background">
+                    <p className="text-lg font-semibold text-secondary-background-foreground">
                       {product.price}
                     </p>
-                    <p className="mt-0.5 text-[10px] text-muted">
+                    <p className="mt-0.5 text-[10px] text-muted-foreground">
                       Commission product অনুযায়ী
                     </p>
                   </div>
@@ -187,7 +187,7 @@ export function Products() {
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}
                     type="button"
-                    className="flex items-center gap-1.5 rounded-xl bg-secondary-background px-3.5 py-2 text-xs font-semibold text-card transition-colors hover:bg-secondary"
+                    className="flex items-center gap-1.5 rounded-xl bg-secondary-background px-3.5 py-2 text-xs font-semibold text-secondary-background-foreground transition-colors hover:bg-secondary border border-border"
                   >
                     Link তৈরি করুন
                     <Copy className="size-3" />
@@ -206,11 +206,9 @@ export function Products() {
           transition={{ delay: 0.3, ease }}
           className="mt-10 flex justify-center"
         >
-          <p className="text-sm text-muted">
-            <span className="font-semibold text-secondary-background">
-              10+ brands
-            </span>
-            , hundreds of products — more added regularly.
+          <p className="text-sm text-muted-foreground">
+            <span className="font-semibold">10+ brands</span>, hundreds of
+            products — more added regularly.
           </p>
         </motion.div>
       </div>

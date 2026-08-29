@@ -147,7 +147,7 @@ export function Benefits() {
                         stiffness: 350,
                         damping: 15,
                       }}
-                      className="flex size-11 items-center justify-center rounded-2xl border border-secondary bg-secondary-background shadow-sm transition-colors group-hover:border-secondary/20 group-hover:bg-secondary/5"
+                      className="flex size-11 items-center justify-center rounded-2xl border border-secondary/30 bg-secondary/8 shadow-sm transition-colors group-hover:border-secondary/40 group-hover:bg-secondary/12"
                     >
                       <Icon className="size-5 text-secondary" />
                     </motion.div>
@@ -155,10 +155,10 @@ export function Benefits() {
                     <h3 className="mt-5 font-semibold text-foreground">
                       {b.title}
                     </h3>
-                    <p className="mt-0.5 text-xs font-medium text-secondary-foreground">
+                    <p className="mt-0.5 text-xs font-medium text-secondary">
                       {b.bangla}
                     </p>
-                    <p className="mt-2.5 text-sm leading-6 text-muted-foreground">
+                    <p className="mt-2.5 text-sm leading-6 text-foreground/65">
                       {b.description}
                     </p>
                   </div>

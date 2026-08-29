@@ -61,7 +61,7 @@ export function Testimonials() {
               variants={cardReveal}
               whileHover={{ y: -8 }}
               transition={{ type: 'spring', stiffness: 250, damping: 18 }}
-              className="group relative overflow-hidden rounded-2xl border border-(--border) bg-(--card) p-7 shadow-sm sm:p-8"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-7 shadow-sm sm:p-8"
             >
               {/* Gradient blob on hover */}
               <div
@@ -74,7 +74,7 @@ export function Testimonials() {
                   <Quote className="size-7 text-secondary/25 -scale-x-100" />
                   <Badge
                     variant="outline"
-                    className="border-border text-[9px] font-normal text-muted"
+                    className="border-border text-[9px] font-normal text-muted-foreground"
                   >
                     Creator preview
                   </Badge>
@@ -109,10 +109,10 @@ export function Testimonials() {
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="text-sm font-semibold text-ink">
+                    <p className="text-sm font-semibold text-foreground">
                       {item.name}
                     </p>
-                    <p className="text-xs text-muted">{item.role}</p>
+                    <p className="text-xs text-muted-foreground">{item.role}</p>
                   </div>
                 </div>
               </div>

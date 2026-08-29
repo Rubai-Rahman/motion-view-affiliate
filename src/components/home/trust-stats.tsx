@@ -70,7 +70,7 @@ export function TrustStats() {
       {/* Subtle top shimmer */}
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-secondary-background to-transparent" />
 
-      <Stagger className="relative mx-auto grid max-w-350 grid-cols-2 px-5 sm:px-8 lg:grid-cols-4 shadow-2xl bg-background">
+      <Stagger className="relative mx-auto grid max-w-350 grid-cols-2 px-5 sm:px-8 lg:grid-cols-4 shadow-sm bg-background">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -81,7 +81,7 @@ export function TrustStats() {
           >
             {/* Vertical divider (not on last) */}
             {i < stats.length - 1 && (
-              <div className="absolute right-0 top-1/4 h-1/2 w-px bg-white/6" />
+              <div className="absolute right-0 top-1/4 h-1/2 w-px bg-border dark:bg-white/6" />
             )}
 
             {/* Accent bar that grows in */}
@@ -101,10 +101,10 @@ export function TrustStats() {
               <span className="text-secondary">{stat.suffix}</span>
             </p>
 
-            <p className="mt-2 text-sm font-medium text-foreground/40">
+            <p className="mt-2 text-sm font-medium text-foreground/60">
               {stat.label}
             </p>
-            <p className="mt-1 text-[11px] text-foreground/60">{stat.sub}</p>
+            <p className="mt-1 text-[11px] text-foreground/45">{stat.sub}</p>
 
             {/* Hover underline */}
             <motion.div
@@ -117,7 +117,7 @@ export function TrustStats() {
         ))}
       </Stagger>
 
-      <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-white/6 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-border to-transparent dark:via-white/6" />
     </section>
   );
 }

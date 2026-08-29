@@ -72,7 +72,7 @@ export function HowItWorks() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.6, ease }}
-            className="hidden shrink-0 items-center gap-2 rounded-2xl border border-white/[0.07] bg-white/[0.03] px-5 py-3 backdrop-blur-xl lg:flex"
+            className="hidden shrink-0 items-center gap-2 rounded-2xl border border-border bg-card px-5 py-3 shadow-sm lg:flex"
           >
             <span className="text-2xl font-semibold text-foreground">4</span>
             <span className="text-sm text-foreground/60">simple steps</span>
@@ -82,7 +82,7 @@ export function HowItWorks() {
         {/* Connector line behind cards */}
         <div className="relative mt-16">
           <div className="absolute left-[11%] right-[11%] top-[44px] hidden h-px overflow-hidden lg:block">
-            <div className="h-full bg-white/[0.06]" />
+            <div className="h-full bg-border dark:bg-white/[0.06]" />
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -104,7 +104,7 @@ export function HowItWorks() {
                   className="group relative"
                 >
                   {/* Card */}
-                  <div className="relative overflow-hidden rounded-2xl border border-border bg-white/3 p-6 backdrop-blur-sm transition-colors duration-300 hover:bg-white/6 hover:border-white/12">
+                  <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition-colors duration-300 hover:border-secondary/30 hover:bg-card hover:shadow-lg hover:shadow-secondary/5">
                     {/* Gradient bg */}
                     <div
                       className={`absolute inset-0 bg-linear-to-br ${step.color} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
@@ -125,7 +125,7 @@ export function HowItWorks() {
                           <Icon className={`size-5 ${step.iconColor}`} />
                         </motion.div>
 
-                        <span className="font-mono text-[11px] font-semibold tracking-[0.15em] text-foreground/20">
+                        <span className="font-mono text-[11px] font-semibold tracking-[0.15em] text-foreground/35">
                           {step.number}
                         </span>
                       </div>
@@ -138,7 +138,7 @@ export function HowItWorks() {
                       >
                         {step.bangla}
                       </p>
-                      <p className="mt-3 text-sm leading-6 text-foreground/60">
+                      <p className="mt-3 text-sm leading-6 text-foreground/65">
                         {step.description}
                       </p>
 

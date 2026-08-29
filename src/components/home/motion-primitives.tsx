@@ -196,7 +196,7 @@ export function SectionHeading({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="mt-5 text-4xl font-semibold tracking-[-0.055em] sm:text-5xl lg:text-[56px] lg:leading-[1.02] text-muted-foreground"
+        className="mt-5 text-4xl font-semibold tracking-[-0.055em] sm:text-5xl lg:text-[56px] lg:leading-[1.02] text-foreground"
       >
         {title}
       </motion.h2>
@@ -221,7 +221,7 @@ export function SectionHeading({
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="mt-4 max-w-2xl text-base leading-7 sm:text-lg text-muted-foreground"
+          className="mt-4 max-w-2xl text-base leading-7 sm:text-lg text-foreground/65"
         >
           {description}
         </motion.p>
@@ -237,7 +237,7 @@ export function SectionHeading({
 export function GlowDivider() {
   return (
     <div className="relative h-px overflow-visible">
-      <div className="absolute inset-x-0 h-px bg-bg-linear-to-r from-transparent via-slate-200 to-transparent dark:via-white/10" />
+      <div className="absolute inset-x-0 h-px bg-linear-to-r from-transparent via-border to-transparent" />
       <motion.div
         animate={{ x: ['-10%', '110%'] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}

@@ -78,10 +78,10 @@ export function FAQ() {
                   key={label}
                   className="rounded-xl border border-border bg-secondary-background p-4"
                 >
-                  <p className="text-2xl font-semibold text-secondary-background">
+                  <p className="text-2xl font-semibold text-secondary-background-foreground">
                     {val}
                   </p>
-                  <p className="mt-1 text-xs text-muted">{label}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{label}</p>
                 </div>
               ))}
             </div>
@@ -113,7 +113,7 @@ export function FAQ() {
                       </div>
                     </AccordionTrigger>
 
-                    <AccordionContent className="pb-5 pr-8 text-sm leading-[1.8] text-muted">
+                    <AccordionContent className="pb-5 pr-8 text-sm leading-[1.8] text-muted-foreground">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>

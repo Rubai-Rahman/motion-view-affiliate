@@ -112,13 +112,12 @@ export function FinalCTA() {
                     onClick={() => {
                       scrollTo('#faq');
                     }}
-                    className="h-12 border-white/10 bg-white/[0.03] px-7 text-slate-300 hover:bg-white/[0.07] hover:text-white"
+                    className="h-12 border bg-white/3 px-7 text-slate-500 hover:bg-white/7 hover:text-slate-900 hover:dark:text-slate-100"
                   >
                     আরও জানুন
                   </Button>
                 </motion.div>
               </motion.div>
-
               {/* Trust micro-text */}
               <motion.p
                 initial={{ opacity: 0 }}

@@ -4,7 +4,6 @@ import { motion } from 'motion/react';
 import {
   Check,
   ChevronRight,
-  CircleDollarSign,
   Link2,
   Package,
   ShoppingBag,
@@ -113,7 +112,7 @@ export function CommissionSection() {
                 <div className="flex size-7 items-center justify-center rounded-lg bg-emerald-500/10">
                   <Check className="size-3.5 text-emerald-600" />
                 </div>
-                <p className="text-xs text-muted">
+                <p className="text-xs text-muted-foreground">
                   Sample transaction tracked successfully
                 </p>
               </div>
