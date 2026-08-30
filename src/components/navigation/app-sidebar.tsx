@@ -28,6 +28,7 @@ import {
 } from '@/components/ui/sidebar';
 
 import { Button } from '@/components/ui/button';
+import { logoutAction } from '@/serverAction/authAction';
 
 const primaryNav = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -51,7 +52,6 @@ function NavItem({
   const pathname = usePathname();
 
   const isActive = pathname === item.to;
-
   const Icon = item.icon;
 
   return (
@@ -77,6 +77,10 @@ function NavItem({
 }
 
 export function AppSidebar() {
+  const handleLogout = async () => {
+    await logoutAction();
+  };
+
   return (
     <Sidebar collapsible="icon" className="border-r border-border bg-sidebar">
       <SidebarContent className="bg-sidebar">
@@ -149,6 +153,7 @@ export function AppSidebar() {
           <Button
             variant="ghost"
             className="w-full justify-start gap-3 px-3 text-destructive hover:bg-destructive/10 hover:text-destructive group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0"
+            onClick={() => handleLogout()}
           >
             <LogOut className="size-4" />
             <span className="group-data-[collapsible=icon]:hidden">লগআউট</span>

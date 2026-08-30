@@ -8,13 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Field, FieldDescription, FieldGroup } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { FormField } from '@/components/ui/form-field';
 import { PasswordInput } from './password-input';
 import { z } from 'zod';
@@ -170,15 +163,13 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
           name="type"
           label="Account Type"
           render={(field) => (
-            <Select value={field.value} onValueChange={field.onChange}>
-              <SelectTrigger id="type" className="w-full">
-                <SelectValue placeholder="Select account type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="individual">Individual</SelectItem>
-                <SelectItem value="business">Business</SelectItem>
-              </SelectContent>
-            </Select>
+            <Input
+              {...field}
+              id="type"
+              type="number"
+              placeholder="Account type"
+              autoComplete="type"
+            />
           )}
         />
 
