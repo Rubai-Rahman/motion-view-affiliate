@@ -6,16 +6,19 @@ import { useMutation } from '@tanstack/react-query';
 import { loginAction } from '@/serverAction/authAction';
 import { toast } from '@/components/ui/toast';
 import { useRouter } from 'next/navigation';
+import { LoginActionResult, LoginPayload } from '@/types/auth.types';
 
 const LoginContainer = () => {
   const router = useRouter();
 
-  const {
-    mutate: loginMutation,
-    isPending,
-  } = useMutation({
-    mutationFn: async (data: any) => {
+  const { mutate: loginMutation, isPending } = useMutation<
+    LoginActionResult,
+    Error,
+    LoginPayload
+  >({
+    mutationFn: async (data: LoginPayload) => {
       const result = await loginAction(data);
+
       if (result.success) {
         toast.add({
           title: 'Login Successful',
@@ -26,23 +29,25 @@ const LoginContainer = () => {
       } else {
         toast.add({
           title: 'Login Failed',
-          description: result.message || 'An error occurred during login.',
+          description: result.error || 'An error occurred during login.',
           type: 'error',
         });
       }
+
       return result;
     },
   });
 
-  const handleLogin = (formdata: any) => {
+  const handleLogin = (formdata: LoginPayload) => {
     loginMutation(formdata);
   };
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs border border-border rounded-lg p-6">
-            <LoginForm onSubmit={handleLogin} />
+            <LoginForm onSubmit={handleLogin} isPending={isPending} />
           </div>
         </div>
       </div>

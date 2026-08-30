@@ -1,24 +1,16 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { cn } from '@/lib/utils';
-
 import { Button } from '@/components/ui/button';
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-} from '@/components/ui/field';
+import { Field, FieldDescription, FieldGroup } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { FormField } from '../ui/form-field';
 import { PasswordInput } from './password-input';
+import { LoginPayload } from '@/types/auth.types';
 
 const loginSchema = z.object({
   identifier: z
@@ -27,7 +19,7 @@ const loginSchema = z.object({
     .min(1, 'Email or phone number is required')
     .refine(
       (value) => {
-        const isEmail = z.string().email().safeParse(value).success;
+        const isEmail = z.email().safeParse(value).success;
         const isPhone = /^01\d{9}$/.test(value);
 
         return isEmail || isPhone;
@@ -45,17 +37,16 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export function LoginForm({
-  onSubmit,
-  isPending = false,
-}: {
-  onSubmit: (data: { login: string; password: string }) => void;
+type LogInProps = {
+  onSubmit: (data: LoginPayload) => void;
   isPending?: boolean;
-}) {
+};
+
+export function LoginForm({ onSubmit, isPending = false }: LogInProps) {
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -65,10 +56,11 @@ export function LoginForm({
   });
 
   const onSubmitHandler = async (data: LoginFormValues) => {
-    const payload = {
+    const payload: LoginPayload = {
       login: data.identifier,
       password: data.password,
     };
+
     onSubmit(payload);
   };
 
@@ -126,17 +118,18 @@ export function LoginForm({
             type="submit"
             disabled={isSubmitting || isPending}
             className="w-full"
+            isLoading={isSubmitting || isPending}
           >
-            {isSubmitting || isPending ? 'Logging in...' : 'Login'}
+            {isSubmitting || isPending ? 'Logging in' : 'Login'}
           </Button>
         </Field>
 
         <Field>
           <FieldDescription className="text-center">
             Don&apos;t have an account?{' '}
-            <Link href="/signup" className="underline underline-offset-4">
-              Sign up
-            </Link>
+            <Button variant="link" disabled={isPending}>
+              <Link href="/signup">Sign up</Link>
+            </Button>
           </FieldDescription>
         </Field>
       </FieldGroup>

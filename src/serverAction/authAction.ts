@@ -1,16 +1,11 @@
 'use server';
 
 import { apiPost } from '@/lib/fetch/fetchCore';
+import { ActionResult, AuthSession, LoginPayload } from '@/types/auth.types';
 import { cookies } from 'next/headers';
-
-interface LoginPayload {
-  login: string;
-  password: string;
-}
 
 interface LoginResponseData {
   token: string;
-  refreshToken?: string;
   user: {
     id: string;
     login: string;
@@ -18,11 +13,7 @@ interface LoginResponseData {
   };
 }
 
-export interface LoginActionResult {
-  success: boolean;
-  message: string;
-  user?: LoginResponseData['user'];
-}
+export type LoginActionResult = ActionResult<AuthSession>;
 
 export async function loginAction(
   payload: LoginPayload,
@@ -30,17 +21,23 @@ export async function loginAction(
   const { login, password } = payload;
 
   if (!login || !password) {
-    return { success: false, message: 'Login and password are required' };
+    return {
+      success: false,
+      error: 'Login and password are required',
+    };
   }
 
   const result = await apiPost<LoginResponseData>(
     '/login',
     { login, password },
-    { auth: false }, // no session exists yet
+    { auth: false },
   );
 
   if (!result.success) {
-    return { success: false, message: result.error };
+    return {
+      success: false,
+      error: result.error,
+    };
   }
 
   const cookieStore = await cookies();
@@ -49,22 +46,20 @@ export async function loginAction(
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: '/',
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: 60 * 60 * 24 * 7,
   });
-
-  if (result.data.refreshToken) {
-    cookieStore.set('refresh_token', result.data.refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      path: '/',
-      maxAge: 60 * 60 * 24 * 30, // 30 days
-    });
-  }
 
   return {
     success: true,
-    message: 'Logged in successfully',
-    user: result.data.user,
+    data: {
+      user: {
+        id: result.data.user.id,
+        name: result.data.user.name,
+        email: result.data.user.login,
+        role: 'user',
+      },
+      accessToken: result.data.token,
+      expiresAt: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    },
   };
 }

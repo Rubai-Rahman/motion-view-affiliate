@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------- */
 
 export interface LoginPayload {
-  identifier: string; // email or phone
+  login: string; // email or phone
   password: string;
 }
 
@@ -44,6 +44,8 @@ export interface AuthSession {
 export type ActionResult<T = undefined> =
   | { success: true; data: T }
   | { success: false; error: string; fieldErrors?: Record<string, string> };
+
+export type LoginActionResult = ActionResult<AuthSession>;
 
 /* -------------------------------------------------------------------------- */
 /* API error helper                                                           */
