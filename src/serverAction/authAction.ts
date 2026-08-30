@@ -1,14 +1,12 @@
 'use server';
 
 import { apiPost } from '@/lib/fetch/fetchCore';
-
 import {
   ActionResult,
   AuthSession,
   LoginPayload,
   SignupPayload,
 } from '@/types/auth.types';
-
 import { cookies } from 'next/headers';
 
 interface LoginResponseData {
@@ -45,6 +43,50 @@ interface SignupResponseData {
 export type LoginActionResult = ActionResult<AuthSession>;
 export type SignupActionResult = ActionResult<AuthSession>;
 
+/**
+ * Store authentication session token.
+ */
+async function setSessionCookie(token: string) {
+  const cookieStore = await cookies();
+
+  cookieStore.set('session_token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 60 * 60 * 24 * 7, // 7 days
+  });
+}
+
+/**
+ * Create AuthSession from API response.
+ */
+function createAuthSession(
+  user: {
+    id: string | number;
+    name: string;
+    email: string;
+    phone?: string;
+    type: number;
+  },
+  token: string,
+): AuthSession {
+  return {
+    user: {
+      id: String(user.id),
+      name: user.name,
+      email: user.email,
+      ...(user.phone ? { phone: user.phone } : {}),
+      type: user.type,
+    },
+    accessToken: token,
+    expiresAt: Date.now() + 1000 * 60 * 60 * 24 * 7,
+  };
+}
+
+/**
+ * Login user.
+ */
 export async function loginAction(
   payload: LoginPayload,
 ): Promise<LoginActionResult> {
@@ -62,7 +104,6 @@ export async function loginAction(
     { login, password },
     { auth: false },
   );
-  console.log('result===', result);
 
   if (!result.success) {
     return {
@@ -71,36 +112,30 @@ export async function loginAction(
     };
   }
 
-  const cookieStore = await cookies();
-
-  cookieStore.set('session_token', result.data.token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 60 * 60 * 24 * 7,
-  });
+  await setSessionCookie(result.data.token);
 
   return {
     success: true,
-    data: {
-      user: {
-        id: String(result.data.data.id),
+    data: createAuthSession(
+      {
+        id: result.data.data.id,
         name: result.data.data.name,
         email: result.data.data.email,
         phone: result.data.data.phone,
         type: result.data.data.type,
       },
-      accessToken: result.data.token,
-      expiresAt: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    },
+      result.data.token,
+    ),
   };
 }
 
+/**
+ * Register a new user.
+ */
 export async function signupAction(
   payload: SignupPayload,
 ): Promise<SignupActionResult> {
-  const result = await apiPost<SignupResponseData>('/signup', payload, {
+  const result = await apiPost<SignupResponseData>('/register', payload, {
     auth: false,
   });
 
@@ -111,27 +146,32 @@ export async function signupAction(
     };
   }
 
-  const cookieStore = await cookies();
-
-  cookieStore.set('session_token', result.data.token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 60 * 60 * 24 * 7,
-  });
+  await setSessionCookie(result.data.token);
 
   return {
     success: true,
-    data: {
-      user: {
+    data: createAuthSession(
+      {
         id: result.data.user.id,
         name: result.data.user.name,
         email: result.data.user.login,
         type: result.data.user.type,
       },
-      accessToken: result.data.token,
-      expiresAt: Date.now() + 1000 * 60 * 60 * 24 * 7,
-    },
+      result.data.token,
+    ),
+  };
+}
+
+/**
+ * Logout user.
+ */
+export async function logoutAction(): Promise<ActionResult<null>> {
+  const cookieStore = await cookies();
+
+  cookieStore.delete('session_token');
+
+  return {
+    success: true,
+    data: null,
   };
 }

@@ -15,7 +15,7 @@ export interface SignupPayload {
   description?: string;
   type: number;
   password: string;
-  confirmPassword: string;
+  password_confirmation: string;
 }
 
 export interface ForgotPasswordPayload {

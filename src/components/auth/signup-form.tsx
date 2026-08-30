@@ -4,7 +4,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Field, FieldDescription, FieldGroup } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
@@ -19,6 +18,7 @@ import {
 import { FormField } from '@/components/ui/form-field';
 import { PasswordInput } from './password-input';
 import { z } from 'zod';
+import { SignupPayload } from '@/types/auth.types';
 
 const signupSchema = z
   .object({
@@ -54,7 +54,12 @@ const signupSchema = z
   });
 
 export type SignupFormValues = z.infer<typeof signupSchema>;
-export function SignupForm({ className }: { className?: string }) {
+
+type SignupFormProps = {
+  onSubmit: (data: SignupPayload) => void;
+  isPending?: boolean;
+};
+export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
   const {
     control,
     handleSubmit,
@@ -73,15 +78,24 @@ export function SignupForm({ className }: { className?: string }) {
     },
   });
 
-  const onSubmit = async (data: SignupFormValues) => {
-    console.log(data);
-    // await signup(data);
+  const onSubmitHandler = async (data: SignupFormValues) => {
+    const payload: SignupPayload = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      description: data.description,
+      type: data.type,
+      password: data.password,
+      password_confirmation: data.passwordConfirmation,
+    };
+    onSubmit(payload);
   };
 
   return (
     <form
-      className={cn('flex flex-col gap-6', className)}
-      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-6"
+      onSubmit={handleSubmit(onSubmitHandler)}
     >
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
@@ -209,8 +223,13 @@ export function SignupForm({ className }: { className?: string }) {
         />
 
         <Field>
-          <Button type="submit" disabled={isSubmitting} className="w-full">
-            {isSubmitting ? 'Creating account...' : 'Create account'}
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            isLoading={isPending}
+            className="w-full"
+          >
+            {isSubmitting ? 'Creating account' : 'Create account'}
           </Button>
         </Field>
 
