@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   description: 'Sign up for an account',
 };
 
-export default function page() {
+export default function SignupPage() {
   return <SignupContainer />;
 }

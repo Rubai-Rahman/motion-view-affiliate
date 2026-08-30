@@ -66,7 +66,6 @@ export async function apiRequest<T>(
       cache,
       next: revalidate !== undefined ? { revalidate } : undefined,
     });
-    console.log('response===', res);
     const contentType = res.headers.get('content-type') || '';
     const payload = contentType.includes('application/json')
       ? await res.json().catch(() => null)

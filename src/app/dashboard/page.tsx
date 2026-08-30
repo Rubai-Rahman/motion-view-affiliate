@@ -94,7 +94,7 @@ export default function DashboardPage() {
             Welcome back, John! 👋
           </h2>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
-            Here's what's happening with your affiliate account today.
+            Here&apos;s what&apos;s happening with your affiliate account today.
           </p>
         </div>
         <Button className="-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg shadow-blue-500/25">

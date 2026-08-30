@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import {
   Sidebar,
@@ -77,8 +77,10 @@ function NavItem({
 }
 
 export function AppSidebar() {
+  const router = useRouter();
   const handleLogout = async () => {
     await logoutAction();
+    router.push('/login');
   };
 
   return (

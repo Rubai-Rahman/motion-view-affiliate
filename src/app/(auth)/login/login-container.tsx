@@ -6,13 +6,13 @@ import { useMutation } from '@tanstack/react-query';
 import { loginAction } from '@/serverAction/authAction';
 import { toast } from '@/components/ui/toast';
 import { useRouter } from 'next/navigation';
-import { LoginActionResult, LoginPayload } from '@/types/auth.types';
+import { AuthActionResult, LoginPayload } from '@/types/auth.types';
 
 const LoginContainer = () => {
   const router = useRouter();
 
   const { mutate: loginMutation, isPending } = useMutation<
-    LoginActionResult,
+    AuthActionResult,
     Error,
     LoginPayload
   >({

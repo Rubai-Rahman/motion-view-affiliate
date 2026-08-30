@@ -131,6 +131,11 @@ export function LoginForm({ onSubmit, isPending = false }: LogInProps) {
               <Link href="/signup">Sign up</Link>
             </Button>
           </FieldDescription>
+          <FieldDescription className="text-center">
+            <Button variant="link" disabled={isPending}>
+              <Link href="/forgot-password">Forgot password</Link>
+            </Button>
+          </FieldDescription>
         </Field>
       </FieldGroup>
     </form>

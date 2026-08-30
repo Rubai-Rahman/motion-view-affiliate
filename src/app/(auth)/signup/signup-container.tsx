@@ -3,7 +3,7 @@
 import { SignupForm } from '@/components/auth/signup-form';
 import { toast } from '@/components/ui/toast';
 import { signupAction } from '@/serverAction/authAction';
-import { LoginActionResult, SignupPayload } from '@/types/auth.types';
+import { AuthActionResult, SignupPayload } from '@/types/auth.types';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -12,13 +12,12 @@ const SignupContainer = () => {
   const router = useRouter();
 
   const { mutate: signUpMutation, isPending } = useMutation<
-    LoginActionResult,
+    AuthActionResult,
     Error,
     SignupPayload
   >({
     mutationFn: async (data: SignupPayload) => {
       const result = await signupAction(data);
-      console.log('result', result);
       if (result.success) {
         toast.add({
           title: 'Signup Successful',
@@ -33,7 +32,6 @@ const SignupContainer = () => {
           type: 'error',
         });
       }
-
       return result;
     },
   });
