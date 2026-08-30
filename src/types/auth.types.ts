@@ -11,6 +11,9 @@ export interface SignupPayload {
   name: string;
   email: string;
   phone: string;
+  address?: string;
+  description?: string;
+  type: number;
   password: string;
   confirmPassword: string;
 }
@@ -28,7 +31,7 @@ export interface AuthUser {
   name: string;
   email: string;
   phone?: string;
-  role: string;
+  type: number;
 }
 
 export interface AuthSession {

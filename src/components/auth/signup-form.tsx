@@ -31,14 +31,18 @@ const signupSchema = z
         (value) => /^01\d{9}$/.test(value),
         'Phone must be a valid 11-digit number',
       ),
-    address: z.string().trim().min(5, 'Address must be at least 5 characters'),
+    address: z
+      .string()
+      .trim()
+      .min(5, 'Address must be at least 5 characters')
+      .optional(),
     description: z
       .string()
       .trim()
       .max(500, 'Description must not exceed 500 characters')
       .optional()
       .or(z.literal('')),
-    type: z.enum(['individual', 'business']),
+    type: z.number().min(1, 'Type is required'),
     password: z.string().min(6, 'Password must be at least 6 characters'),
     passwordConfirmation: z
       .string()
@@ -63,7 +67,7 @@ export function SignupForm({ className }: { className?: string }) {
       phone: '',
       address: '',
       description: '',
-      type: 'individual',
+      type: 1,
       password: '',
       passwordConfirmation: '',
     },
