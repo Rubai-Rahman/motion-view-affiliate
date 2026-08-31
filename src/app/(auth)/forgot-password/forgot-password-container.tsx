@@ -2,20 +2,28 @@
 
 import Image from 'next/image';
 import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 
 import { toast } from '@/components/ui/toast';
 import { ForgotPasswordForm } from '@/components/auth/forgot-password-form';
-import { sendOtpForResetPassword } from '@/serverAction/passwordRecoveryAction';
+import {
+  getOtpByPhone,
+  resetPassword,
+  ResetPasswordPayload,
+  verifyOtpForPhone,
+} from '@/serverAction/passwordRecoveryAction';
 
 const ForgotPasswordContainer = () => {
+  const [step, setStep] = useState<'phone' | 'otp' | 'password'>('phone');
   const { mutate: getOtp, isPending: isGetOtpPending } = useMutation({
     mutationFn: async (data: string) => {
-      const result = await sendOtpForResetPassword(data);
+      const result = await getOtpByPhone(data);
       if (result.success) {
         toast.add({
           title: 'OTP Sent Successfully',
           type: 'success',
         });
+        setStep('otp');
       } else {
         toast.add({
           title: 'Failed to Send OTP',
@@ -29,13 +37,14 @@ const ForgotPasswordContainer = () => {
 
   const { mutate: verifyOtp, isPending: isVerifyOtpPending } = useMutation({
     mutationFn: async (data: string) => {
-      const result = await sendOtpForResetPassword(data);
+      const result = await verifyOtpForPhone(data);
       if (result.success) {
         toast.add({
           title: 'OTP Verified Successfully',
 
           type: 'success',
         });
+        setStep('password');
       } else {
         toast.add({
           title: 'Failed to Verify OTP',
@@ -47,10 +56,11 @@ const ForgotPasswordContainer = () => {
       return result;
     },
   });
-  const { mutate: updatePassword, isPending: isUpdatePasswordPending } =
+  const { mutate: resetPasswordMutation, isPending: isUpdatePasswordPending } =
     useMutation({
-      mutationFn: async (data: string) => {
-        const result = await sendOtpForResetPassword(data);
+      mutationFn: async (data: ResetPasswordPayload) => {
+        const result = await resetPassword(data);
+        console.log('result===', result);
         if (result.success) {
           toast.add({
             title: 'Password Updated Successfully',
@@ -75,8 +85,8 @@ const ForgotPasswordContainer = () => {
   const handleVerifyOtp = (formdata: string) => {
     verifyOtp(formdata);
   };
-  const handleUpdatePassword = (formdata: string) => {
-    updatePassword(formdata);
+  const handleResetPassword = (formdata: ResetPasswordPayload) => {
+    resetPasswordMutation(formdata);
   };
 
   return (
@@ -89,8 +99,9 @@ const ForgotPasswordContainer = () => {
               isVerifyingOtp={isVerifyOtpPending}
               isResettingPassword={isUpdatePasswordPending}
               onSendOtp={handleGetOtp}
+              step={step}
               onVerifyOtp={handleVerifyOtp}
-              onResetPassword={handleUpdatePassword}
+              onResetPassword={handleResetPassword}
             />
           </div>
         </div>

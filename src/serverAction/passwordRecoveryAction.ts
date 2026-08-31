@@ -2,13 +2,13 @@
 
 import { apiPost } from '@/lib/fetch/fetchCore';
 
-interface UpdatePasswordPayload {
+export interface ResetPasswordPayload {
   phone: string;
   password: string;
   password_confirmation: string;
 }
 
-export const sendOtpForResetPassword = async (mobileNo: string) => {
+export const getOtpByPhone = async (mobileNo: string) => {
   if (!mobileNo) {
     return { success: false, error: 'Mobile number is required' };
   }
@@ -33,7 +33,7 @@ export const sendOtpForResetPassword = async (mobileNo: string) => {
   };
 };
 
-export const otpVerify = async (otpInfo: string) => {
+export const verifyOtpForPhone = async (otpInfo: string) => {
   const result = await apiPost(
     `/verify-otp`,
     { otp: otpInfo },
@@ -51,7 +51,7 @@ export const otpVerify = async (otpInfo: string) => {
   };
 };
 
-export const updatePassword = async (payload: UpdatePasswordPayload) => {
+export const resetPassword = async (payload: ResetPasswordPayload) => {
   const result = await apiPost(`/reset-password-by-phone`, payload, {
     auth: false,
   });

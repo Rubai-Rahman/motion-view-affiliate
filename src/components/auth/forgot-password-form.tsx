@@ -33,12 +33,12 @@ const passwordSchema = z
       .min(6, 'Password must be at least 6 characters')
       .max(16, 'Password must not exceed 16 characters'),
 
-    password_confirmation: z
+    passwordConfirmation: z
       .string()
       .min(6, 'Password confirmation is required')
       .max(16, 'Password must not exceed 16 characters'),
   })
-  .refine((data) => data.password === data.password_confirmation, {
+  .refine((data) => data.password === data.passwordConfirmation, {
     message: 'Passwords do not match',
     path: ['password_confirmation'],
   });
@@ -46,20 +46,20 @@ const passwordSchema = z
 type PhoneFormValues = z.infer<typeof phoneSchema>;
 type OtpFormValues = z.infer<typeof otpSchema>;
 type PasswordFormValues = z.infer<typeof passwordSchema>;
-
+type ResetPasswordPayload = {
+  phone: string;
+  password: string;
+  password_confirmation: string;
+};
 type ForgotPasswordProps = {
   isSendingOtp?: boolean;
   isVerifyingOtp?: boolean;
   isResettingPassword?: boolean;
 
   onSendOtp: (phone: string) => void;
+  step?: 'phone' | 'otp' | 'password';
   onVerifyOtp: (phone: string, otp: string) => void;
-  onResetPassword: (
-    phone: string,
-    otp: string,
-    password: string,
-    passwordConfirmation: string,
-  ) => void;
+  onResetPassword: (payload: ResetPasswordPayload) => void;
 };
 
 export function ForgotPasswordForm({
@@ -67,12 +67,11 @@ export function ForgotPasswordForm({
   isVerifyingOtp = false,
   isResettingPassword = false,
   onSendOtp,
+  step,
   onVerifyOtp,
   onResetPassword,
 }: ForgotPasswordProps) {
-  const [step, setStep] = useState<'phone' | 'otp' | 'password'>('phone');
   const [phone, setPhone] = useState('');
-  const [otp, setOtp] = useState('');
 
   const phoneForm = useForm<PhoneFormValues>({
     resolver: zodResolver(phoneSchema),
@@ -92,31 +91,30 @@ export function ForgotPasswordForm({
     resolver: zodResolver(passwordSchema),
     defaultValues: {
       password: '',
-      password_confirmation: '',
+      passwordConfirmation: '',
     },
   });
 
   const handlePhoneSubmit = (data: PhoneFormValues) => {
     setPhone(data.phone);
     onSendOtp(data.phone);
-
-    // Parent can change the flow after successful API response.
-    // For now we move to OTP after requesting OTP.
-    setStep('otp');
   };
 
   const handleOtpSubmit = (data: OtpFormValues) => {
-    setOtp(data.otp);
     onVerifyOtp(phone, data.otp);
   };
 
   const handlePasswordSubmit = (data: PasswordFormValues) => {
-    onResetPassword(phone, otp, data.password, data.password_confirmation);
+    const payload: ResetPasswordPayload = {
+      phone: phone,
+      password: data.password,
+      password_confirmation: data.passwordConfirmation,
+    };
+    onResetPassword(payload);
   };
 
   const handleResendOtp = () => {
     if (!phone || isSendingOtp) return;
-
     onSendOtp(phone);
   };
 
@@ -245,12 +243,12 @@ export function ForgotPasswordForm({
 
             <FormField
               control={passwordForm.control}
-              name="password_confirmation"
+              name="passwordConfirmation"
               label="Confirm Password"
               render={(field) => (
                 <PasswordInput
                   {...field}
-                  id="password_confirmation"
+                  id="passwordConfirmation"
                   autoComplete="new-password"
                 />
               )}
