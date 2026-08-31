@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import LeaderboardContainer from './leadderboard-container';
 
 export const metadata: Metadata = {
   title: 'Leaderboard',
@@ -6,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const LeaderboardPage = () => {
-  return <div>Leaderboard</div>;
+  return <LeaderboardContainer />;
 };
 
 export default LeaderboardPage;
