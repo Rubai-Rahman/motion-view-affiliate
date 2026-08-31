@@ -95,11 +95,11 @@ export default function OnboardingUI() {
             <div className="overflow-hidden rounded-3xl border bg-card shadow-xl shadow-black/5">
               {/* Top gradient section */}
               <div className="relative overflow-hidden px-6 pb-10 pt-12 text-center sm:px-12 sm:pt-16">
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-primary/10 via-primary/5 to-transparent" />
 
                 <div className="relative mx-auto flex size-20 items-center justify-center rounded-full border-8 border-primary/10 bg-primary/15">
                   <div className="flex size-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/20">
-                    <Check className="size-6 stroke-[3]" />
+                    <Check className="size-6 stroke-3" />
                   </div>
                 </div>
 
