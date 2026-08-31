@@ -8,12 +8,14 @@ import {
   SignupPayload,
 } from '@/types/auth.types';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 interface LoginResponseData {
   success: boolean;
   message: string;
   token: string;
   token_type: string;
+  status?: number;
   data: {
     id: number;
     name: string;
@@ -114,7 +116,9 @@ export async function loginAction(
       error: result.error,
     };
   }
-
+  if (result.data.status == 0) {
+    redirect('/onboard');
+  }
   await setSessionCookie(result.data.token);
 
   return {
