@@ -18,6 +18,8 @@ const ForgotPasswordContainer = () => {
   const { mutate: getOtp, isPending: isGetOtpPending } = useMutation({
     mutationFn: async (data: string) => {
       const result = await getOtpByPhone(data);
+      console.log('result===', result);
+
       if (result.success) {
         toast.add({
           title: 'OTP Sent Successfully',
@@ -26,7 +28,7 @@ const ForgotPasswordContainer = () => {
         setStep('otp');
       } else {
         toast.add({
-          title: 'Failed to Send OTP',
+          title: result.error || 'Failed to Send OTP',
           type: 'error',
         });
       }
@@ -47,7 +49,7 @@ const ForgotPasswordContainer = () => {
         setStep('password');
       } else {
         toast.add({
-          title: 'Failed to Verify OTP',
+          title: result.error || 'Failed to Verify OTP',
 
           type: 'error',
         });
@@ -69,7 +71,7 @@ const ForgotPasswordContainer = () => {
           });
         } else {
           toast.add({
-            title: 'Failed to Update Password',
+            title: result.error || 'Failed to Update Password',
 
             type: 'error',
           });
