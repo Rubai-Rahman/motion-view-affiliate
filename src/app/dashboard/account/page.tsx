@@ -13,7 +13,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  Calendar,
   Shield,
   Bell,
   CreditCard,

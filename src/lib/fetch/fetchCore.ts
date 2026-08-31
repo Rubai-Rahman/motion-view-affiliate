@@ -19,7 +19,7 @@ export type ApiService = keyof typeof API_URLS;
 
 export type ApiResponse<T> =
   | { success: true; data: T; status: number }
-  | { success: false; error: string; status: number };
+  | { success: false; error: string; status: number; details?: unknown };
 
 interface RequestOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -87,6 +87,7 @@ export async function apiRequest<T>(
       next: revalidate !== undefined ? { revalidate } : undefined,
     });
     const contentType = res.headers.get('content-type') || '';
+
     const payload = contentType.includes('application/json')
       ? await res.json().catch(() => null)
       : null;
@@ -94,14 +95,22 @@ export async function apiRequest<T>(
     if (!res.ok) {
       return {
         success: false,
-        error: payload?.message || res.statusText || 'Request failed',
+        error:
+          payload?.message ??
+          payload?.error ??
+          res.statusText ??
+          'Request failed',
         status: res.status,
+        details: payload?.errors ?? payload,
       };
     }
 
-    return { success: true, data: payload as T, status: res.status };
+    return {
+      success: true,
+      data: payload as T,
+      status: res.status,
+    };
   } catch (err) {
-    console.error(`[apiRequest] ${method} ${endpoint} failed:`, err);
     return {
       success: false,
       error: err instanceof Error ? err.message : 'Network error',

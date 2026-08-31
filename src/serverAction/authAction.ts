@@ -30,18 +30,21 @@ interface LoginResponseData {
   };
 }
 
-interface SignupResponseData {
-  token: string;
-  user: {
+export interface SignupResult {
+  success: boolean;
+  message: string;
+  data: {
     id: string;
-    login: string;
     name: string;
-    type: number;
+    email: string;
+    phone: string;
+    affiliateCode: string;
+    status: number;
   };
 }
 
 export type LoginActionResult = ActionResult<AuthSession>;
-export type SignupActionResult = ActionResult<AuthSession>;
+export type SignupActionResult = ActionResult<SignupResult>;
 
 /**
  * Store authentication session token.
@@ -135,7 +138,7 @@ export async function loginAction(
 export async function signupAction(
   payload: SignupPayload,
 ): Promise<SignupActionResult> {
-  const result = await apiPost<SignupResponseData>('/register', payload, {
+  const result = await apiPost<SignupResult>('/register', payload, {
     auth: false,
   });
 
@@ -146,19 +149,9 @@ export async function signupAction(
     };
   }
 
-  await setSessionCookie(result.data.token);
-
   return {
     success: true,
-    data: createAuthSession(
-      {
-        id: result.data.user.id,
-        name: result.data.user.name,
-        email: result.data.user.login,
-        type: result.data.user.type,
-      },
-      result.data.token,
-    ),
+    data: result.data,
   };
 }
 

@@ -18,7 +18,6 @@ const ForgotPasswordContainer = () => {
   const { mutate: getOtp, isPending: isGetOtpPending } = useMutation({
     mutationFn: async (data: string) => {
       const result = await getOtpByPhone(data);
-      console.log('result===', result);
 
       if (result.success) {
         toast.add({
@@ -62,7 +61,6 @@ const ForgotPasswordContainer = () => {
     useMutation({
       mutationFn: async (data: ResetPasswordPayload) => {
         const result = await resetPassword(data);
-        console.log('result===', result);
         if (result.success) {
           toast.add({
             title: 'Password Updated Successfully',

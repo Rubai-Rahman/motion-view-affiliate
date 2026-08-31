@@ -2,29 +2,28 @@
 
 import { SignupForm } from '@/components/auth/signup-form';
 import { toast } from '@/components/ui/toast';
-import { signupAction } from '@/serverAction/authAction';
-import { AuthActionResult, SignupPayload } from '@/types/auth.types';
+import { signupAction, SignupActionResult } from '@/serverAction/authAction';
+import { SignupPayload } from '@/types/auth.types';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 const SignupContainer = () => {
   const router = useRouter();
-
   const { mutate: signUpMutation, isPending } = useMutation<
-    AuthActionResult,
+    SignupActionResult,
     Error,
     SignupPayload
   >({
     mutationFn: async (data: SignupPayload) => {
       const result = await signupAction(data);
-      if (result.success) {
+      if (result?.success) {
         toast.add({
           title: 'Signup Successful',
-          description: 'Welcome! You have been signed up successfully.',
+          description: result.data?.message || 'Signup successful',
           type: 'success',
         });
-        router.push('/dashboard');
+        router.push('/onboard');
       } else {
         toast.add({
           title: 'Signup Failed',
