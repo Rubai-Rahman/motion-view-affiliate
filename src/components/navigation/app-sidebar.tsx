@@ -38,7 +38,7 @@ const primaryNav = [
   { href: '/dashboard/reports', label: 'Reports', icon: BarChart3 },
 
   { href: '/dashboard/orders', label: 'Orders', icon: Package },
-  { href: '/dashboard/affiliates', label: 'Affiliates', icon: Link2 },
+  { href: '/dashboard/affiliate-link', label: 'Affiliate Link', icon: Link2 },
 ] as const;
 
 const secondaryNav = [
