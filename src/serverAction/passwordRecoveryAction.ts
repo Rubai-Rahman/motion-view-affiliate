@@ -14,11 +14,10 @@ export const getOtpByPhone = async (mobileNo: string) => {
   }
 
   const result = await apiPost(
-    `/send-otp-phone`,
+    `/reset-password-request-by-phone`,
     { phone: mobileNo },
     {
       auth: false,
-      service: 'otp',
     },
   );
   if (!result.success) {
