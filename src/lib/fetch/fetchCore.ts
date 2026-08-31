@@ -1,13 +1,21 @@
 import { cookies } from 'next/headers';
 
-const BASE_URL = process.env.BACKEND_API_URL; // e.g. https://internal-api.yourcompany.com
+const API_URLS = {
+  main: process.env.BACKEND_API_URL,
+  otp: process.env.OTP_API_URL,
+} as const;
 const INTERNAL_API_KEY = process.env.BACKEND_API_KEY; // optional server-to-server secret
 
-if (!BASE_URL) {
+if (!API_URLS.main) {
   throw new Error(
     'BACKEND_API_URL is not defined in your environment variables',
   );
 }
+if (!API_URLS.otp) {
+  throw new Error('OTP_API_URL is not defined in your environment variables');
+}
+
+export type ApiService = keyof typeof API_URLS;
 
 export type ApiResponse<T> =
   | { success: true; data: T; status: number }
@@ -18,6 +26,7 @@ interface RequestOptions {
   body?: unknown;
   headers?: Record<string, string>;
   auth?: boolean; // attach the user's session cookie as a Bearer token, default true
+  service?: ApiService;
   cache?: RequestCache;
   revalidate?: number | false;
 }
@@ -35,11 +44,22 @@ export async function apiRequest<T>(
     body,
     headers = {},
     auth = true,
+    service = 'main',
     cache,
     revalidate,
   } = options;
 
-  const url = `${BASE_URL}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
+  const baseUrl = API_URLS[service];
+
+  if (!baseUrl) {
+    return {
+      success: false,
+      error: `API service "${service}" is not configured`,
+      status: 500,
+    };
+  }
+
+  const url = `${baseUrl}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
 
   const finalHeaders: Record<string, string> = {
     'Content-Type': 'application/json',

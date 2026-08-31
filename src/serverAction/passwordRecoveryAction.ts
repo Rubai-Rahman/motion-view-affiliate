@@ -16,7 +16,10 @@ export const sendOtpForResetPassword = async (mobileNo: string) => {
   const result = await apiPost(
     `/send-otp-phone`,
     { phone: mobileNo },
-    { auth: false },
+    {
+      auth: false,
+      service: 'otp',
+    },
   );
   if (!result.success) {
     return {
@@ -34,7 +37,7 @@ export const otpVerify = async (otpInfo: string) => {
   const result = await apiPost(
     `/verify-otp`,
     { otp: otpInfo },
-    { auth: false },
+    { auth: false, service: 'otp' },
   );
   if (!result.success) {
     return {
