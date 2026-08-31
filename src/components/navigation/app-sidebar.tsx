@@ -66,9 +66,11 @@ function NavItem({
         render={
           <Link
             href={item.href}
-            className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center"
+            className={`flex items-center gap-2 group-data-[collapsible=icon]:justify-center ${isActive ? 'border border-border' : ''}`}
           >
-            <Icon className="size-4 shrink-0" />
+            <Icon
+              className={`size-4 shrink-0 ${isActive ? 'text-secondary' : ''}`}
+            />
             <span className="text-sm font-medium group-data-[collapsible=icon]:hidden">
               {item.label}
             </span>
