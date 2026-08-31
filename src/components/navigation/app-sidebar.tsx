@@ -52,7 +52,7 @@ function NavItem({
 }) {
   const pathname = usePathname();
 
-  const isActive = pathname === item.to;
+  const isActive = pathname === item.href;
   const Icon = item.icon;
 
   return (
@@ -112,7 +112,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="space-y-1 px-2">
               {primaryNav.map((item) => (
-                <NavItem key={item.to} item={item} />
+                <NavItem key={item.href} item={item} />
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
@@ -127,7 +127,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="space-y-1 px-2">
               {secondaryNav.map((item) => (
-                <NavItem key={item.to} item={item} />
+                <NavItem key={item.href} item={item} />
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
