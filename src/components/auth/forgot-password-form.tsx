@@ -9,6 +9,7 @@ import { Field, FieldGroup } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { FormField } from '../ui/form-field';
 import { PasswordInput } from './password-input';
+import Link from 'next/link';
 
 const phoneSchema = z.object({
   phone: z
@@ -264,6 +265,14 @@ export function ForgotPasswordForm({
                   ? 'Resetting Password...'
                   : 'Reset Password'}
               </Button>
+            </Field>
+            <Field>
+              <Link
+                href="/login"
+                className="text-sm text-blue-500 hover:underline"
+              >
+                Back to Login
+              </Link>
             </Field>
           </form>
         )}
