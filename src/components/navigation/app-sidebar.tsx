@@ -5,7 +5,7 @@ import {
   Trophy,
   Wallet,
   BarChart3,
-  Link2,
+  Package,
   UserRound,
   LifeBuoy,
   ScrollText,
@@ -31,17 +31,18 @@ import { Button } from '@/components/ui/button';
 import { logoutAction } from '@/serverAction/authAction';
 
 const primaryNav = [
-  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { to: '/dashboard/leaderboard', label: 'Leaderboard', icon: Trophy },
-  { to: '/dashboard/payment-report', label: 'Payments', icon: Wallet },
-  { to: '/dashboard/reports', label: 'Reports', icon: BarChart3 },
-  { to: '/dashboard/affiliate-link', label: 'Affiliate Link', icon: Link2 },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/dashboard/leaderboard', label: 'Leaderboard', icon: Trophy },
+  { href: '/dashboard/payment-report', label: 'Payments', icon: Wallet },
+  { href: '/dashboard/reports', label: 'Reports', icon: BarChart3 },
+  { href: '/dashboard/reports', label: 'Reports', icon: BarChart3 },
+  { href: '/dashboard/orders', label: 'Orders', icon: Package },
 ] as const;
 
 const secondaryNav = [
-  { to: '/dashboard/account', label: 'My Account', icon: UserRound },
-  { to: '/dashboard/help', label: 'Help & Support', icon: LifeBuoy },
-  { to: '/dashboard/terms', label: 'Terms & Conditions', icon: ScrollText },
+  { href: '/dashboard/account', label: 'My Account', icon: UserRound },
+  { href: '/dashboard/help', label: 'Help & Support', icon: LifeBuoy },
+  { href: '/dashboard/terms', label: 'Terms & Conditions', icon: ScrollText },
 ] as const;
 
 function NavItem({
@@ -62,7 +63,7 @@ function NavItem({
         className="h-10"
         render={
           <Link
-            href={item.to}
+            href={item.href}
             className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center"
           >
             <Icon className="size-4 shrink-0" />
