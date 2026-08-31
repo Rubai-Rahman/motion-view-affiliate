@@ -10,6 +10,7 @@ import {
   LifeBuoy,
   ScrollText,
   LogOut,
+  Link2,
 } from 'lucide-react';
 
 import Link from 'next/link';
@@ -35,8 +36,9 @@ const primaryNav = [
   { href: '/dashboard/leaderboard', label: 'Leaderboard', icon: Trophy },
   { href: '/dashboard/payment-report', label: 'Payments', icon: Wallet },
   { href: '/dashboard/reports', label: 'Reports', icon: BarChart3 },
-  { href: '/dashboard/reports', label: 'Reports', icon: BarChart3 },
+
   { href: '/dashboard/orders', label: 'Orders', icon: Package },
+  { href: '/dashboard/affiliates', label: 'Affiliates', icon: Link2 },
 ] as const;
 
 const secondaryNav = [
