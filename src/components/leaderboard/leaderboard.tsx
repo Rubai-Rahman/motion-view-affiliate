@@ -1,4 +1,4 @@
-import { Trophy, DollarSign, Calendar, Medal, Crown } from 'lucide-react';
+import { Trophy, Calendar, Medal, Crown } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { LeaderboardData } from '@/types/dashboard.types';
@@ -9,7 +9,7 @@ interface LeaderboardProps {
 
 const Leaderboard = ({ data }: LeaderboardProps) => {
   const { date_filter, my_position, leaderboard } = data;
-
+  console.log('my_position===', my_position, 'data===', data);
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -27,7 +27,8 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
   };
 
   const getRankBadge = (rank: number) => {
-    if (rank === 1) return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
+    if (rank === 1)
+      return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
     if (rank === 2) return 'bg-gray-400/10 text-gray-400 border-gray-400/20';
     if (rank === 3) return 'bg-amber-600/10 text-amber-600 border-amber-600/20';
     return '';
@@ -67,7 +68,7 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
             <div className="space-y-1">
               <p className="text-sm text-muted-foreground">Rank</p>
               <div className="flex items-center gap-2">
-                {getRankIcon(my_position.rank)}
+                {getRankIcon(my_position?.rank)}
                 <p className="text-2xl font-bold">#{my_position.rank}</p>
               </div>
             </div>
@@ -153,9 +154,7 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
                       </p>
                     </div>
                     <Badge
-                      variant={
-                        affiliate.rank <= 3 ? 'default' : 'secondary'
-                      }
+                      variant={affiliate.rank <= 3 ? 'default' : 'secondary'}
                     >
                       ${affiliate.total_commission.toLocaleString()}
                     </Badge>

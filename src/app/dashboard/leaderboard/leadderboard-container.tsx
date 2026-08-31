@@ -7,10 +7,6 @@ import { LeaderboardSkeleton } from '@/components/skeleton/leaderboard-skeleton'
 import { toast } from '@/components/ui/toast';
 import { getLeaderboardData } from '@/serverAction/reportAction';
 import { useQuery } from '@tanstack/react-query';
-import {
-  LeaderboardData,
-  LeaderboardServerResponse,
-} from '@/types/dashboard.types';
 
 const LeaderboardContainer = () => {
   const {
@@ -21,7 +17,7 @@ const LeaderboardContainer = () => {
     queryKey: ['leaderboard'],
     queryFn: async () => {
       const result = await getLeaderboardData();
-
+      console.log('apiResult', result);
       if (result.success) {
         toast.add({
           title: 'Leaderboard Loaded',
@@ -40,15 +36,12 @@ const LeaderboardContainer = () => {
       return result;
     },
   });
-
+  console.log('leaderboardData', leaderboardData);
   if (isError) return <ErrorState />;
   if (isPending) return <LeaderboardSkeleton />;
   if (!leaderboardData?.data) return <EmptyState />;
 
-  const leaderboardResponse = leaderboardData.data as LeaderboardServerResponse;
-  if (!leaderboardResponse?.data) return <EmptyState />;
-
-  return <Leaderboard data={leaderboardResponse.data as LeaderboardData} />;
+  return <Leaderboard data={leaderboardData.data?.data ?? {}} />;
 };
 
 export default LeaderboardContainer;

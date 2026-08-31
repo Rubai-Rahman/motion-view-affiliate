@@ -1,3 +1,7 @@
+/* -------------------------------------------------------------------------- */
+/* Dashboard summary                                                          */
+/* -------------------------------------------------------------------------- */
+
 export interface DashboardData {
   date_filter?: {
     from_date: string;
@@ -29,7 +33,10 @@ export interface DashboardServerResponse {
   data: DashboardApiResponse;
 }
 
-// Leaderboard Types
+/* -------------------------------------------------------------------------- */
+/* Leaderboard                                                                */
+/* -------------------------------------------------------------------------- */
+
 export interface MyPosition {
   rank: number;
   affiliate_id: number;
@@ -71,7 +78,10 @@ export interface LeaderboardServerResponse {
   data: LeaderboardApiResponse;
 }
 
-// Account Types
+/* -------------------------------------------------------------------------- */
+/* Account                                                                    */
+/* -------------------------------------------------------------------------- */
+
 export interface AccountData {
   id: number;
   name: string;

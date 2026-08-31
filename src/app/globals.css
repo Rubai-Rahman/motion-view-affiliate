@@ -81,8 +81,8 @@
 }
 
 :root {
-  --background: oklch(0.97 0.012 150);
-  --foreground: oklch(0.18 0.015 170);
+  --background: oklch(0.985 0.002 240);
+  --foreground: oklch(0.21 0.006 240);
 
   --secondary-background: oklch(0.97 0.008 150);
   --secondary-background-foreground: oklch(0.18 0.015 170);
