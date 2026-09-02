@@ -6,9 +6,9 @@ import {
   BalanceInquiryResponse,
   WalletTransactionHistoryApiResponse,
   WithdrawRequestListApiResponse,
-  WithdrawRequestPayload,
   WithdrawRequestResponse,
 } from '@/types/reports.types';
+import { WithdrawPayload } from '@/types/payment.types';
 import { OrderListApiResponse } from '@/types/orders.types';
 
 export const getDashboardData = async () => {
@@ -24,7 +24,6 @@ export const getDashboardData = async () => {
     data: result.data,
   };
 };
-
 
 export const getAccountData = async () => {
   const result = await apiGet(`/me`);
@@ -47,7 +46,10 @@ export const getBalanceInquiryData = async () => {
     };
   }
 
-  return result;
+  return {
+    success: true,
+    data: result.data,
+  };
 };
 
 export const getWalletTransactionHistoryData = async (params?: {
@@ -97,22 +99,18 @@ export const getWithdrawRequestListData = async () => {
 };
 
 export const submitWithdrawRequest = async (
-  payload: WithdrawRequestPayload,
-) => {
+  payload: WithdrawPayload,
+): Promise<WithdrawRequestResponse> => {
   const result = await apiPost<WithdrawRequestResponse>(
     `/withdraw-request`,
     payload,
   );
 
   if (!result.success) {
-    return {
-      success: false,
-      error: result.error,
-      available_balance: undefined,
-    };
+    throw new Error(result.error);
   }
 
-  return result;
+  return result.data;
 };
 
 export const getOrderListData = async (params?: {

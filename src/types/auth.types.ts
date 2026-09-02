@@ -40,25 +40,17 @@ export interface AuthSession {
   expiresAt: number;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Server-action result envelope                                              */
-/* -------------------------------------------------------------------------- */
-
 export type ActionResult<T = undefined> =
-  | { success: true; data: T }
-  | { success: false; error: string; fieldErrors?: Record<string, string> };
+  | { success: true; data: T; message?: string }
+  | {
+      success: false;
+      error: string;
+      fieldErrors?: Record<string, string>;
+      message?: string;
+    };
 
 export type AuthActionResult = ActionResult<AuthSession>;
 
-/* -------------------------------------------------------------------------- */
-/* API error helper                                                           */
-/* -------------------------------------------------------------------------- */
-
-/**
- * Parses an unknown thrown value into a human-readable error string.
- * Handles fetch Response objects, plain Error instances, and
- * structured API responses ({ message, errors }).
- */
 export async function parseApiError(err: unknown): Promise<string> {
   if (err instanceof Response) {
     try {

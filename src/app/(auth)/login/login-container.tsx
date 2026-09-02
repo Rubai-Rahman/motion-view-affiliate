@@ -16,25 +16,21 @@ const LoginContainer = () => {
     Error,
     LoginPayload
   >({
-    mutationFn: async (data: LoginPayload) => {
-      const result = await loginAction(data);
-
-      if (result.success) {
-        toast.add({
-          title: 'Login Successful',
-          description: 'Welcome back! You have been logged in successfully.',
-          type: 'success',
-        });
-        router.push('/dashboard');
-      } else {
-        toast.add({
-          title: 'Login Failed',
-          description: result.error || 'An error occurred during login.',
-          type: 'error',
-        });
-      }
-
-      return result;
+    mutationFn: (data: LoginPayload) => loginAction(data),
+    onSuccess: (result) => {
+      toast.add({
+        title: 'Login Successful',
+        description: result.message || 'Login successful.',
+        type: 'success',
+      });
+      router.push('/dashboard');
+    },
+    onError: (error) => {
+      toast.add({
+        title: 'Login Failed',
+        description: error.message || 'An error occurred during login.',
+        type: 'error',
+      });
     },
   });
 

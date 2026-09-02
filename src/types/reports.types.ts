@@ -78,11 +78,6 @@ export interface WithdrawRequestListApiResponse {
   data: Paginated<WithdrawRequestItem>;
 }
 
-export interface WithdrawRequestPayload {
-  amount: number | string;
-  note?: string;
-}
-
 export interface WithdrawRequestResponse {
   success: boolean;
   message: string;

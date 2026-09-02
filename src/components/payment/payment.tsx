@@ -10,8 +10,8 @@ import { EmptyState } from '@/components/shared/empty-state';
 import {
   WithdrawRequestItem,
   WithdrawRequestListApiResponse,
-  WithdrawRequestPayload,
 } from '@/types/reports.types';
+import { WithdrawPayload } from '@/types/payment.types';
 
 /* -------------------------------------------------------------------------- */
 /* Form schema                                                                */
@@ -27,10 +27,6 @@ const withdrawSchema = z.object({
 
 type WithdrawFormValues = z.infer<typeof withdrawSchema>;
 
-/* -------------------------------------------------------------------------- */
-/* Helpers                                                                    */
-/* -------------------------------------------------------------------------- */
-
 const formatCurrency = (value: number | string) =>
   new Intl.NumberFormat('en-BD', {
     style: 'currency',
@@ -38,35 +34,9 @@ const formatCurrency = (value: number | string) =>
     maximumFractionDigits: 2,
   }).format(Number(value ?? 0));
 
-const formatDate = (value?: string) => {
-  if (!value) return 'N/A';
-  const date = new Date(value);
-  return Number.isNaN(date.getTime())
-    ? 'N/A'
-    : new Intl.DateTimeFormat('en-BD', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      }).format(date);
-};
-
-const statusVariant = (
-  status: string,
-): 'default' | 'secondary' | 'destructive' => {
-  const s = status.toLowerCase();
-  if (s === 'approved') return 'default';
-  if (s === 'rejected') return 'destructive';
-  return 'secondary';
-};
-
-/* -------------------------------------------------------------------------- */
-/* Props                                                                      */
-/* -------------------------------------------------------------------------- */
-
 interface PaymentProps {
-  withdrawalList: WithdrawRequestListApiResponse | null;
   availableBalance: string;
-  onWithdraw: (payload: WithdrawRequestPayload) => void;
+  onWithdraw: (payload: WithdrawPayload) => void;
   isWithdrawing: boolean;
 }
 
@@ -75,13 +45,10 @@ interface PaymentProps {
 /* -------------------------------------------------------------------------- */
 
 const Payment = ({
-  withdrawalList,
   availableBalance,
   onWithdraw,
   isWithdrawing,
 }: PaymentProps) => {
-  const items = withdrawalList?.data?.data ?? [];
-
   const {
     register,
     handleSubmit,
@@ -144,9 +111,7 @@ const Payment = ({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold tracking-tight">
-              {withdrawalList?.data?.total ?? 0}
-            </div>
+            <div className="text-3xl font-bold tracking-tight">{0}</div>
             <p className="mt-2 text-sm text-muted-foreground">
               Total records in your withdrawal history.
             </p>
@@ -166,7 +131,10 @@ const Payment = ({
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <label htmlFor="amount" className="text-sm text-muted-foreground">
+                <label
+                  htmlFor="amount"
+                  className="text-sm text-muted-foreground"
+                >
                   Amount
                 </label>
                 <input
@@ -213,64 +181,6 @@ const Payment = ({
               </Button>
             </div>
           </form>
-        </CardContent>
-      </Card>
-
-      {/* Withdrawal history */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-base">
-            <Clock3 className="size-4" />
-            Recent Withdrawal Requests
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {!items.length ? (
-            <EmptyState
-              title="No withdrawal requests"
-              description="Once you request a payout, it will appear here."
-            />
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-175 border-separate border-spacing-y-2 text-left">
-                <thead>
-                  <tr className="text-sm text-muted-foreground">
-                    <th className="pb-2 font-medium">Date</th>
-                    <th className="pb-2 font-medium">Amount</th>
-                    <th className="pb-2 font-medium">Note</th>
-                    <th className="pb-2 font-medium text-right">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(items as WithdrawRequestItem[]).map((item, index) => (
-                    <tr
-                      key={String(item.id ?? index)}
-                      className="rounded-xl bg-muted/30"
-                    >
-                      <td className="rounded-l-xl px-3 py-3 text-sm text-muted-foreground">
-                        {formatDate(
-                          String(item.created_at ?? item.updated_at ?? ''),
-                        )}
-                      </td>
-                      <td className="px-3 py-3 font-semibold">
-                        {formatCurrency(item.amount ?? 0)}
-                      </td>
-                      <td className="px-3 py-3 text-sm text-muted-foreground">
-                        {String(item.note ?? '—')}
-                      </td>
-                      <td className="rounded-r-xl px-3 py-3 text-right">
-                        <Badge
-                          variant={statusVariant(String(item.status ?? 'pending'))}
-                        >
-                          {String(item.status ?? 'Pending')}
-                        </Badge>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
         </CardContent>
       </Card>
     </div>
