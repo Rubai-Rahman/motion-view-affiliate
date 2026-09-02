@@ -17,6 +17,7 @@ interface DashboardProps {
 }
 
 const Dashboard = ({ data }: DashboardProps) => {
+  console.log('data==', data);
   const { date_filter, summary } = data;
 
   const formatDate = (dateString: string | undefined) => {

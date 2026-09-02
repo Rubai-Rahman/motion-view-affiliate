@@ -5,7 +5,7 @@ import { EmptyState } from '@/components/shared/empty-state';
 import { ErrorState } from '@/components/shared/error-state';
 import { LeaderboardSkeleton } from '@/components/skeleton/leaderboard-skeleton';
 import { toast } from '@/components/ui/toast';
-import { getLeaderboardData } from '@/serverAction/reportAction';
+import { getLeaderboardData } from '@/serverAction/leaderBoardAction';
 import { useQuery } from '@tanstack/react-query';
 
 const LeaderboardContainer = () => {
@@ -17,11 +17,12 @@ const LeaderboardContainer = () => {
     queryKey: ['leaderboard'],
     queryFn: async () => {
       const result = await getLeaderboardData();
-      console.log('apiResult', result);
       if (result.success) {
         toast.add({
           title: 'Leaderboard Loaded',
-          description: 'Leaderboard data has been loaded successfully.',
+          description:
+            result?.data?.message ||
+            'Leaderboard data has been loaded successfully.',
           type: 'success',
         });
       } else {

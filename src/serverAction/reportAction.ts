@@ -1,7 +1,7 @@
 'use server';
 
 import { apiGet, apiPost } from '@/lib/fetch/fetchCore';
-import { DashboardServerResponse } from '@/types/dashboard.types';
+import { DashboardApiResponse } from '@/types/dashboard.types';
 import {
   BalanceInquiryResponse,
   WalletTransactionHistoryApiResponse,
@@ -12,7 +12,7 @@ import {
 import { OrderListApiResponse } from '@/types/orders.types';
 
 export const getDashboardData = async () => {
-  const result = await apiGet(`/dashboard`);
+  const result = await apiGet<DashboardApiResponse>('/dashboard');
   if (!result.success) {
     return {
       success: false,
@@ -21,21 +21,10 @@ export const getDashboardData = async () => {
   }
   return {
     success: true,
-    data: result.data as DashboardServerResponse,
+    data: result.data,
   };
 };
 
-export const getLeaderboardData = async () => {
-  const result = await apiGet(`/leaderboard`);
-  console.log('result===', result);
-  if (!result.success) {
-    return {
-      success: false,
-      error: result.error,
-    };
-  }
-  return result;
-};
 
 export const getAccountData = async () => {
   const result = await apiGet(`/me`);

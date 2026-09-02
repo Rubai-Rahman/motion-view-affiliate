@@ -7,10 +7,6 @@ import { DashboardSkeleton } from '@/components/skeleton/dashboard-skeleton';
 import { toast } from '@/components/ui/toast';
 import { getDashboardData } from '@/serverAction/reportAction';
 import { useQuery } from '@tanstack/react-query';
-import {
-  DashboardData,
-  DashboardServerResponse,
-} from '@/types/dashboard.types';
 
 const DashboardContainer = () => {
   const {
@@ -21,11 +17,10 @@ const DashboardContainer = () => {
     queryKey: ['dashboard'],
     queryFn: async () => {
       const result = await getDashboardData();
-
-      if (result.success) {
+      if (result?.success) {
         toast.add({
           title: 'Dashboard Loaded',
-          description: 'Your dashboard data has been loaded successfully.',
+          description: result?.data?.message || 'Dashboard loaded successfully',
           type: 'success',
         });
       } else {
@@ -44,11 +39,10 @@ const DashboardContainer = () => {
   if (isError) return <ErrorState />;
   if (isPending) return <DashboardSkeleton />;
   if (!dashboardData?.data) return <EmptyState />;
-
-  const dashboardResponse = dashboardData.data as DashboardServerResponse;
+  const dashboardResponse = dashboardData.data;
   if (!dashboardResponse?.data) return <EmptyState />;
 
-  return <Dashboard data={dashboardResponse.data as DashboardData} />;
+  return <Dashboard data={dashboardResponse.data} />;
 };
 
 export default DashboardContainer;
