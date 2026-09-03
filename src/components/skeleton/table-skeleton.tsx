@@ -1,6 +1,12 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; columns?: number }) {
+const TableSkeleton = ({
+  rows = 5,
+  columns = 4,
+}: {
+  rows?: number;
+  columns?: number;
+}) => {
   return (
     <div className="rounded-xl border border-border bg-card">
       <div className="p-6 border-b border-border">
@@ -18,7 +24,10 @@ export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; column
           {[...Array(rows)].map((_, rowIndex) => (
             <div key={`row-${rowIndex}`} className="flex gap-4">
               {[...Array(columns)].map((_, colIndex) => (
-                <Skeleton key={`cell-${rowIndex}-${colIndex}`} className="h-10 flex-1" />
+                <Skeleton
+                  key={`cell-${rowIndex}-${colIndex}`}
+                  className="h-10 flex-1"
+                />
               ))}
             </div>
           ))}
@@ -26,4 +35,6 @@ export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; column
       </div>
     </div>
   );
-}
+};
+
+export default TableSkeleton;

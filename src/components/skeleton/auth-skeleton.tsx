@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function AuthSkeleton() {
+const AuthSkeleton = () => {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -33,4 +33,6 @@ export function AuthSkeleton() {
       </div>
     </div>
   );
-}
+};
+
+export default AuthSkeleton;

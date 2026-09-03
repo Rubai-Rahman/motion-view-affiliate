@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function DashboardSkeleton() {
+const DashboardSkeleton = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -56,4 +56,6 @@ export function DashboardSkeleton() {
       </div>
     </div>
   );
-}
+};
+
+export default DashboardSkeleton;

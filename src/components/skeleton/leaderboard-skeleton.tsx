@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function LeaderboardSkeleton() {
+const LeaderboardSkeleton = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -51,4 +51,6 @@ export function LeaderboardSkeleton() {
       </div>
     </div>
   );
-}
+};
+
+export default LeaderboardSkeleton;

@@ -6,10 +6,10 @@ import { useQuery } from '@tanstack/react-query';
 import Orders from '@/components/orders/orders';
 import { EmptyState } from '@/components/shared/empty-state';
 import { ErrorState } from '@/components/shared/error-state';
-import { TableSkeleton } from '@/components/skeleton/table-skeleton';
 import { toast } from '@/components/ui/toast';
 import { getOrderListData } from '@/serverAction/reportAction';
 import { OrderFilters, OrderListApiResponse } from '@/types/orders.types';
+import TableSkeleton from '@/components/skeleton/table-skeleton';
 
 const defaultFilters: OrderFilters = {
   from_date: '',

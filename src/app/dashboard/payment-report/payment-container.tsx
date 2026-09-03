@@ -3,6 +3,7 @@
 import Balance from '@/components/payment/balance';
 import WithdrawForm from '@/components/payment/withdraw-form';
 import { ErrorState } from '@/components/shared/error-state';
+import PaymentSkeleton from '@/components/skeleton/payment-skeleton';
 import { toast } from '@/components/ui/toast';
 import {
   getWithdrawRequestListData,
@@ -50,11 +51,10 @@ const PaymentContainer = () => {
 
   const handleWithdraw = (formdata: WithdrawPayload) => {
     withdraw(formdata);
-    
   };
 
   if (isWithdrawalPending) {
-    return <div>Loading...</div>;
+    return <PaymentSkeleton />;
   }
   if (isWithdrawalError) {
     return <ErrorState />;

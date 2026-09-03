@@ -10,6 +10,7 @@ import {
 } from '@/types/reports.types';
 import { WithdrawPayload } from '@/types/payment.types';
 import { OrderListApiResponse } from '@/types/orders.types';
+import { AccountServerResponse } from '@/types/dashboard.types';
 
 export const getDashboardData = async () => {
   const result = await apiGet<DashboardApiResponse>('/dashboard');
@@ -26,14 +27,17 @@ export const getDashboardData = async () => {
 };
 
 export const getAccountData = async () => {
-  const result = await apiGet(`/me`);
+  const result = await apiGet<AccountServerResponse>(`/me`);
   if (!result.success) {
     return {
       success: false,
       error: result.error,
     };
   }
-  return result;
+  return {
+    success: true,
+    data: result.data,
+  };
 };
 
 export const getBalanceInquiryData = async () => {

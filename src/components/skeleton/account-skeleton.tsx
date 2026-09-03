@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function AccountSkeleton() {
+const AccountSkeleton = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -54,4 +54,6 @@ export function AccountSkeleton() {
       </div>
     </div>
   );
-}
+};
+
+export default AccountSkeleton;

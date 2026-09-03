@@ -3,7 +3,7 @@
 import Leaderboard from '@/components/leaderboard/leaderboard';
 import { EmptyState } from '@/components/shared/empty-state';
 import { ErrorState } from '@/components/shared/error-state';
-import { LeaderboardSkeleton } from '@/components/skeleton/leaderboard-skeleton';
+import LeaderboardSkeleton from '@/components/skeleton/leaderboard-skeleton';
 import { toast } from '@/components/ui/toast';
 import { getLeaderboardData } from '@/serverAction/leaderBoardAction';
 import { useQuery } from '@tanstack/react-query';
