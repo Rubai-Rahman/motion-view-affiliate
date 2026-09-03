@@ -1,7 +1,15 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '128.199.150.9',
+        pathname: '/storage/**',
+      },
+    ],
+  },
   reactCompiler: true,
 };
 
