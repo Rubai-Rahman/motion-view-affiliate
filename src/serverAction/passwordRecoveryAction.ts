@@ -1,12 +1,10 @@
 'use server';
 
 import { apiPost } from '@/lib/fetch/fetchCore';
-
-export interface ResetPasswordPayload {
-  phone: string;
-  password: string;
-  password_confirmation: string;
-}
+import {
+  ForgotPasswordPayload,
+  ResetPasswordPayload,
+} from '@/types/auth.types';
 
 export const getOtpByPhone = async (mobileNo: string) => {
   if (!mobileNo) {
@@ -15,6 +13,29 @@ export const getOtpByPhone = async (mobileNo: string) => {
 
   const result = await apiPost(
     `/reset-password-request-by-phone`,
+    { phone: mobileNo },
+    {
+      auth: false,
+    },
+  );
+  if (!result.success) {
+    return {
+      success: false,
+      error: result.error,
+    };
+  }
+  return {
+    success: true,
+    data: result.data,
+  };
+};
+export const resendOtpByPhone = async (mobileNo: string) => {
+  if (!mobileNo) {
+    return { success: false, error: 'Mobile number is required' };
+  }
+
+  const result = await apiPost(
+    `/send-otp-for-change-password`,
     { phone: mobileNo },
     {
       auth: false,
@@ -50,9 +71,24 @@ export const verifyOtpForPhone = async (otpInfo: string) => {
   };
 };
 
-export const resetPassword = async (payload: ResetPasswordPayload) => {
+export const forgotPassword = async (payload: ForgotPasswordPayload) => {
   const result = await apiPost(`/reset-password-by-phone`, payload, {
     auth: false,
+  });
+  if (!result.success) {
+    return {
+      success: false,
+      error: result.error,
+    };
+  }
+  return {
+    success: true,
+    data: result.data,
+  };
+};
+export const resetPassword = async (payload: ResetPasswordPayload) => {
+  const result = await apiPost(`/change-password`, payload, {
+    auth: true,
   });
   if (!result.success) {
     return {

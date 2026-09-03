@@ -3,15 +3,14 @@
 import Image from 'next/image';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-
 import { toast } from '@/components/ui/toast';
 import { ForgotPasswordForm } from '@/components/auth/forgot-password-form';
 import {
   getOtpByPhone,
-  resetPassword,
-  ResetPasswordPayload,
+  forgotPassword,
   verifyOtpForPhone,
 } from '@/serverAction/passwordRecoveryAction';
+import { ForgotPasswordPayload } from '@/types/auth.types';
 
 const ForgotPasswordContainer = () => {
   const [step, setStep] = useState<'phone' | 'otp' | 'password'>('phone');
@@ -53,8 +52,8 @@ const ForgotPasswordContainer = () => {
 
   const { mutate: resetPasswordMutation, isPending: isUpdatePasswordPending } =
     useMutation({
-      mutationFn: async (data: ResetPasswordPayload) =>
-        await resetPassword(data),
+      mutationFn: async (data: ForgotPasswordPayload) =>
+        await forgotPassword(data),
       onSuccess: () => {
         toast.add({
           title: 'Password Updated Successfully',
@@ -75,7 +74,7 @@ const ForgotPasswordContainer = () => {
   const handleVerifyOtp = (formdata: string) => {
     verifyOtp(formdata);
   };
-  const handleResetPassword = (formdata: ResetPasswordPayload) => {
+  const handleResetPassword = (formdata: ForgotPasswordPayload) => {
     resetPasswordMutation(formdata);
   };
 

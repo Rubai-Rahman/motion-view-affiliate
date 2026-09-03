@@ -1,16 +1,13 @@
 'use client';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { Button } from '@/components/ui/button';
 import { Field, FieldGroup } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { FormField } from '../ui/form-field';
 import { PasswordInput } from './password-input';
-import Link from 'next/link';
-import { ForgotPasswordPayload } from '@/types/auth.types';
+import { ResetPasswordPayload } from '@/types/auth.types';
 
 const phoneSchema = z.object({
   phone: z
@@ -30,6 +27,10 @@ const otpSchema = z.object({
 
 const passwordSchema = z
   .object({
+    currentPassword: z
+      .string()
+      .min(6, 'Current password is required')
+      .max(16, 'Password must not exceed 16 characters'),
     password: z
       .string()
       .min(6, 'Password must be at least 6 characters')
@@ -57,10 +58,10 @@ type ForgotPasswordProps = {
   onSendOtp: (phone: string) => void;
   step?: 'phone' | 'otp' | 'password';
   onVerifyOtp: (phone: string, otp: string) => void;
-  onResetPassword: (payload: ForgotPasswordPayload) => void;
+  onResetPassword: (payload: ResetPasswordPayload) => void;
 };
 
-export function ForgotPasswordForm({
+const ChangePasswordForm = ({
   isSendingOtp = false,
   isVerifyingOtp = false,
   isResettingPassword = false,
@@ -68,13 +69,13 @@ export function ForgotPasswordForm({
   step,
   onVerifyOtp,
   onResetPassword,
-}: ForgotPasswordProps) {
-  const [phone, setPhone] = useState('');
+}: ForgotPasswordProps) => {
+  const userPhone = localStorage.getItem('user_phone') || '';
 
   const phoneForm = useForm<PhoneFormValues>({
     resolver: zodResolver(phoneSchema),
     defaultValues: {
-      phone: '',
+      phone: userPhone,
     },
   });
 
@@ -94,17 +95,16 @@ export function ForgotPasswordForm({
   });
 
   const handlePhoneSubmit = (data: PhoneFormValues) => {
-    setPhone(data.phone);
     onSendOtp(data.phone);
   };
 
   const handleOtpSubmit = (data: OtpFormValues) => {
-    onVerifyOtp(phone, data.otp);
+    onVerifyOtp(userPhone, data.otp);
   };
 
   const handlePasswordSubmit = (data: PasswordFormValues) => {
-    const payload: ForgotPasswordPayload = {
-      phone: phone,
+    const payload: ResetPasswordPayload = {
+      current_password: data.currentPassword,
       password: data.password,
       password_confirmation: data.passwordConfirmation,
     };
@@ -112,8 +112,8 @@ export function ForgotPasswordForm({
   };
 
   const handleResendOtp = () => {
-    if (!phone || isSendingOtp) return;
-    onSendOtp(phone);
+    if (!userPhone || isSendingOtp) return;
+    onSendOtp(userPhone);
   };
 
   return (
@@ -122,16 +122,17 @@ export function ForgotPasswordForm({
         {/* Header */}
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">
-            {step === 'phone' && 'Forgot Password'}
+            {step === 'phone' && 'Change Password'}
             {step === 'otp' && 'Verify Phone Number'}
             {step === 'password' && 'Reset Password'}
           </h1>
 
           <p className="text-sm text-balance text-muted-foreground">
             {step === 'phone' &&
-              'Enter your phone number to reset your password.'}
+              'An OTP will be sent to your phone number to reset your password.'}
 
-            {step === 'otp' && `Enter the verification code sent to ${phone}.`}
+            {step === 'otp' &&
+              `Enter the verification code sent to ${userPhone}.`}
 
             {step === 'password' &&
               'Your phone number has been verified. Create a new password.'}
@@ -156,6 +157,7 @@ export function ForgotPasswordForm({
                   inputMode="numeric"
                   placeholder="017XXXXXXXX"
                   autoComplete="tel"
+                  readOnly
                   maxLength={11}
                 />
               )}
@@ -229,6 +231,18 @@ export function ForgotPasswordForm({
             <FormField
               control={passwordForm.control}
               name="password"
+              label="Current Password"
+              render={(field) => (
+                <PasswordInput
+                  {...field}
+                  id="password"
+                  autoComplete="current-password"
+                />
+              )}
+            />
+            <FormField
+              control={passwordForm.control}
+              name="password"
               label="New Password"
               render={(field) => (
                 <PasswordInput
@@ -263,17 +277,11 @@ export function ForgotPasswordForm({
                   : 'Reset Password'}
               </Button>
             </Field>
-            <Field>
-              <Link
-                href="/login"
-                className="text-sm text-blue-500 hover:underline"
-              >
-                Back to Login
-              </Link>
-            </Field>
           </form>
         )}
       </FieldGroup>
     </div>
   );
-}
+};
+
+export default ChangePasswordForm;

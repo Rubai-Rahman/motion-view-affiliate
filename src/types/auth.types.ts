@@ -19,7 +19,14 @@ export interface SignupPayload {
 }
 
 export interface ForgotPasswordPayload {
-  email: string;
+  phone: string;
+  password: string;
+  password_confirmation: string;
+}
+export interface ResetPasswordPayload {
+  current_password: string;
+  password: string;
+  password_confirmation: string;
 }
 
 /* -------------------------------------------------------------------------- */

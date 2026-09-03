@@ -3,20 +3,19 @@
 import Image from 'next/image';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-
 import { toast } from '@/components/ui/toast';
-import { ForgotPasswordForm } from '@/components/auth/forgot-password-form';
 import {
-  getOtpByPhone,
+  resendOtpByPhone,
   resetPassword,
-  ResetPasswordPayload,
   verifyOtpForPhone,
 } from '@/serverAction/passwordRecoveryAction';
+import ChangePasswordForm from '@/components/auth/change-password-form';
+import { ResetPasswordPayload } from '@/types/auth.types';
 
 const ChangePasswordContainer = () => {
   const [step, setStep] = useState<'phone' | 'otp' | 'password'>('phone');
   const { mutate: getOtp, isPending: isGetOtpPending } = useMutation({
-    mutationFn: async (data: string) => await getOtpByPhone(data),
+    mutationFn: async (data: string) => await resendOtpByPhone(data),
 
     onSuccess: () => {
       toast.add({
@@ -45,7 +44,6 @@ const ChangePasswordContainer = () => {
     onError: (error) => {
       toast.add({
         title: error.message || 'Failed to Verify OTP',
-
         type: 'error',
       });
     },
@@ -84,7 +82,7 @@ const ChangePasswordContainer = () => {
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs border border-border rounded-lg p-6">
-            <ForgotPasswordForm
+            <ChangePasswordForm
               isSendingOtp={isGetOtpPending}
               isVerifyingOtp={isVerifyOtpPending}
               isResettingPassword={isUpdatePasswordPending}
