@@ -13,7 +13,7 @@ import {
   verifyOtpForPhone,
 } from '@/serverAction/passwordRecoveryAction';
 
-const ForgotPasswordContainer = () => {
+const ChangePasswordContainer = () => {
   const [step, setStep] = useState<'phone' | 'otp' | 'password'>('phone');
   const { mutate: getOtp, isPending: isGetOtpPending } = useMutation({
     mutationFn: async (data: string) => await getOtpByPhone(data),
@@ -109,4 +109,4 @@ const ForgotPasswordContainer = () => {
   );
 };
 
-export default ForgotPasswordContainer;
+export default ChangePasswordContainer;

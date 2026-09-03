@@ -166,6 +166,7 @@ export async function logoutAction(): Promise<ActionResult<null>> {
   const cookieStore = await cookies();
 
   cookieStore.delete('session_token');
+  localStorage.removeItem('user_phone');
 
   return {
     success: true,

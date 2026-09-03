@@ -16,7 +16,9 @@ const AccountContainer = () => {
     queryKey: ['account'],
     queryFn: async () => {
       const result = await getAccountData();
-
+      if (result?.data?.data) {
+        localStorage.setItem('user_phone', result.data.data.phone);
+      }
       return result;
     },
   });
