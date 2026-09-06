@@ -14,13 +14,7 @@ const AccountContainer = () => {
     isError,
   } = useQuery({
     queryKey: ['account'],
-    queryFn: async () => {
-      const result = await getAccountData();
-      if (result?.data?.data) {
-        localStorage.setItem('user_phone', result.data.data.phone);
-      }
-      return result;
-    },
+    queryFn: () => getAccountData(),
   });
   console.log('accountData===', accountData);
   if (isError) return <ErrorState />;

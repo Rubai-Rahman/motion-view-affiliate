@@ -85,7 +85,8 @@ export function AppSidebar() {
   const router = useRouter();
   const handleLogout = async () => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('user_phone');
+      localStorage.removeItem('phone');
+      localStorage.removeItem('name');
     }
     await logoutAction();
     router.push('/login');

@@ -18,12 +18,19 @@ const LoginContainer = () => {
   >({
     mutationFn: (data: LoginPayload) => loginAction(data),
     onSuccess: (result) => {
-      toast.add({
-        title: 'Login Successful',
-        description: result.message || 'Login successful.',
-        type: 'success',
-      });
-      router.push('/dashboard');
+      console.log('result===', result);
+      if (result.success && result.data) {
+        const phone = result.data.user.phone;
+        const name = result.data.user.name;
+        if (phone) localStorage.setItem('phone', phone);
+        if (name) localStorage.setItem('name', name);
+        toast.add({
+          title: 'Login Successful',
+          description: result.message || 'Login successful.',
+          type: 'success',
+        });
+        router.push('/dashboard');
+      }
     },
     onError: (error) => {
       toast.add({

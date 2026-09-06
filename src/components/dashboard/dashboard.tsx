@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DashboardData } from '@/types/dashboard.types';
+import { EmptyState } from '../shared/empty-state';
 
 interface DashboardProps {
   data: DashboardData;
@@ -19,7 +20,7 @@ interface DashboardProps {
 const Dashboard = ({ data }: DashboardProps) => {
   console.log('data==', data);
   const { date_filter, summary } = data;
-
+  const userName = localStorage.getItem('name') || 'Affiliate';
   const formatDate = (dateString: string | undefined) => {
     if (!dateString) return 'N/A';
     const date = new Date(dateString);
@@ -32,16 +33,7 @@ const Dashboard = ({ data }: DashboardProps) => {
 
   // Handle missing data gracefully
   if (!summary) {
-    return (
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">
-            Loading your dashboard data...
-          </p>
-        </div>
-      </div>
-    );
+    return <EmptyState />;
   }
 
   return (
@@ -50,7 +42,10 @@ const Dashboard = ({ data }: DashboardProps) => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Welcome back, Affiliate!</p>
+          <p className="text-muted-foreground">
+            Welcome back
+            <span className="font-semibold text-secondary"> {userName}</span>
+          </p>
         </div>
         {date_filter && date_filter.from_date && date_filter.to_date && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -72,7 +67,7 @@ const Dashboard = ({ data }: DashboardProps) => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${(summary.total_sales ?? 0).toLocaleString()}
+              ৳ {(summary.total_sales ?? 0).toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">
               {summary.number_of_sales ?? 0} sales made
@@ -87,7 +82,7 @@ const Dashboard = ({ data }: DashboardProps) => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${(summary.total_commission ?? 0).toLocaleString()}
+              ৳ {(summary.total_commission ?? 0).toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">Total earnings</p>
           </CardContent>
@@ -131,7 +126,7 @@ const Dashboard = ({ data }: DashboardProps) => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${(summary.balance ?? 0).toLocaleString()}
+              ৳ {(summary.balance ?? 0).toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">Available balance</p>
           </CardContent>
@@ -146,7 +141,7 @@ const Dashboard = ({ data }: DashboardProps) => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${(summary.pending_commission ?? 0).toLocaleString()}
+              ৳ {(summary.pending_commission ?? 0).toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">Awaiting payment</p>
           </CardContent>
@@ -159,7 +154,7 @@ const Dashboard = ({ data }: DashboardProps) => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${(summary.total_bonus ?? 0).toLocaleString()}
+              ৳ {(summary.total_bonus ?? 0).toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">Bonus earnings</p>
           </CardContent>
