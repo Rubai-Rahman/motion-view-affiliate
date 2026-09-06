@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import Reports from '@/components/reports/reports';
 import { EmptyState } from '@/components/shared/empty-state';
 import { ErrorState } from '@/components/shared/error-state';
-import { toast } from '@/components/ui/toast';
 import {
   getBalanceInquiryData,
   getWalletTransactionHistoryData,
@@ -32,17 +31,7 @@ const ReportsContainer = () => {
     isError: isBalanceError,
   } = useQuery({
     queryKey: ['balance-inquiry'],
-    queryFn: async () => {
-      const result = await getBalanceInquiryData();
-      if (!result.success) {
-        toast.add({
-          title: 'Balance Load Failed',
-          description: result.error || 'Unable to load your wallet balance.',
-          type: 'error',
-        });
-      }
-      return result;
-    },
+    queryFn: getBalanceInquiryData,
   });
 
   const {
@@ -52,22 +41,12 @@ const ReportsContainer = () => {
     refetch: refetchTransactions,
   } = useQuery({
     queryKey: ['wallet-transaction-history', filters],
-    queryFn: async () => {
-      const result = await getWalletTransactionHistoryData({
+    queryFn: () =>
+      getWalletTransactionHistoryData({
         from_date: filters.from_date,
         to_date: filters.to_date,
         type: filters.type,
-      });
-      if (!result.success) {
-        toast.add({
-          title: 'Transaction History Failed',
-          description:
-            result.error || 'Unable to load transaction history at this time.',
-          type: 'error',
-        });
-      }
-      return result;
-    },
+      }),
   });
 
   const handleFilterChange = (

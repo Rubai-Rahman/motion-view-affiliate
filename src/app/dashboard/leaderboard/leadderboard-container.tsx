@@ -4,7 +4,6 @@ import Leaderboard from '@/components/leaderboard/leaderboard';
 import { EmptyState } from '@/components/shared/empty-state';
 import { ErrorState } from '@/components/shared/error-state';
 import LeaderboardSkeleton from '@/components/skeleton/leaderboard-skeleton';
-import { toast } from '@/components/ui/toast';
 import { getLeaderboardData } from '@/serverAction/leaderBoardAction';
 import { useQuery } from '@tanstack/react-query';
 
@@ -15,27 +14,7 @@ const LeaderboardContainer = () => {
     isError,
   } = useQuery({
     queryKey: ['leaderboard'],
-    queryFn: async () => {
-      const result = await getLeaderboardData();
-      if (result.success) {
-        toast.add({
-          title: 'Leaderboard Loaded',
-          description:
-            result?.data?.message ||
-            'Leaderboard data has been loaded successfully.',
-          type: 'success',
-        });
-      } else {
-        toast.add({
-          title: 'Leaderboard Load Failed',
-          description:
-            result.error || 'An error occurred while loading leaderboard data.',
-          type: 'error',
-        });
-      }
-
-      return result;
-    },
+    queryFn: getLeaderboardData,
   });
   console.log('leaderboardData', leaderboardData);
   if (isError) return <ErrorState />;

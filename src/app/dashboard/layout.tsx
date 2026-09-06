@@ -45,7 +45,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </header>
 
           {/* Main */}
-          <main className="flex-1 overflow-auto mx-4">{children}</main>
+          <main className="flex-1 overflow-auto mx-4 pb-4">{children}</main>
         </div>
       </div>
     </SidebarProvider>

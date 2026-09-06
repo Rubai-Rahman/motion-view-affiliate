@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query';
 import Orders from '@/components/orders/orders';
 import { EmptyState } from '@/components/shared/empty-state';
 import { ErrorState } from '@/components/shared/error-state';
-import { toast } from '@/components/ui/toast';
 import { getOrderListData } from '@/serverAction/reportAction';
 import { OrderFilters, OrderListApiResponse } from '@/types/orders.types';
 import TableSkeleton from '@/components/skeleton/table-skeleton';
@@ -27,23 +26,12 @@ const OrdersContainer = () => {
     refetch,
   } = useQuery({
     queryKey: ['order-list', filters],
-    queryFn: async () => {
-      const result = await getOrderListData({
+    queryFn: () =>
+      getOrderListData({
         from_date: filters.from_date,
         to_date: filters.to_date,
         status: filters.status,
-      });
-
-      if (!result.success) {
-        toast.add({
-          title: 'Orders Load Failed',
-          description: result.error || 'Unable to load your order list.',
-          type: 'error',
-        });
-      }
-
-      return result;
-    },
+      }),
   });
 
   const handleFilterChange = (field: keyof OrderFilters, value: string) => {
