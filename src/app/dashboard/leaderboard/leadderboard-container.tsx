@@ -16,12 +16,12 @@ const LeaderboardContainer = () => {
     queryKey: ['leaderboard'],
     queryFn: getLeaderboardData,
   });
-  console.log('leaderboardData', leaderboardData);
+
   if (isError) return <ErrorState />;
   if (isPending) return <LeaderboardSkeleton />;
   if (!leaderboardData?.data) return <EmptyState />;
 
-  return <Leaderboard data={leaderboardData.data?.data ?? {}} />;
+  return <Leaderboard data={leaderboardData?.data?.data} />;
 };
 
 export default LeaderboardContainer;

@@ -3,9 +3,11 @@ export interface LeaderboardEntry {
   affiliate_id: number;
   name: string;
   affiliate_code: string;
+  profile_picture: string;
   number_of_sales: number;
   total_sales: number;
   total_commission: number;
+  is_me: boolean;
 }
 export interface MyPosition {
   rank: number;
