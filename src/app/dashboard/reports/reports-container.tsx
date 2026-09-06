@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-
 import Reports from '@/components/reports/reports';
 import { EmptyState } from '@/components/shared/empty-state';
 import { ErrorState } from '@/components/shared/error-state';
@@ -16,6 +15,7 @@ import {
   TransactionFilters,
   WalletTransactionHistoryApiResponse,
 } from '@/types/reports.types';
+import ReportSkeleton from '@/components/skeleton/report-skeleton';
 
 const defaultFilters: TransactionFilters = {
   from_date: '',
@@ -80,16 +80,7 @@ const ReportsContainer = () => {
   if (isBalanceError || isTransactionsError) return <ErrorState />;
 
   if (isBalancePending || isTransactionsPending) {
-    return (
-      <div className="space-y-4 py-8">
-        <div className="h-10 w-48 animate-pulse rounded-lg bg-muted" />
-        <div className="grid gap-4 md:grid-cols-3">
-          <div className="h-36 animate-pulse rounded-xl bg-muted" />
-          <div className="h-36 animate-pulse rounded-xl bg-muted" />
-          <div className="h-36 animate-pulse rounded-xl bg-muted" />
-        </div>
-      </div>
-    );
+    return <ReportSkeleton />;
   }
 
   if (!balanceData?.data && !transactionsData?.data) return <EmptyState />;

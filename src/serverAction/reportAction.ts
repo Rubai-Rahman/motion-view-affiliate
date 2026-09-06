@@ -83,7 +83,10 @@ export const getWalletTransactionHistoryData = async (params?: {
     };
   }
 
-  return result;
+  return {
+    success: true,
+    data: result.data,
+  };
 };
 
 export const getWithdrawRequestListData = async () => {
@@ -99,7 +102,10 @@ export const getWithdrawRequestListData = async () => {
     };
   }
 
-  return result;
+  return {
+    success: true,
+    data: result.data,
+  };
 };
 
 export const submitWithdrawRequest = async (
@@ -146,5 +152,8 @@ export const getOrderListData = async (params?: {
     };
   }
 
-  return result;
+  return {
+    success: true,
+    data: result.data,
+  };
 };

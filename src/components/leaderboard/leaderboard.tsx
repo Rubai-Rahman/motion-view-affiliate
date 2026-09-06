@@ -1,7 +1,7 @@
 import { Trophy, Calendar, Medal, Crown } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { LeaderboardData } from '@/types/dashboard.types';
+import { LeaderboardData } from '@/types/leaderboard.types';
 
 interface LeaderboardProps {
   data: LeaderboardData;
@@ -9,7 +9,7 @@ interface LeaderboardProps {
 
 const Leaderboard = ({ data }: LeaderboardProps) => {
   const { date_filter, my_position, leaderboard } = data;
-  console.log('my_position===', my_position, 'data===', data);
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {

@@ -3,4 +3,5 @@ export interface WithdrawPayload {
   amount: number;
   payment_account: string;
   affiliate_note?: string;
+  note?: string;
 }

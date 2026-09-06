@@ -1,16 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowDownCircle, CheckCircle2, Clock3, Wallet } from 'lucide-react';
+import { ArrowDownCircle, CheckCircle2, Wallet } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { EmptyState } from '@/components/shared/empty-state';
-import {
-  WithdrawRequestItem,
-  WithdrawRequestListApiResponse,
-} from '@/types/reports.types';
 import { WithdrawPayload } from '@/types/payment.types';
 
 /* -------------------------------------------------------------------------- */
@@ -68,7 +62,11 @@ const Payment = ({
       return;
     }
 
-    onWithdraw({ amount: values.amount, note: values.note });
+    onWithdraw({
+      amount: Number(values.amount), note: values.note,
+      payment_method: 0,
+      payment_account: ''
+    });
     reset();
   };
 

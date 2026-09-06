@@ -2,6 +2,7 @@
 
 import Balance from '@/components/payment/balance';
 import WithdrawForm from '@/components/payment/withdraw-form';
+import WithdrawList from '@/components/payment/withdraw-list';
 import { ErrorState } from '@/components/shared/error-state';
 import PaymentSkeleton from '@/components/skeleton/payment-skeleton';
 import { toast } from '@/components/ui/toast';
@@ -64,6 +65,7 @@ const PaymentContainer = () => {
     <div>
       <Balance />
       <WithdrawForm onSubmit={handleWithdraw} isPending={isWithdrawing} />
+      <WithdrawList />
     </div>
   );
 };

@@ -1,4 +1,6 @@
 'use client';
+
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -31,7 +33,7 @@ const passwordSchema = z
       .string()
       .min(6, 'Current password is required')
       .max(16, 'Password must not exceed 16 characters'),
-    password: z
+    newPassword: z
       .string()
       .min(6, 'Password must be at least 6 characters')
       .max(16, 'Password must not exceed 16 characters'),
@@ -41,7 +43,7 @@ const passwordSchema = z
       .min(6, 'Password confirmation is required')
       .max(16, 'Password must not exceed 16 characters'),
   })
-  .refine((data) => data.password === data.passwordConfirmation, {
+  .refine((data) => data.newPassword === data.passwordConfirmation, {
     message: 'Passwords do not match',
     path: ['password_confirmation'],
   });
@@ -70,7 +72,12 @@ const ChangePasswordForm = ({
   onVerifyOtp,
   onResetPassword,
 }: ForgotPasswordProps) => {
-  const userPhone = localStorage.getItem('user_phone') || '';
+  const [userPhone] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('user_phone') || '';
+    }
+    return '';
+  });
 
   const phoneForm = useForm<PhoneFormValues>({
     resolver: zodResolver(phoneSchema),
@@ -89,7 +96,8 @@ const ChangePasswordForm = ({
   const passwordForm = useForm<PasswordFormValues>({
     resolver: zodResolver(passwordSchema),
     defaultValues: {
-      password: '',
+      currentPassword: '',
+      newPassword: '',
       passwordConfirmation: '',
     },
   });
@@ -105,7 +113,7 @@ const ChangePasswordForm = ({
   const handlePasswordSubmit = (data: PasswordFormValues) => {
     const payload: ResetPasswordPayload = {
       current_password: data.currentPassword,
-      password: data.password,
+      password: data.newPassword,
       password_confirmation: data.passwordConfirmation,
     };
     onResetPassword(payload);
@@ -230,24 +238,24 @@ const ChangePasswordForm = ({
           >
             <FormField
               control={passwordForm.control}
-              name="password"
+              name="currentPassword"
               label="Current Password"
               render={(field) => (
                 <PasswordInput
                   {...field}
-                  id="password"
+                  id="currentPassword"
                   autoComplete="current-password"
                 />
               )}
             />
             <FormField
               control={passwordForm.control}
-              name="password"
+              name="newPassword"
               label="New Password"
               render={(field) => (
                 <PasswordInput
                   {...field}
-                  id="password"
+                  id="newPassword"
                   autoComplete="new-password"
                 />
               )}

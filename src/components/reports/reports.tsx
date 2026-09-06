@@ -9,14 +9,14 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { EmptyState } from '@/components/shared/empty-state';
 import {
-  BalanceInqueryResponse,
+  BalanceInquiryResponse,
   TransactionFilters,
   WalletTransactionHistoryApiResponse,
   WalletTransactionItem,
 } from '@/types/reports.types';
 
 interface ReportsProps {
-  balance: BalanceInqueryResponse | null;
+  balance: BalanceInquiryResponse | null;
   transactions: WalletTransactionHistoryApiResponse | null;
   filters: TransactionFilters;
   onFilterChange: (field: keyof TransactionFilters, value: string) => void;
