@@ -1,4 +1,3 @@
-// components/signup-form.tsx
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +11,15 @@ import { FormField } from '@/components/ui/form-field';
 import { PasswordInput } from './password-input';
 import { z } from 'zod';
 import { SignupPayload } from '@/types/auth.types';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
+import { accountType } from '@/constants/signup';
 
 const signupSchema = z
   .object({
@@ -163,13 +171,28 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
           name="type"
           label="Account Type"
           render={(field) => (
-            <Input
-              {...field}
-              id="type"
-              type="number"
-              placeholder="Account type"
-              autoComplete="type"
-            />
+            <Select
+              value={String(field.value)}
+              onValueChange={(value) => field.onChange(Number(value))}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select account type">
+                  {
+                    accountType.find((item) => item.value === field.value)
+                      ?.label
+                  }
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {accountType.map((item) => (
+                    <SelectItem key={item.value} value={String(item.value)}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           )}
         />
 

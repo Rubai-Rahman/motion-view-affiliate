@@ -84,6 +84,9 @@ function NavItem({
 export function AppSidebar() {
   const router = useRouter();
   const handleLogout = async () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('user_phone');
+    }
     await logoutAction();
     router.push('/login');
   };

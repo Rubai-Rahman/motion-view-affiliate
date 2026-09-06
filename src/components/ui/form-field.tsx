@@ -4,6 +4,7 @@
 import {
   Controller,
   type Control,
+  type ControllerRenderProps,
   type FieldPath,
   type FieldValues,
 } from 'react-hook-form';
@@ -15,13 +16,9 @@ type FormFieldProps<TFieldValues extends FieldValues> = {
   name: FieldPath<TFieldValues>;
   label?: React.ReactNode;
   labelExtra?: React.ReactNode; // e.g. "Forgot password?" link
-  render: (field: {
-    value: any;
-    onChange: (...event: any[]) => void;
-    onBlur: () => void;
-    name: string;
-    ref: React.Ref<any>;
-  }) => React.ReactNode;
+  render: (
+    field: ControllerRenderProps<TFieldValues, FieldPath<TFieldValues>>,
+  ) => React.ReactNode;
 };
 
 export function FormField<TFieldValues extends FieldValues>({
