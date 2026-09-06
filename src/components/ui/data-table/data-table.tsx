@@ -12,7 +12,13 @@ import {
 import { Button } from '@/components/ui/button';
 import type { ColumnDef, RowData } from '@tanstack/react-table';
 import { useAppTable, type features } from './data-table-features';
-
+import { ArrowDownUp, MoveDown, MoveUp, Settings2 } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 interface DataTableProps<TData extends RowData> {
   columns: ColumnDef<typeof features, TData>[];
   data: TData[];
@@ -33,11 +39,40 @@ export function DataTable<TData extends RowData>({
       data,
       ...(pageCount !== undefined ? { manualPagination: true, pageCount } : {}),
     },
-    (state) => ({ pagination: state.pagination, sorting: state.sorting }),
+    (state) => ({
+      pagination: state.pagination,
+      sorting: state.sorting,
+      columnVisibility: state.columnVisibility,
+    }),
   );
 
   return (
     <div className="space-y-4">
+      <div className="flex justify-end">
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Button variant="outline" size="sm" className="gap-2">
+              <Settings2 className="size-4" />
+              Columns
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                >
+                  {column.columnDef.header as string}
+                </DropdownMenuCheckboxItem>
+              ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -54,12 +89,20 @@ export function DataTable<TData extends RowData>({
                     }
                   >
                     {header.isPlaceholder ? null : (
-                      <>
+                      <div className="flex items-center gap-1">
                         <table.FlexRender header={header} />
-                        {{ asc: ' ↑', desc: ' ↓' }[
-                          header.column.getIsSorted() as string
-                        ] ?? null}
-                      </>
+                        {header.column.getCanSort() &&
+                          ({
+                            asc: (
+                              <MoveUp className="size-3.5 text-foreground" />
+                            ),
+                            desc: (
+                              <MoveDown className="size-3.5 text-foreground" />
+                            ),
+                          }[header.column.getIsSorted() as string] ?? (
+                            <ArrowDownUp className="size-3.5 text-foreground" />
+                          ))}
+                      </div>
                     )}
                   </TableHead>
                 ))}
@@ -79,7 +122,7 @@ export function DataTable<TData extends RowData>({
             ) : table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
-                  {row.getAllCells().map((cell) => (
+                  {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       <table.FlexRender cell={cell} />
                     </TableCell>
