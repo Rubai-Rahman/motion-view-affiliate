@@ -331,7 +331,7 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
           <div
             className={cn(
               'flex items-center gap-3 rounded-lg py-1.5 pl-2',
-              affiliate.is_me && 'border-l-4 border-primary bg-primary/10',
+              affiliate.is_me && 'border-l-4 border-primary bg-secondary/40',
             )}
           >
             <Avatar className="size-9">
