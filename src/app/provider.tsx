@@ -1,5 +1,5 @@
 import { QueryProvider } from '@/components/provider/query-provider';
-import SmoothScroll from '@/components/provider/smoothScroll';
+
 import { ThemeProvider } from '@/components/provider/theme-provider';
 import { Toaster } from '@/components/ui/toast';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -18,10 +18,8 @@ export default async function Providers({
         disableTransitionOnChange
       >
         <TooltipProvider>
-          <SmoothScroll>
-            {children}
-            <Toaster />
-          </SmoothScroll>
+          {children}
+          <Toaster />
         </TooltipProvider>
       </ThemeProvider>
     </QueryProvider>
