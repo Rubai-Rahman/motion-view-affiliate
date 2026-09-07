@@ -3,6 +3,9 @@ import { LeaderboardData, LeaderboardEntry } from '@/types/leaderboard.types';
 import { DataTable } from '../ui/data-table/data-table';
 import { createAppColumnHelper } from '../ui/data-table/data-table-features';
 import RankCard from './rank-card';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { cn } from '@/lib/utils';
+import { Badge } from '../ui/badge';
 
 export const dummyLeaderboardData: LeaderboardEntry[] = [
   {
@@ -312,13 +315,6 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
     });
   };
 
-  // const getRankBadge = (rank: number) => {
-  //   if (rank === 1)
-  //     return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-  //   if (rank === 2) return 'bg-gray-400/10 text-gray-400 border-gray-400/20';
-  //   if (rank === 3) return 'bg-amber-600/10 text-amber-600 border-amber-600/20';
-  //   return '';
-  // };
   const columnHelper = createAppColumnHelper<LeaderboardEntry>();
 
   const columns = columnHelper.columns([
@@ -332,21 +328,34 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
         const affiliate = row.original;
 
         return (
-          <div className="flex items-center gap-3">
-            <img
-              src={affiliate.profile_picture}
-              alt={affiliate.name}
-              className="h-8 w-8 rounded-full object-cover"
-            />
+          <div
+            className={cn(
+              'flex items-center gap-3 rounded-lg py-1.5 pl-2',
+              affiliate.is_me && 'border-l-4 border-primary bg-primary/10',
+            )}
+          >
+            <Avatar className="size-9">
+              <AvatarImage
+                src={affiliate.profile_picture}
+                alt={affiliate.name}
+              />
+
+              <AvatarFallback>
+                {affiliate.name.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
 
             <div>
-              <div className="font-medium">
-                {affiliate.name}
+              <div className="flex items-center gap-2">
+                <span className="font-medium">{affiliate.name}</span>
 
                 {affiliate.is_me && (
-                  <span className="ml-2 text-xs text-muted-foreground">
+                  <Badge
+                    variant="secondary"
+                    className="rounded-full bg-primary/10 px-2 py-0 text-[10px] text-primary"
+                  >
                     You
-                  </span>
+                  </Badge>
                 )}
               </div>
 
