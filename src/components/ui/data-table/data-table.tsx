@@ -66,11 +66,9 @@ export function DataTable<TData extends RowData>({
 
         <div className="flex justify-end">
           <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Button variant="outline" size="sm" className="gap-2">
-                <Settings2 className="size-4" />
-                Columns
-              </Button>
+            <DropdownMenuTrigger className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-3 py-1.5 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+              <Settings2 className="size-4" />
+              Columns
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {table
