@@ -303,7 +303,7 @@ interface LeaderboardProps {
 const Leaderboard = ({ data }: LeaderboardProps) => {
   console.log('leaderboard', data);
   const { date_filter, my_position, leaderboard } = data;
-  console.log('leaderboard', leaderboard, my_position);
+  console.log('my_positions', leaderboard, my_position);
   const podium = dummyLeaderboardData.slice(0, 3);
   const order = [1, 0, 2];
   const formatDate = (dateString: string) => {
@@ -414,6 +414,76 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
         columns={columns}
         hasPagination={false}
       />
+      {my_position && my_position.rank > 15 && (
+        <div className="overflow-hidden rounded-md border bg-card">
+          {/* Your Position Header */}
+          <div className="flex items-center gap-2 border-b bg-secondary/10 px-4 py-2">
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Your Position
+            </span>
+
+            <Badge
+              variant="secondary"
+              className="rounded-full bg-secondary/15 px-2 py-0.5 text-[10px]"
+            >
+              #{my_position.rank}
+            </Badge>
+          </div>
+
+          {/* Row */}
+          <div className="grid grid-cols-[80px_minmax(250px,1fr)_120px_140px_140px] items-center">
+            {/* Rank */}
+            <div className="px-4 py-3">
+              <span className="font-medium">{my_position.rank}</span>
+            </div>
+
+            {/* Affiliate */}
+            <div className="px-4 py-3">
+              <div className="flex items-center gap-3">
+                <Avatar className="size-9">
+                  <AvatarFallback className="bg-secondary/15 text-sm font-semibold">
+                    {my_position.name.slice(0, 2).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="truncate font-semibold">
+                      {my_position.name}
+                    </span>
+
+                    <Badge
+                      variant="secondary"
+                      className="shrink-0 rounded-full bg-secondary/15 px-2 py-0 text-[10px]"
+                    >
+                      You
+                    </Badge>
+                  </div>
+
+                  <div className="text-xs text-muted-foreground">
+                    {my_position.affiliate_code}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Sales */}
+            <div className="px-4 py-3 text-sm font-medium">
+              {my_position.number_of_sales}
+            </div>
+
+            {/* Total Sales */}
+            <div className="px-4 py-3 text-sm font-medium">
+              {my_position.total_sales}
+            </div>
+
+            {/* Commission */}
+            <div className="px-4 py-3 text-sm font-semibold">
+              {my_position.total_commission}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
