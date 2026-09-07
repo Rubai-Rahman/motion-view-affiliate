@@ -6,6 +6,7 @@ import { z } from 'zod';
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -69,10 +70,7 @@ const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
 
   return (
     <Dialog>
-      <DialogTrigger>
-        <Button> Request Withdraw</Button>
-      </DialogTrigger>
-
+      <DialogTrigger render={<Button>Request Withdraw</Button>} />
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
@@ -175,16 +173,11 @@ const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
 
             {/* Actions */}
             <div className="flex justify-end gap-3 border-t pt-5">
-              <Button
-                type="button"
-                variant="outline"
-                disabled={submitting}
-                onClick={() => {
-                  // Dialog close is handled by Dialog's dismiss button.
-                }}
+              <DialogClose
+                render={<Button variant="outline" disabled={submitting} />}
               >
-                <DialogTrigger>Cancel</DialogTrigger>
-              </Button>
+                Cancel
+              </DialogClose>
 
               <Button
                 type="submit"

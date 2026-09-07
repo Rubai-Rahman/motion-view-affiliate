@@ -23,19 +23,11 @@ export interface Paginated<T> {
   total: number;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Balance                                                                    */
-/* -------------------------------------------------------------------------- */
-
 export interface BalanceInquiryResponse {
   success: boolean;
   message: string;
   balance: string | number;
 }
-
-/* -------------------------------------------------------------------------- */
-/* Wallet transaction history                                                 */
-/* -------------------------------------------------------------------------- */
 
 export interface WalletTransactionItem {
   id?: number | string;
@@ -57,25 +49,32 @@ export interface WalletTransactionHistoryApiResponse {
   data: Paginated<WalletTransactionItem>;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Withdraw requests                                                          */
-/* -------------------------------------------------------------------------- */
-
 export interface WithdrawRequestItem {
   id?: number | string;
+  amount_in: number;
+  amount_out: number;
   amount?: number | string;
-  status?: string;
+  transaction_type?: string;
+  transaction_type_name?: string;
+  reference_id?: number;
+  description?: string;
   created_at?: string;
-  updated_at?: string;
-  note?: string;
-  transaction_id?: string;
-  [key: string]: unknown;
+}
+export interface WithdrawRequestPagination {
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+  from: number | null;
+  to: number | null;
+  has_next_page: boolean;
 }
 
 export interface WithdrawRequestListApiResponse {
   success: boolean;
   message: string;
-  data: Paginated<WithdrawRequestItem>;
+  data: WithdrawRequestItem[];
+  pagination: WithdrawRequestPagination;
 }
 
 export interface WithdrawRequestResponse {

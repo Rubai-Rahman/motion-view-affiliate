@@ -59,8 +59,8 @@ export function DataTable<TData extends RowData>({
   );
 
   return (
-    <div className="space-y-4 border rounded-md p-2 bg-card">
-      <div className="flex justify-between items-center">
+    <div className="space-y-4">
+      <div className="flex justify-between items-center px-6 pt-6">
         {title && (
           <h2 className="text-lg font-semibold text-foreground">{title}</h2>
         )}
@@ -91,72 +91,74 @@ export function DataTable<TData extends RowData>({
           </DropdownMenu>
         </div>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    onClick={header.column.getToggleSortingHandler()}
-                    className={
-                      header.column.getCanSort()
-                        ? 'cursor-pointer select-none'
-                        : ''
-                    }
-                  >
-                    {header.isPlaceholder ? null : (
-                      <div className="flex items-center gap-1">
-                        <table.FlexRender header={header} />
-                        {header.column.getCanSort() &&
-                          ({
-                            asc: (
-                              <MoveUp className="size-3.5 text-foreground" />
-                            ),
-                            desc: (
-                              <MoveDown className="size-3.5 text-foreground" />
-                            ),
-                          }[header.column.getIsSorted() as string] ?? (
-                            <ArrowDownUp className="size-3.5 text-foreground" />
-                          ))}
-                      </div>
-                    )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {isLoading ? (
-              <TableSkeleton />
-            ) : table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      <table.FlexRender cell={cell} />
-                    </TableCell>
+      <div className="px-6">
+        <div className="rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead
+                      key={header.id}
+                      onClick={header.column.getToggleSortingHandler()}
+                      className={
+                        header.column.getCanSort()
+                          ? 'cursor-pointer select-none'
+                          : ''
+                      }
+                    >
+                      {header.isPlaceholder ? null : (
+                        <div className="flex items-center gap-1">
+                          <table.FlexRender header={header} />
+                          {header.column.getCanSort() &&
+                            ({
+                              asc: (
+                                <MoveUp className="size-3.5 text-foreground" />
+                              ),
+                              desc: (
+                                <MoveDown className="size-3.5 text-foreground" />
+                              ),
+                            }[header.column.getIsSorted() as string] ?? (
+                              <ArrowDownUp className="size-3.5 text-foreground" />
+                            ))}
+                        </div>
+                      )}
+                    </TableHead>
                   ))}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {isLoading ? (
+                <TableSkeleton />
+              ) : table.getRowModel().rows.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        <table.FlexRender cell={cell} />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
 
       {/* Pagination controls */}
       {hasPagination && (
-        <div className="flex items-center justify-end space-x-2">
+        <div className="flex items-center justify-end space-x-2 px-6 pb-6">
           <Button
             variant="outline"
             size="sm"

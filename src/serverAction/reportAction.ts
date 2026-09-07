@@ -89,10 +89,14 @@ export const getWalletTransactionHistoryData = async (params?: {
   };
 };
 
-export const getWithdrawRequestListData = async () => {
+export const getWithdrawRequestListData = async (params?: {
+  from_date?: string;
+  to_date?: string;
+  type?: string;
+}) => {
   const result = await apiPost<WithdrawRequestListApiResponse>(
     `/withdraw-request-list`,
-    {},
+    params || {},
   );
 
   if (!result.success) {
