@@ -30,6 +30,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { logoutAction } from '@/serverAction/authAction';
+import useLocalStorage from '@/hooks/useSyncExterna';
 
 const primaryNav = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -83,7 +84,8 @@ function NavItem({
 
 export function AppSidebar() {
   const router = useRouter();
-  const name = localStorage.getItem('name') || '';
+  const name = useLocalStorage('name');
+
   const handleLogout = async () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('phone');
@@ -147,14 +149,13 @@ export function AppSidebar() {
       <SidebarFooter className="border-t border-border p-2">
         <div className="space-y-2">
           <div className="flex items-center gap-3 rounded-xl border border-border bg-surface-2 p-3 group-data-[collapsible=icon]:justify-center">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-background/15 font-mono text-xs font-semibold text-foreground border border-border">
-              {name.charAt(0).toUpperCase() + name.charAt(1).toUpperCase() ||
-                'M'}
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand/15 font-mono text-xs font-semibold text-brand">
+              MV
             </span>
 
             <div className="min-w-0 group-data-[collapsible=icon]:hidden">
               <p className="truncate text-xs font-semibold text-foreground">
-                {name || 'User'}
+                {name}
               </p>
 
               <p className="truncate font-mono text-[10px] text-muted-foreground">
