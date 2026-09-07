@@ -1,9 +1,8 @@
-import { Trophy, Calendar, Medal, Crown } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Calendar } from 'lucide-react';
 import { LeaderboardData, LeaderboardEntry } from '@/types/leaderboard.types';
 import { DataTable } from '../ui/data-table/data-table';
 import { createAppColumnHelper } from '../ui/data-table/data-table-features';
+import RankCard from './rank-card';
 
 export const dummyLeaderboardData: LeaderboardEntry[] = [
   {
@@ -26,7 +25,7 @@ export const dummyLeaderboardData: LeaderboardEntry[] = [
     number_of_sales: 8,
     total_sales: 80,
     total_commission: 8,
-    is_me: false,
+    is_me: true,
   },
   {
     rank: 3,
@@ -301,7 +300,9 @@ interface LeaderboardProps {
 const Leaderboard = ({ data }: LeaderboardProps) => {
   console.log('leaderboard', data);
   const { date_filter, my_position, leaderboard } = data;
-  console.log('leaderboard', leaderboard);
+  console.log('leaderboard', leaderboard, my_position);
+  const podium = dummyLeaderboardData.slice(0, 3);
+  const order = [1, 0, 2];
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -309,13 +310,6 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
       day: 'numeric',
       year: 'numeric',
     });
-  };
-
-  const getRankIcon = (rank: number) => {
-    if (rank === 1) return <Crown className="size-5 text-yellow-500" />;
-    if (rank === 2) return <Medal className="size-5 text-gray-400" />;
-    if (rank === 3) return <Medal className="size-5 text-amber-600" />;
-    return null;
   };
 
   // const getRankBadge = (rank: number) => {
@@ -404,58 +398,13 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
           </div>
         )}
       </div>
-
-      {/* My Position Card */}
-      <Card className="bg-linear-to-br from-primary/10 to-primary/5 border-primary/20">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Trophy className="size-5 text-primary" />
-            Your Position
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-4">
-            <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Rank</p>
-              <div className="flex items-center gap-2">
-                {getRankIcon(my_position?.rank)}
-                <p className="text-2xl font-bold">#{my_position.rank}</p>
-              </div>
-            </div>
-            <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Name</p>
-              <p className="text-2xl font-bold">{my_position.name}</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Total Sales</p>
-              <p className="text-2xl font-bold">
-                ${my_position.total_sales.toLocaleString()}
-              </p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Commission</p>
-              <p className="text-2xl font-bold">
-                ${my_position.total_commission.toLocaleString()}
-              </p>
-            </div>
-          </div>
-          <div className="mt-4 flex items-center gap-4 text-sm">
-            <span className="text-muted-foreground">Affiliate Code:</span>
-            <Badge variant="outline">{my_position.affiliate_code}</Badge>
-            <span className="text-muted-foreground">Sales:</span>
-            <span className="font-medium">{my_position.number_of_sales}</span>
-            {my_position.is_in_top_10 && (
-              <Badge className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20">
-                🏆 Top 10
-              </Badge>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Leaderboard List */}
-
-      <DataTable data={dummyLeaderboardData} columns={columns} />
+      <RankCard order={order} podium={podium} />
+      <DataTable
+        title="Leaderboard"
+        data={dummyLeaderboardData}
+        columns={columns}
+        hasPagination={false}
+      />
     </div>
   );
 };

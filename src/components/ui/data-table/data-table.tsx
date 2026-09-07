@@ -1,4 +1,3 @@
-// data-table.tsx
 'use client';
 
 import {
@@ -24,6 +23,8 @@ interface DataTableProps<TData extends RowData> {
   data: TData[];
   pageCount?: number;
   isLoading?: boolean;
+  title?: string;
+  hasPagination?: boolean;
 }
 
 export function DataTable<TData extends RowData>({
@@ -31,12 +32,22 @@ export function DataTable<TData extends RowData>({
   data,
   pageCount,
   isLoading,
+  title,
+  hasPagination = true,
 }: DataTableProps<TData>) {
   const table = useAppTable(
     {
-      key: 'data-table', // unique per instance if you render >1 on a page
+      key: 'data-table',
       columns,
       data,
+
+      initialState: {
+        pagination: {
+          pageIndex: 0,
+          pageSize: 15,
+        },
+      },
+
       ...(pageCount !== undefined ? { manualPagination: true, pageCount } : {}),
     },
     (state) => ({
@@ -47,31 +58,39 @@ export function DataTable<TData extends RowData>({
   );
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-end">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Button variant="outline" size="sm" className="gap-2">
-              <Settings2 className="size-4" />
-              Columns
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  className="capitalize"
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                >
-                  {column.columnDef.header as string}
-                </DropdownMenuCheckboxItem>
-              ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+    <div className="space-y-4 border rounded-md p-2 bg-card">
+      <div className="flex justify-between items-center">
+        {title && (
+          <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+        )}
+
+        <div className="flex justify-end">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Button variant="outline" size="sm" className="gap-2">
+                <Settings2 className="size-4" />
+                Columns
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.columnDef.header as string}
+                  </DropdownMenuCheckboxItem>
+                ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -144,27 +163,30 @@ export function DataTable<TData extends RowData>({
       </div>
 
       {/* Pagination controls */}
-      <div className="flex items-center justify-end space-x-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <span className="text-sm text-muted-foreground">
-          Page {table.state.pagination.pageIndex + 1} of {table.getPageCount()}
-        </span>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+      {hasPagination && (
+        <div className="flex items-center justify-end space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </Button>
+          <span className="text-sm text-muted-foreground">
+            Page {table.state.pagination.pageIndex + 1} of{' '}
+            {table.getPageCount()}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
