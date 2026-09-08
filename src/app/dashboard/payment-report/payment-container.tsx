@@ -63,7 +63,10 @@ const PaymentContainer = () => {
     queryFn: () =>
       getWithdrawRequestListData({
         filters,
-        pagination: { per_page: pagination.pageSize },
+        pagination: {
+          per_page: pagination.pageSize,
+          page: pagination.pageIndex + 1, // Convert 0-based to 1-based
+        },
       }),
   });
 
@@ -118,12 +121,6 @@ const PaymentContainer = () => {
             <p className="text-sm text-muted-foreground">
               Track your withdrawal history and manage your balance
             </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-xs text-muted-foreground">
-              Real-time updates
-            </span>
           </div>
         </div>
       </div>

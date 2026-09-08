@@ -3,7 +3,12 @@
 import { apiGet, apiPost } from '@/lib/fetch/fetchCore';
 import { DashboardApiResponse } from '@/types/dashboard.types';
 
-import { BalanceInquiryResponse, WithdrawPayload, WithdrawRequestListApiResponse, WithdrawRequestResponse } from '@/types/payment.types';
+import {
+  BalanceInquiryResponse,
+  WithdrawPayload,
+  WithdrawRequestListApiResponse,
+  WithdrawRequestResponse,
+} from '@/types/payment.types';
 import { OrderListApiResponse } from '@/types/orders.types';
 import { AccountServerResponse } from '@/types/dashboard.types';
 import { WalletTransactionHistoryApiResponse } from '@/types/reports.types';
@@ -96,12 +101,14 @@ export const getWithdrawRequestListData = async ({
   };
   pagination?: {
     per_page?: number;
+    page?: number;
   };
 }) => {
   const result = await apiPost<WithdrawRequestListApiResponse>(
     '/withdraw-request-list',
     {
       per_page: pagination?.per_page,
+      page: pagination?.page,
       from_date: filters?.from_date,
       to_date: filters?.to_date,
       status: filters?.status,
