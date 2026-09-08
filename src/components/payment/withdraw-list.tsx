@@ -8,10 +8,8 @@ import {
 const columnHelper = createAppColumnHelper<WithdrawRequestItem>();
 
 const columns = columnHelper.columns([
-  columnHelper.display({
-    id: 'index',
+  columnHelper.accessor('id', {
     header: 'ID',
-    cell: ({ row }) => row.index + 1,
   }),
 
   columnHelper.accessor('payment_account', {

@@ -21,6 +21,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { FormField } from '../ui/form-field';
 
 import { WithdrawPayload } from '@/types/payment.types';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
+import { paymentMethods } from '@/constants/withdraw.constant';
 
 const withdrawSchema = z.object({
   paymentMethod: z.number().min(1, 'Payment method is required'),
@@ -53,16 +61,16 @@ const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
     },
   });
 
-  const onSubmitHandler = async (data: WithdrawFormValues) => {
+  const onSubmitHandler = async (formData: WithdrawFormValues) => {
+    console.log('formData', formData);
     const payload: WithdrawPayload = {
-      payment_method: data.paymentMethod,
-      amount: data.amount,
+      payment_method: formData.paymentMethod,
+      amount: formData.amount,
       payment_account:
-        data.accountNo +
-        (data.accountDetails ? ` - ${data.accountDetails}` : ''),
-      affiliate_note: data.affiliateNote,
+        formData.accountNo +
+        (formData.accountDetails ? ` - ${formData.accountDetails}` : ''),
+      affiliate_note: formData.affiliateNote,
     };
-
     onSubmit(payload);
   };
 
@@ -84,21 +92,35 @@ const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
 
         <form onSubmit={handleSubmit(onSubmitHandler)} className="mt-2">
           <FieldGroup>
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-5">
               {/* Payment Method */}
               <FormField
                 control={control}
                 name="paymentMethod"
                 label="Payment Method"
                 render={(field) => (
-                  <Input
-                    {...field}
-                    id="paymentMethod"
-                    type="number"
-                    placeholder="Enter payment method"
-                    autoComplete="off"
-                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  />
+                  <Select
+                    value={String(field.value)}
+                    onValueChange={(value) => field.onChange(Number(value))}
+                  >
+                    <SelectTrigger id="paymentMethod" className="h-10 w-full">
+                      <SelectValue placeholder="Select payment method">
+                        {
+                          paymentMethods.find(
+                            (method) => method.value === field.value,
+                          )?.label
+                        }
+                      </SelectValue>
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      {paymentMethods.map((method) => (
+                        <SelectItem key={method.value} value={method.value}>
+                          {method.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 )}
               />
 
