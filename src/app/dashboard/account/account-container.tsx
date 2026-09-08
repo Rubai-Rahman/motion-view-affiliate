@@ -16,7 +16,7 @@ const AccountContainer = () => {
     queryKey: ['account'],
     queryFn: () => getAccountData(),
   });
-  console.log('accountData===', accountData);
+
   if (isError) return <ErrorState />;
   if (isPending) return <AccountSkeleton />;
   if (!accountData?.data) return <EmptyState />;

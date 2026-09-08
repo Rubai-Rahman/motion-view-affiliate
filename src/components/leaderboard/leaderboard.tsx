@@ -301,7 +301,6 @@ interface LeaderboardProps {
 }
 
 const Leaderboard = ({ data }: LeaderboardProps) => {
-  console.log('leaderboard', data);
   const { date_filter, my_position, leaderboard } = data;
   console.log('my_positions', leaderboard, my_position);
   const podium = dummyLeaderboardData.slice(0, 3);

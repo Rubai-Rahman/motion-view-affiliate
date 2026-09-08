@@ -29,7 +29,7 @@ const columns = columnHelper.columns([
     cell: ({ getValue }) => {
       const value = getValue();
 
-      return value > 0 ? `$${value.toLocaleString()}` : '-';
+      return value > 0 ? `৳ ${value.toLocaleString()}` : '-';
     },
   }),
 

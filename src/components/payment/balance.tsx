@@ -7,13 +7,17 @@ import { CheckCircle2, Wallet } from 'lucide-react';
 import { ErrorState } from '../shared/error-state';
 import WithdrawForm from './withdraw-form';
 import { WithdrawPayload } from '@/types/payment.types';
+import CardSkeleton from '../skeleton/card-skeleton';
 
-const formatCurrency = (value: number | string) =>
-  new Intl.NumberFormat('en-BD', {
+const formatCurrency = (value: number | string) => {
+  return new Intl.NumberFormat('en-BD', {
     style: 'currency',
     currency: 'BDT',
     maximumFractionDigits: 2,
-  }).format(Number(value ?? 0));
+  })
+    .format(Number(value ?? 0))
+    .replace('BDT', '৳');
+};
 
 const Balance = ({
   handleWithdraw,
@@ -41,10 +45,12 @@ const Balance = ({
   });
   console.log('balanceData', balanceData);
   if (isBalanceError) return <ErrorState />;
-  if (isBalancePending) return <div>Loading...</div>;
-
+  if (isBalancePending) return <CardSkeleton />;
+  console.log('balanceData', balanceData);
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div
+      className={`grid gap-6  ${withdrawalSummary ? 'lg:grid-cols-2' : 'grid-cols-1'}`}
+    >
       <Card className="border-primary/20 bg-linear-to-br from-primary/10 via-primary/5 to-transparent backdrop-blur-sm shadow-lg shadow-primary/5">
         <CardHeader className="pb-4 flex justify-between items-start">
           <div className="space-y-1">
@@ -78,52 +84,54 @@ const Balance = ({
         </CardContent>
       </Card>
 
-      <Card className="border-emerald-500/20 bg-linear-to-br from-emerald-500/10 via-emerald-500/5 to-transparent backdrop-blur-sm shadow-lg shadow-emerald-500/5">
-        <CardHeader className="pb-4">
-          <div className="space-y-1">
-            <CardTitle className="flex items-center gap-2 text-base font-semibold">
-              <div className="p-1.5 rounded-lg bg-emerald-500/10">
-                <CheckCircle2 className="size-4 text-emerald-500" />
+      {withdrawalSummary && (
+        <Card className="border-emerald-500/20 bg-linear-to-br from-emerald-500/10 via-emerald-500/5 to-transparent backdrop-blur-sm shadow-lg shadow-emerald-500/5">
+          <CardHeader className="pb-4">
+            <div className="space-y-1">
+              <CardTitle className="flex items-center gap-2 text-base font-semibold">
+                <div className="p-1.5 rounded-lg bg-emerald-500/10">
+                  <CheckCircle2 className="size-4 text-emerald-500" />
+                </div>
+                Total Withdrawals
+              </CardTitle>
+              <p className="text-xs text-muted-foreground">
+                Your withdrawal history
+              </p>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 text-xs font-semibold text-emerald-600">
+                {withdrawalSummary?.totalTransactions ?? 0} transactions
+              </span>
+            </div>
+
+            <div className="text-4xl font-bold tracking-tight bg-linear-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
+              {formatCurrency(withdrawalSummary?.totalAmountOut ?? 0)}
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-emerald-500/10">
+              <div className="space-y-1">
+                <p className="text-xs text-muted-foreground font-medium">
+                  Total In
+                </p>
+                <p className="text-sm font-semibold text-emerald-600">
+                  {formatCurrency(withdrawalSummary?.totalAmountIn ?? 0)}
+                </p>
               </div>
-              Total Withdrawals
-            </CardTitle>
-            <p className="text-xs text-muted-foreground">
-              Your withdrawal history
-            </p>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 text-xs font-semibold text-emerald-600">
-              {withdrawalSummary?.totalTransactions ?? 0} transactions
-            </span>
-          </div>
 
-          <div className="text-4xl font-bold tracking-tight bg-linear-to-r from-emerald-600 to-emerald-400 bg-clip-text text-transparent">
-            {formatCurrency(withdrawalSummary?.totalAmountOut ?? 0)}
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 pt-4 border-t border-emerald-500/10">
-            <div className="space-y-1">
-              <p className="text-xs text-muted-foreground font-medium">
-                Total In
-              </p>
-              <p className="text-sm font-semibold text-emerald-600">
-                {formatCurrency(withdrawalSummary?.totalAmountIn ?? 0)}
-              </p>
+              <div className="space-y-1">
+                <p className="text-xs text-muted-foreground font-medium">
+                  Total Out
+                </p>
+                <p className="text-sm font-semibold text-emerald-600">
+                  {formatCurrency(withdrawalSummary?.totalAmountOut ?? 0)}
+                </p>
+              </div>
             </div>
-
-            <div className="space-y-1">
-              <p className="text-xs text-muted-foreground font-medium">
-                Total Out
-              </p>
-              <p className="text-sm font-semibold text-emerald-600">
-                {formatCurrency(withdrawalSummary?.totalAmountOut ?? 0)}
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };

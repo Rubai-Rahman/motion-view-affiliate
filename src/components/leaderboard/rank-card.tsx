@@ -145,7 +145,7 @@ const RankCard = ({ order, podium }: RankCardProps) => {
                     config.accent,
                   )}
                 >
-                  ৳{p.total_commission.toLocaleString()}
+                  ৳ {p.total_commission.toLocaleString()}
                 </p>
               </div>
 
@@ -163,7 +163,7 @@ const RankCard = ({ order, podium }: RankCardProps) => {
                   <p className="text-[10px] text-muted-foreground">Revenue</p>
 
                   <p className="mt-0.5 text-sm font-semibold">
-                    ৳{p.total_sales.toLocaleString()}
+                    ৳ {p.total_sales.toLocaleString()}
                   </p>
                 </div>
               </div>

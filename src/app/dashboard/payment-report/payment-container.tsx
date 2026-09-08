@@ -107,8 +107,6 @@ const PaymentContainer = () => {
   //   totalAmountOut: 0,
   // };
 
-  console.log('withdrawalSummary', withdrawListData);
-
   return (
     <div className="space-y-8">
       <div className="relative">
