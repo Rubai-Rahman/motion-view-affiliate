@@ -15,7 +15,7 @@ import { Calendar, Filter, FunnelX } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { statusOptions } from '@/constants/filter.constant';
 
-interface PaymentFilterProps {
+interface ListFilterProps {
   filters: {
     from_date: string;
     to_date: string;
@@ -29,11 +29,7 @@ interface PaymentFilterProps {
   onReset: () => void;
 }
 
-const PaymentFilter = ({
-  filters,
-  onFiltersChange,
-  onReset,
-}: PaymentFilterProps) => {
+const ListFilter = ({ filters, onFiltersChange, onReset }: ListFilterProps) => {
   const handleFromDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onFiltersChange({ ...filters, from_date: e.target.value });
   };
@@ -138,7 +134,7 @@ const PaymentFilter = ({
           <div className="space-y-2">
             <label className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
               <Filter className="size-3" />
-              Transaction Type
+              Type
             </label>
 
             <Select
@@ -168,4 +164,4 @@ const PaymentFilter = ({
   );
 };
 
-export default PaymentFilter;
+export default ListFilter;

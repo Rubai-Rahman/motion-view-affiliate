@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Balance from '@/components/payment/balance';
 import WithdrawList from '@/components/payment/withdraw-list';
-import PaymentFilter from '@/components/payment/payment-filter';
 import { EmptyState } from '@/components/shared/empty-state';
 import { ErrorState } from '@/components/shared/error-state';
 import TableSkeleton from '@/components/skeleton/table-skeleton';
@@ -18,6 +17,7 @@ import {
 } from '@/types/payment.types';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { InboxIcon } from 'lucide-react';
+import ListFilter from '@/components/common/list-filter';
 
 const PaymentContainer = () => {
   const [filters, setFilters] = useState<{
@@ -128,7 +128,7 @@ const PaymentContainer = () => {
           handleWithdraw={handleWithdraw}
           isWithdrawing={isWithdrawing}
         />
-        <PaymentFilter
+        <ListFilter
           filters={filters}
           onFiltersChange={handleFiltersChange}
           onReset={handleResetFilters}
