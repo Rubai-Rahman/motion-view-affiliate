@@ -1,4 +1,3 @@
-
 export interface Paginated<T> {
   current_page: number;
   data: T[];
@@ -19,7 +18,6 @@ export interface Paginated<T> {
   to: number | null;
   total: number;
 }
-
 
 export interface WalletTransactionItem {
   id?: number | string;
@@ -75,10 +73,8 @@ export interface WalletTransactionHistoryApiResponse {
 //   available_balance?: string;
 // }
 
-
-
-export interface TransactionFilters {
-  from_date: string;
-  to_date: string;
-  type: string;
-}
+// export interface TransactionFilters {
+//   from_date: string;
+//   to_date: string;
+//   type: string;
+// }

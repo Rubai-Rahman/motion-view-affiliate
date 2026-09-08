@@ -2,15 +2,11 @@
 
 import { apiGet, apiPost } from '@/lib/fetch/fetchCore';
 import { DashboardApiResponse } from '@/types/dashboard.types';
-import {
-  BalanceInquiryResponse,
-  WalletTransactionHistoryApiResponse,
-  WithdrawRequestListApiResponse,
-  WithdrawRequestResponse,
-} from '@/types/reports.types';
-import { WithdrawPayload } from '@/types/payment.types';
+
+import { BalanceInquiryResponse, WithdrawPayload, WithdrawRequestListApiResponse, WithdrawRequestResponse } from '@/types/payment.types';
 import { OrderListApiResponse } from '@/types/orders.types';
 import { AccountServerResponse } from '@/types/dashboard.types';
+import { WalletTransactionHistoryApiResponse } from '@/types/reports.types';
 
 export const getDashboardData = async () => {
   const result = await apiGet<DashboardApiResponse>('/dashboard');
@@ -96,7 +92,7 @@ export const getWithdrawRequestListData = async ({
   filters?: {
     from_date?: string;
     to_date?: string;
-    status?: string;
+    status?: number | null;
   };
   pagination?: {
     per_page?: number;

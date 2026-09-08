@@ -77,13 +77,13 @@ const WithdrawList = ({
   }) => void;
 }) => {
   const { data, pagination: apiPagination } = withdrawListData;
-  console.log('withdrawListData', withdrawListData);
+
   return (
     <div className="rounded-xl border border-primary/20 bg-linear-to-br from-primary/5 via-transparent to-transparent backdrop-blur-sm shadow-lg shadow-primary/5 overflow-hidden">
       <DataTable
         columns={columns}
         data={data}
-        title="Withdrawal Requests"
+        title="Withdrawal Requests History"
         pageCount={apiPagination?.last_page}
         hasPagination={apiPagination?.last_page > 1}
         pagination={pagination}

@@ -18,22 +18,22 @@ interface PaymentFilterProps {
   filters: {
     from_date: string;
     to_date: string;
-    type: string;
+    status: number | null;
   };
   onFiltersChange: (filters: {
     from_date: string;
     to_date: string;
-    type: string;
+    status: number | null;
   }) => void;
   onReset: () => void;
 }
 
 const statusOptions = [
-  { value: '0', label: 'Pending' },
-  { value: '1', label: 'Processing' },
-  { value: '2', label: 'Paid' },
-  { value: '3', label: 'Rejected' },
-  { value: '4', label: 'Cancelled' },
+  { value: 0, label: 'Pending' },
+  { value: 1, label: 'Processing' },
+  { value: 2, label: 'Paid' },
+  { value: 3, label: 'Rejected' },
+  { value: 4, label: 'Cancelled' },
 ];
 
 const PaymentFilter = ({
@@ -49,17 +49,20 @@ const PaymentFilter = ({
     onFiltersChange({ ...filters, to_date: e.target.value });
   };
 
-  const handleTypeChange = (value: string | null) => {
-    onFiltersChange({ ...filters, type: value || 'all' });
+  const handleStatusChange = (value: number | null) => {
+    onFiltersChange({
+      ...filters,
+      status: value === -1 ? null : value,
+    });
   };
 
   const hasActiveFilters =
     filters.from_date !== '' ||
     filters.to_date !== '' ||
-    filters.type !== 'all';
+    filters.status !== null;
 
-  const selectedType = statusOptions.find(
-    (option) => option.value === filters.type,
+  const selectedStatus = statusOptions.find(
+    (option) => option.value === filters.status,
   );
 
   return (
@@ -145,15 +148,18 @@ const PaymentFilter = ({
               Transaction Type
             </label>
 
-            <Select value={filters.type} onValueChange={handleTypeChange}>
+            <Select
+              value={filters.status ?? -1}
+              onValueChange={handleStatusChange}
+            >
               <SelectTrigger className="h-10 w-full border-primary/20 transition-colors focus:border-primary/50 focus:ring-primary/20">
-                <SelectValue placeholder="All Types">
-                  {selectedType?.label ?? 'All Types'}
+                <SelectValue placeholder="All Statuses">
+                  {selectedStatus?.label ?? 'All Statuses'}
                 </SelectValue>
               </SelectTrigger>
 
               <SelectContent>
-                <SelectItem value="all">All Types</SelectItem>
+                <SelectItem value={-1}>All Statuses</SelectItem>
 
                 {statusOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>

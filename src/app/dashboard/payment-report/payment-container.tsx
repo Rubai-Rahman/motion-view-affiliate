@@ -12,15 +12,22 @@ import {
   getWithdrawRequestListData,
   submitWithdrawRequest,
 } from '@/serverAction/reportAction';
-import { WithdrawPayload } from '@/types/payment.types';
-import { WithdrawRequestResponse } from '@/types/reports.types';
+import {
+  WithdrawPayload,
+  WithdrawRequestResponse,
+} from '@/types/payment.types';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { InboxIcon } from 'lucide-react';
 
 const PaymentContainer = () => {
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<{
+    from_date: string;
+    to_date: string;
+    status: number | null;
+  }>({
     from_date: '',
     to_date: '',
-    type: 'all',
+    status: null,
   });
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
 
@@ -73,29 +80,29 @@ const PaymentContainer = () => {
     setFilters({
       from_date: '',
       to_date: '',
-      type: 'all',
+      status: null,
     });
     setPagination({ pageIndex: 0, pageSize: 10 });
   };
 
-  const withdrawalSummary = withdrawListData?.data?.data?.reduce(
-    (summary, item) => {
-      summary.totalTransactions += 1;
-      summary.totalAmountIn += Number(item.amount_in || 0);
-      summary.totalAmountOut += Number(item.amount_out || 0);
+  // const withdrawalSummary = withdrawListData?.data?.data?.reduce(
+  //   (summary, item) => {
+  //     summary.totalTransactions += 1;
+  //     summary.totalAmountIn += Number(item.amount_in || 0);
+  //     summary.totalAmountOut += Number(item.amount_out || 0);
 
-      return summary;
-    },
-    {
-      totalTransactions: 0,
-      totalAmountIn: 0,
-      totalAmountOut: 0,
-    },
-  ) ?? {
-    totalTransactions: 0,
-    totalAmountIn: 0,
-    totalAmountOut: 0,
-  };
+  //     return summary;
+  //   },
+  //   {
+  //     totalTransactions: 0,
+  //     totalAmountIn: 0,
+  //     totalAmountOut: 0,
+  //   },
+  // ) ?? {
+  //   totalTransactions: 0,
+  //   totalAmountIn: 0,
+  //   totalAmountOut: 0,
+  // };
 
   console.log('withdrawalSummary', withdrawListData);
 
@@ -125,7 +132,6 @@ const PaymentContainer = () => {
         <Balance
           handleWithdraw={handleWithdraw}
           isWithdrawing={isWithdrawing}
-          withdrawalSummary={withdrawalSummary}
         />
         <PaymentFilter
           filters={filters}
@@ -137,8 +143,13 @@ const PaymentContainer = () => {
         ) : isWithdrawalError ? (
           <ErrorState />
         ) : withdrawListData?.data === null ||
+          withdrawListData?.data?.data?.length === 0 ||
           withdrawListData?.data === undefined ? (
-          <EmptyState />
+          <EmptyState
+            title="No withdrawal requests found"
+            description="Try adjusting your filters or search query."
+            icon={<InboxIcon className="size-10 text-muted-foreground" />}
+          />
         ) : (
           <WithdrawList
             withdrawListData={withdrawListData?.data}

@@ -48,3 +48,9 @@ export interface WithdrawRequestResponse {
   message: string;
   available_balance?: string;
 }
+
+export interface WithdrawFilters {
+  from_date: string;
+  to_date: string;
+  status: number | null;
+}
