@@ -343,19 +343,17 @@ const PaymentContainer = () => {
         </div>
       </div>
 
-      <PaymentFilter
-        filters={filters}
-        onFiltersChange={handleFiltersChange}
-        onReset={handleResetFilters}
-      />
-
       <div className="space-y-6">
         <Balance
           handleWithdraw={handleWithdraw}
           isWithdrawing={isWithdrawing}
           withdrawalSummary={withdrawalSummary}
         />
-
+        <PaymentFilter
+          filters={filters}
+          onFiltersChange={handleFiltersChange}
+          onReset={handleResetFilters}
+        />
         {isWithdrawalPending ? (
           <TableSkeleton />
         ) : isWithdrawalError ? (

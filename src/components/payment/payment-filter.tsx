@@ -1,5 +1,7 @@
 'use client';
 
+import type React from 'react';
+
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -9,7 +11,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { Calendar, Filter, X } from 'lucide-react';
+import { Calendar, Filter, FunnelX } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 interface PaymentFilterProps {
@@ -27,10 +29,11 @@ interface PaymentFilterProps {
 }
 
 const typeOptions = [
-  { value: 'all', label: 'All Types' },
-  { value: '1', label: 'Campus Ambassador' },
-  { value: '2', label: 'Influencer' },
-  { value: '3', label: 'Affiliate Marketer' },
+  { value: '1', label: 'Commission' },
+  { value: '2', label: 'Withdrawal' },
+  { value: '3', label: 'Reversal' },
+  { value: '4', label: 'Refund' },
+  { value: '5', label: 'Adjustment' },
 ];
 
 const PaymentFilter = ({
@@ -51,18 +54,29 @@ const PaymentFilter = ({
   };
 
   const hasActiveFilters =
-    filters.from_date || filters.to_date || filters.type !== 'all';
+    filters.from_date !== '' ||
+    filters.to_date !== '' ||
+    filters.type !== 'all';
+
+  const selectedType = typeOptions.find(
+    (option) => option.value === filters.type,
+  );
 
   return (
-    <Card className="border-primary/20 bg-linear-to-br from-primary/10 via-primary/5 to-transparent backdrop-blur-sm shadow-lg shadow-primary/5 overflow-hidden">
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-5">
+    <Card className="overflow-hidden border-primary/20 bg-linear-to-br from-primary/10 via-primary/5 to-transparent shadow-lg shadow-primary/5 backdrop-blur-sm">
+      <CardContent className="px-3">
+        {/* Header */}
+        <div className="mb-2 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10">
+            <div className="rounded-lg bg-primary/10 p-2">
               <Filter className="size-4 text-primary" />
             </div>
+
             <div>
-              <h3 className="text-sm font-semibold">Filter Transactions</h3>
+              <h3 className="text-sm font-semibold text-foreground">
+                Filter Transactions
+              </h3>
+
               <p className="text-xs text-muted-foreground">
                 {hasActiveFilters
                   ? 'Active filters applied'
@@ -70,62 +84,77 @@ const PaymentFilter = ({
               </p>
             </div>
           </div>
+
           {hasActiveFilters && (
             <Button
-              variant="ghost"
+              variant="destructive"
               size="sm"
               onClick={onReset}
               className="h-8 text-xs hover:bg-primary/10 hover:text-primary"
             >
-              <X className="size-3 mr-1" />
+              <FunnelX className="mr-1 size-3" />
               Reset
             </Button>
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* Filters */}
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+          {/* From Date */}
           <div className="space-y-2">
-            <label className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+            <label className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
               <Calendar className="size-3" />
               From Date
             </label>
+
             <div className="relative">
-              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+              <Calendar className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+
               <Input
                 type="date"
                 value={filters.from_date}
                 onChange={handleFromDateChange}
-                className="pl-10 border-primary/20 focus:border-primary/50 focus:ring-primary/20"
+                className="h-10 border-primary/20 pl-10 transition-colors focus:border-primary/50 focus:ring-primary/20"
               />
             </div>
           </div>
 
+          {/* To Date */}
           <div className="space-y-2">
-            <label className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+            <label className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
               <Calendar className="size-3" />
               To Date
             </label>
+
             <div className="relative">
-              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+              <Calendar className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+
               <Input
                 type="date"
                 value={filters.to_date}
                 onChange={handleToDateChange}
-                className="pl-10 border-primary/20 focus:border-primary/50 focus:ring-primary/20"
+                className="h-10 border-primary/20 pl-10 transition-colors focus:border-primary/50 focus:ring-primary/20"
               />
             </div>
           </div>
 
+          {/* Transaction Type */}
           <div className="space-y-2">
-            <label className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+            <label className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
               <Filter className="size-3" />
               Transaction Type
             </label>
+
             <Select value={filters.type} onValueChange={handleTypeChange}>
-              <SelectTrigger className="w-full border-primary/20 focus:border-primary/50 focus:ring-primary/20">
-                <SelectValue placeholder="Select type" />
+              <SelectTrigger className="h-10 w-full border-primary/20 transition-colors focus:border-primary/50 focus:ring-primary/20">
+                <SelectValue placeholder="All Types">
+                  {selectedType?.label ?? 'All Types'}
+                </SelectValue>
               </SelectTrigger>
+
               <SelectContent>
+                <SelectItem value="all">All Types</SelectItem>
+
                 {typeOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
