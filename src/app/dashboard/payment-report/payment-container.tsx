@@ -18,6 +18,7 @@ import {
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { InboxIcon } from 'lucide-react';
 import ListFilter from '@/components/common/list-filter';
+import { statusOptions } from '@/constants/filter.constant';
 
 const PaymentContainer = () => {
   const [filters, setFilters] = useState<{
@@ -29,6 +30,7 @@ const PaymentContainer = () => {
     to_date: '',
     status: null,
   });
+
   const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
 
   const { mutate: withdraw, isPending: isWithdrawing } = useMutation<
@@ -88,25 +90,6 @@ const PaymentContainer = () => {
     setPagination({ pageIndex: 0, pageSize: 10 });
   };
 
-  // const withdrawalSummary = withdrawListData?.data?.data?.reduce(
-  //   (summary, item) => {
-  //     summary.totalTransactions += 1;
-  //     summary.totalAmountIn += Number(item.amount_in || 0);
-  //     summary.totalAmountOut += Number(item.amount_out || 0);
-
-  //     return summary;
-  //   },
-  //   {
-  //     totalTransactions: 0,
-  //     totalAmountIn: 0,
-  //     totalAmountOut: 0,
-  //   },
-  // ) ?? {
-  //   totalTransactions: 0,
-  //   totalAmountIn: 0,
-  //   totalAmountOut: 0,
-  // };
-
   return (
     <div className="space-y-8">
       <div className="relative">
@@ -129,9 +112,11 @@ const PaymentContainer = () => {
           isWithdrawing={isWithdrawing}
         />
         <ListFilter
+          title={'WithdrawalList'}
           filters={filters}
           onFiltersChange={handleFiltersChange}
           onReset={handleResetFilters}
+          options={statusOptions}
         />
         {isWithdrawalPending ? (
           <TableSkeleton />

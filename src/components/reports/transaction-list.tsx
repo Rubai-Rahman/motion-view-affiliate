@@ -1,55 +1,82 @@
-import {
-  WithdrawRequestListApiResponse,
-  WithdrawRequestItem,
-} from '@/types/reports.types';
 import { DataTable } from '@/components/ui/data-table/data-table';
 import { createAppColumnHelper } from '@/components/ui/data-table/data-table-features';
+import {
+  TransactionItem,
+  TransactionListApiResponse,
+} from '@/types/reports.types';
 
-const columnHelper = createAppColumnHelper<WithdrawRequestItem>();
+const columnHelper = createAppColumnHelper<TransactionItem>();
 
 const columns = columnHelper.columns([
   columnHelper.accessor('id', {
     header: 'ID',
   }),
+
   columnHelper.accessor('reference_id', {
     header: 'Reference ID',
     cell: ({ getValue }) => getValue() || '-',
   }),
+
   columnHelper.accessor('transaction_type_name', {
     header: 'Type',
-    cell: ({ getValue }) => getValue() || 'Withdrawal',
+    cell: ({ getValue }) => getValue() || '-',
   }),
+
   columnHelper.accessor('description', {
     header: 'Description',
     cell: ({ getValue }) => getValue() || '-',
   }),
+
   columnHelper.accessor('amount_in', {
     header: 'Amount In',
     cell: ({ getValue }) => {
       const value = getValue();
-      return value > 0 ? `$${value.toLocaleString()}` : '-';
+
+      return value > 0
+        ? `৳${value.toLocaleString('en-BD', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}`
+        : '-';
     },
   }),
+
   columnHelper.accessor('amount_out', {
     header: 'Amount Out',
     cell: ({ getValue }) => {
       const value = getValue();
-      return value > 0 ? `$${value.toLocaleString()}` : '-';
+
+      return value > 0
+        ? `৳${value.toLocaleString('en-BD', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}`
+        : '-';
     },
   }),
+
   columnHelper.accessor('amount', {
     header: 'Total Amount',
     cell: ({ getValue }) => {
       const value = getValue();
-      return value ? `$${Number(value).toLocaleString()}` : '-';
+
+      return value
+        ? `৳${Number(value).toLocaleString('en-BD', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}`
+        : '-';
     },
   }),
+
   columnHelper.accessor('created_at', {
     header: 'Date',
     cell: ({ getValue }) => {
       const date = getValue();
+
       if (!date) return '-';
-      return new Date(date).toLocaleDateString('en-US', {
+
+      return new Date(date.replace(' ', 'T')).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
@@ -59,19 +86,19 @@ const columns = columnHelper.columns([
 ]);
 
 const TransactionList = ({
-  withdrawListData,
+  transactionsListData,
   pagination,
   onPaginationChange,
 }: {
-  withdrawListData: WithdrawRequestListApiResponse;
+  transactionsListData: TransactionListApiResponse;
   pagination: { pageIndex: number; pageSize: number };
   onPaginationChange: (pagination: {
     pageIndex: number;
     pageSize: number;
   }) => void;
 }) => {
-  const { data, pagination: apiPagination } = withdrawListData;
-  console.log('withdrawListData', withdrawListData);
+  const { data, pagination: apiPagination } = transactionsListData;
+  console.log('transactionsListData', transactionsListData);
   return (
     <div className="rounded-xl border border-primary/20 bg-linear-to-br from-primary/5 via-transparent to-transparent backdrop-blur-sm shadow-lg shadow-primary/5 overflow-hidden">
       <DataTable

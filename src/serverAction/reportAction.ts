@@ -11,7 +11,7 @@ import {
 } from '@/types/payment.types';
 import { OrderListApiResponse } from '@/types/orders.types';
 import { AccountServerResponse } from '@/types/dashboard.types';
-import { WalletTransactionHistoryApiResponse } from '@/types/reports.types';
+import { TransactionListApiResponse } from '@/types/reports.types';
 
 export const getDashboardData = async () => {
   const result = await apiGet<DashboardApiResponse>('/dashboard');
@@ -60,22 +60,27 @@ export const getBalanceInquiryData = async () => {
 export const getWalletTransactionHistoryData = async (params?: {
   from_date?: string;
   to_date?: string;
-  type?: string;
+  type?: number | null;
+  per_page?: number;
+  page?: number;
 }) => {
   const searchParams = new URLSearchParams();
 
   if (params?.from_date) searchParams.set('from_date', params.from_date);
   if (params?.to_date) searchParams.set('to_date', params.to_date);
-  if (params?.type && params.type !== 'all') {
-    searchParams.set('type', params.type);
+  if (params?.type !== null && params?.type !== undefined) {
+    searchParams.set('type', String(params.type));
   }
+  if (params?.per_page) searchParams.set('per_page', String(params.per_page));
+  if (params?.page && params.page > 1)
+    searchParams.set('page', String(params.page));
 
   const queryString = searchParams.toString();
   const endpoint = queryString
     ? `/wallet-transaction-history?${queryString}`
     : `/wallet-transaction-history`;
 
-  const result = await apiGet<WalletTransactionHistoryApiResponse>(endpoint);
+  const result = await apiGet<TransactionListApiResponse>(endpoint);
 
   if (!result.success) {
     return {

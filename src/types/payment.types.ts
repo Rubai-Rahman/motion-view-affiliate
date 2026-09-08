@@ -26,7 +26,7 @@ export interface WithdrawRequestItem {
   processed_at: string | null;
   created_at: string;
 }
-export interface WithdrawRequestPagination {
+export interface RequestPagination {
   current_page: number;
   last_page: number;
   per_page: number;
@@ -40,7 +40,7 @@ export interface WithdrawRequestListApiResponse {
   success: boolean;
   message: string;
   data: WithdrawRequestItem[];
-  pagination: WithdrawRequestPagination;
+  pagination: RequestPagination;
 }
 
 export interface WithdrawRequestResponse {

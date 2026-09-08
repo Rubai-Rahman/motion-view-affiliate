@@ -1,3 +1,5 @@
+import { RequestPagination } from './payment.types';
+
 export interface Paginated<T> {
   current_page: number;
   data: T[];
@@ -19,62 +21,33 @@ export interface Paginated<T> {
   total: number;
 }
 
-export interface WalletTransactionItem {
+export interface TransactionItem {
   id?: number | string;
-  type?: string;
+  amount_in: number;
+  amount_out: number;
   amount?: number | string;
-  note?: string;
+  transaction_type?: string;
+  transaction_type_name?: string;
+  reference_id?: number;
+  description?: string;
   created_at?: string;
-  updated_at?: string;
-  transaction_id?: string;
-  status?: string;
-  balance_after?: number | string;
-  [key: string]: unknown;
 }
 
-export interface WalletTransactionHistoryApiResponse {
+export interface TransactionListApiResponse {
   success: boolean;
   message: string;
-  balance: number | string;
-  data: Paginated<WalletTransactionItem>;
+  data: TransactionItem[];
+  pagination: RequestPagination;
 }
 
-// export interface WithdrawRequestItem {
-//   id?: number | string;
-//   amount_in: number;
-//   amount_out: number;
-//   amount?: number | string;
-//   transaction_type?: string;
-//   transaction_type_name?: string;
-//   reference_id?: number;
-//   description?: string;
-//   created_at?: string;
-// }
-// export interface WithdrawRequestPagination {
-//   current_page: number;
-//   last_page: number;
-//   per_page: number;
-//   total: number;
-//   from: number | null;
-//   to: number | null;
-//   has_next_page: boolean;
-// }
+export interface TransactionResponse {
+  success: boolean;
+  message: string;
+  available_balance?: string;
+}
 
-// export interface WithdrawRequestListApiResponse {
-//   success: boolean;
-//   message: string;
-//   data: WithdrawRequestItem[];
-//   pagination: WithdrawRequestPagination;
-// }
-
-// export interface WithdrawRequestResponse {
-//   success: boolean;
-//   message: string;
-//   available_balance?: string;
-// }
-
-// export interface TransactionFilters {
-//   from_date: string;
-//   to_date: string;
-//   type: string;
-// }
+export interface TransactionFilters {
+  from_date: string;
+  to_date: string;
+  type: string;
+}

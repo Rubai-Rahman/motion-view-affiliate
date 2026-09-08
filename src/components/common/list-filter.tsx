@@ -13,23 +13,41 @@ import {
 import { Button } from '@/components/ui/button';
 import { Calendar, Filter, FunnelX } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { statusOptions } from '@/constants/filter.constant';
+import {
+  statusOptions,
+  transactionTypeOptions,
+} from '@/constants/filter.constant';
 
 interface ListFilterProps {
+  title: string;
   filters: {
     from_date: string;
     to_date: string;
-    status: number | null;
+    status?: number | null;
+    type?: number | null;
   };
   onFiltersChange: (filters: {
     from_date: string;
     to_date: string;
-    status: number | null;
+    status?: number | null;
+    type?: number | null;
   }) => void;
   onReset: () => void;
+  filterType?: 'status' | 'type';
+  options?: Array<{ value: number; label: string }>;
 }
 
-const ListFilter = ({ filters, onFiltersChange, onReset }: ListFilterProps) => {
+const ListFilter = ({
+  title,
+  filters,
+  onFiltersChange,
+  onReset,
+  filterType = 'status',
+  options,
+}: ListFilterProps) => {
+  const defaultOptions =
+    filterType === 'status' ? statusOptions : transactionTypeOptions;
+  const filterOptions = options || defaultOptions;
   const handleFromDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onFiltersChange({ ...filters, from_date: e.target.value });
   };
@@ -38,20 +56,29 @@ const ListFilter = ({ filters, onFiltersChange, onReset }: ListFilterProps) => {
     onFiltersChange({ ...filters, to_date: e.target.value });
   };
 
-  const handleStatusChange = (value: number | null) => {
-    onFiltersChange({
-      ...filters,
-      status: value === -1 ? null : value,
-    });
+  const handleFilterChange = (value: number | null) => {
+    if (filterType === 'status') {
+      onFiltersChange({
+        ...filters,
+        status: value === -1 ? null : value,
+      });
+    } else {
+      onFiltersChange({
+        ...filters,
+        type: value === -1 ? null : value,
+      });
+    }
   };
 
   const hasActiveFilters =
     filters.from_date !== '' ||
     filters.to_date !== '' ||
-    filters.status !== null;
+    (filterType === 'status' ? filters.status !== null : filters.type !== null);
 
-  const selectedStatus = statusOptions.find(
-    (option) => option.value === filters.status,
+  const currentFilterValue =
+    filterType === 'status' ? filters.status : filters.type;
+  const selectedOption = filterOptions.find(
+    (option) => option.value === currentFilterValue,
   );
 
   return (
@@ -66,13 +93,13 @@ const ListFilter = ({ filters, onFiltersChange, onReset }: ListFilterProps) => {
 
             <div>
               <h3 className="text-sm font-semibold text-foreground">
-                Filter Transactions
+                {title} Filter
               </h3>
 
               <p className="text-xs text-muted-foreground">
                 {hasActiveFilters
                   ? 'Active filters applied'
-                  : 'Filter by date and type'}
+                  : `Filter by date and ${filterType === 'status' ? 'status' : 'type'}`}
               </p>
             </div>
           </div>
@@ -134,23 +161,30 @@ const ListFilter = ({ filters, onFiltersChange, onReset }: ListFilterProps) => {
           <div className="space-y-2">
             <label className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
               <Filter className="size-3" />
-              Type
+              {filterType === 'status' ? 'Status' : 'Type'}
             </label>
 
             <Select
-              value={filters.status ?? -1}
-              onValueChange={handleStatusChange}
+              value={currentFilterValue ?? -1}
+              onValueChange={handleFilterChange}
             >
               <SelectTrigger className="h-10 w-full border-primary/20 transition-colors focus:border-primary/50 focus:ring-primary/20">
-                <SelectValue placeholder="All Statuses">
-                  {selectedStatus?.label ?? 'All Statuses'}
+                <SelectValue
+                  placeholder={
+                    filterType === 'status' ? 'All Statuses' : 'All Types'
+                  }
+                >
+                  {selectedOption?.label ??
+                    (filterType === 'status' ? 'All Statuses' : 'All Types')}
                 </SelectValue>
               </SelectTrigger>
 
               <SelectContent>
-                <SelectItem value={-1}>All Statuses</SelectItem>
+                <SelectItem value={-1}>
+                  {filterType === 'status' ? 'All Statuses' : 'All Types'}
+                </SelectItem>
 
-                {statusOptions.map((option) => (
+                {filterOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
                   </SelectItem>
