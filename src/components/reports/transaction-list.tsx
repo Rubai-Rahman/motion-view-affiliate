@@ -1,70 +1,64 @@
+import {
+  WithdrawRequestListApiResponse,
+  WithdrawRequestItem,
+} from '@/types/reports.types';
 import { DataTable } from '@/components/ui/data-table/data-table';
 import { createAppColumnHelper } from '@/components/ui/data-table/data-table-features';
-import {
-  WithdrawRequestItem,
-  WithdrawRequestListApiResponse,
-} from '@/types/payment.types';
 
 const columnHelper = createAppColumnHelper<WithdrawRequestItem>();
 
 const columns = columnHelper.columns([
-  columnHelper.display({
-    id: 'index',
+  columnHelper.accessor('id', {
     header: 'ID',
-    cell: ({ row }) => row.index + 1,
   }),
-
-  columnHelper.accessor('payment_account', {
-    header: 'Account No',
+  columnHelper.accessor('reference_id', {
+    header: 'Reference ID',
     cell: ({ getValue }) => getValue() || '-',
   }),
-
-  columnHelper.accessor('payment_method_name', {
-    header: 'Payment Method',
+  columnHelper.accessor('transaction_type_name', {
+    header: 'Type',
+    cell: ({ getValue }) => getValue() || 'Withdrawal',
+  }),
+  columnHelper.accessor('description', {
+    header: 'Description',
     cell: ({ getValue }) => getValue() || '-',
   }),
-
-  columnHelper.accessor('amount', {
-    header: 'Amount',
+  columnHelper.accessor('amount_in', {
+    header: 'Amount In',
     cell: ({ getValue }) => {
       const value = getValue();
-
       return value > 0 ? `$${value.toLocaleString()}` : '-';
     },
   }),
-
-  columnHelper.accessor('status_name', {
-    header: 'Status',
-    cell: ({ getValue }) => getValue() || '-',
-  }),
-
-  columnHelper.accessor('transaction_reference', {
-    header: 'Reference',
-    cell: ({ getValue }) => getValue() || '-',
-  }),
-
-  columnHelper.accessor('created_at', {
-    header: 'Created At',
+  columnHelper.accessor('amount_out', {
+    header: 'Amount Out',
     cell: ({ getValue }) => {
       const value = getValue();
-      if (!value) return '-';
-      return new Date(value).toLocaleString();
+      return value > 0 ? `$${value.toLocaleString()}` : '-';
     },
   }),
-
-  columnHelper.accessor('processed_at', {
-    header: 'Processed At',
+  columnHelper.accessor('amount', {
+    header: 'Total Amount',
     cell: ({ getValue }) => {
       const value = getValue();
-
-      if (!value) return '-';
-
-      return new Date(value).toLocaleString();
+      return value ? `$${Number(value).toLocaleString()}` : '-';
+    },
+  }),
+  columnHelper.accessor('created_at', {
+    header: 'Date',
+    cell: ({ getValue }) => {
+      const date = getValue();
+      if (!date) return '-';
+      return new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
     },
   }),
 ]);
 
-const WithdrawList = ({
+const TransactionList = ({
   withdrawListData,
   pagination,
   onPaginationChange,
@@ -83,7 +77,7 @@ const WithdrawList = ({
       <DataTable
         columns={columns}
         data={data}
-        title="Withdrawal Requests"
+        title="Transaction List"
         pageCount={apiPagination?.last_page}
         hasPagination={apiPagination?.last_page > 1}
         pagination={pagination}
@@ -93,4 +87,4 @@ const WithdrawList = ({
   );
 };
 
-export default WithdrawList;
+export default TransactionList;

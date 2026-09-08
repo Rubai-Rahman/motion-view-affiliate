@@ -16,239 +16,13 @@ import { WithdrawPayload } from '@/types/payment.types';
 import { WithdrawRequestResponse } from '@/types/reports.types';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-const dummyWithdrawList = {
-  success: true,
-  data: {
-    success: true,
-    message: 'Withdrawal request list retrieved successfully.',
-    data: [
-      {
-        id: 1,
-        amount_in: 5000,
-        amount_out: 0,
-        amount: 5000,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1001,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-01T10:30:00Z',
-      },
-      {
-        id: 2,
-        amount_in: 0,
-        amount_out: 3000,
-        amount: 3000,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1002,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-02T14:20:00Z',
-      },
-      {
-        id: 3,
-        amount_in: 2500,
-        amount_out: 0,
-        amount: 2500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1003,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-03T09:15:00Z',
-      },
-      {
-        id: 4,
-        amount_in: 0,
-        amount_out: 4500,
-        amount: 4500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1004,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-04T16:45:00Z',
-      },
-      {
-        id: 5,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 6,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 7,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 8,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 9,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 10,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 11,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 12,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 13,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 14,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 15,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 16,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 17,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 18,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-      {
-        id: 19,
-        amount_in: 1500,
-        amount_out: 0,
-        amount: 1500,
-        transaction_type: 'withdrawal',
-        transaction_type_name: 'Withdrawal Request',
-        reference_id: 1005,
-        description: 'Withdrawal to bank account',
-        created_at: '2026-09-05T11:10:00Z',
-      },
-    ],
-    pagination: {
-      current_page: 1,
-      last_page: 2,
-      per_page: 10,
-      total: 19,
-      from: 1,
-      to: 10,
-      has_next_page: true,
-    },
-  },
-};
 const PaymentContainer = () => {
   const [filters, setFilters] = useState({
     from_date: '',
     to_date: '',
     type: 'all',
   });
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
 
   const { mutate: withdraw, isPending: isWithdrawing } = useMutation<
     WithdrawRequestResponse,
@@ -278,11 +52,12 @@ const PaymentContainer = () => {
     isPending: isWithdrawalPending,
     isError: isWithdrawalError,
   } = useQuery({
-    queryKey: ['withdraw-request-list', filters],
-    queryFn: async () => {
-      const result = await getWithdrawRequestListData(filters);
-      return result;
-    },
+    queryKey: ['withdraw-request-list', filters, pagination],
+    queryFn: () =>
+      getWithdrawRequestListData({
+        filters,
+        pagination: { per_page: pagination.pageSize },
+      }),
   });
 
   const handleWithdraw = (formdata: WithdrawPayload) => {
@@ -291,6 +66,7 @@ const PaymentContainer = () => {
 
   const handleFiltersChange = (newFilters: typeof filters) => {
     setFilters(newFilters);
+    setPagination((p) => ({ ...p, pageIndex: 0 }));
   };
 
   const handleResetFilters = () => {
@@ -299,9 +75,10 @@ const PaymentContainer = () => {
       to_date: '',
       type: 'all',
     });
+    setPagination({ pageIndex: 0, pageSize: 10 });
   };
 
-  const withdrawalSummary = dummyWithdrawList?.data?.data?.reduce(
+  const withdrawalSummary = withdrawListData?.data?.data?.reduce(
     (summary, item) => {
       summary.totalTransactions += 1;
       summary.totalAmountIn += Number(item.amount_in || 0);
@@ -320,7 +97,8 @@ const PaymentContainer = () => {
     totalAmountOut: 0,
   };
 
-  console.log('withdrawalSummary', withdrawalSummary);
+  console.log('withdrawalSummary', withdrawListData);
+
   return (
     <div className="space-y-8">
       <div className="relative">
@@ -362,7 +140,11 @@ const PaymentContainer = () => {
           withdrawListData?.data === undefined ? (
           <EmptyState />
         ) : (
-          <WithdrawList withdrawListData={dummyWithdrawList?.data} />
+          <WithdrawList
+            withdrawListData={withdrawListData?.data}
+            pagination={pagination}
+            onPaginationChange={setPagination}
+          />
         )}
       </div>
     </div>

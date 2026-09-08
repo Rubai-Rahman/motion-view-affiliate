@@ -1,6 +1,3 @@
-/* -------------------------------------------------------------------------- */
-/* Shared pagination envelope (Laravel-style)                                 */
-/* -------------------------------------------------------------------------- */
 
 export interface Paginated<T> {
   current_page: number;
@@ -23,11 +20,6 @@ export interface Paginated<T> {
   total: number;
 }
 
-export interface BalanceInquiryResponse {
-  success: boolean;
-  message: string;
-  balance: string | number;
-}
 
 export interface WalletTransactionItem {
   id?: number | string;
@@ -49,43 +41,41 @@ export interface WalletTransactionHistoryApiResponse {
   data: Paginated<WalletTransactionItem>;
 }
 
-export interface WithdrawRequestItem {
-  id?: number | string;
-  amount_in: number;
-  amount_out: number;
-  amount?: number | string;
-  transaction_type?: string;
-  transaction_type_name?: string;
-  reference_id?: number;
-  description?: string;
-  created_at?: string;
-}
-export interface WithdrawRequestPagination {
-  current_page: number;
-  last_page: number;
-  per_page: number;
-  total: number;
-  from: number | null;
-  to: number | null;
-  has_next_page: boolean;
-}
+// export interface WithdrawRequestItem {
+//   id?: number | string;
+//   amount_in: number;
+//   amount_out: number;
+//   amount?: number | string;
+//   transaction_type?: string;
+//   transaction_type_name?: string;
+//   reference_id?: number;
+//   description?: string;
+//   created_at?: string;
+// }
+// export interface WithdrawRequestPagination {
+//   current_page: number;
+//   last_page: number;
+//   per_page: number;
+//   total: number;
+//   from: number | null;
+//   to: number | null;
+//   has_next_page: boolean;
+// }
 
-export interface WithdrawRequestListApiResponse {
-  success: boolean;
-  message: string;
-  data: WithdrawRequestItem[];
-  pagination: WithdrawRequestPagination;
-}
+// export interface WithdrawRequestListApiResponse {
+//   success: boolean;
+//   message: string;
+//   data: WithdrawRequestItem[];
+//   pagination: WithdrawRequestPagination;
+// }
 
-export interface WithdrawRequestResponse {
-  success: boolean;
-  message: string;
-  available_balance?: string;
-}
+// export interface WithdrawRequestResponse {
+//   success: boolean;
+//   message: string;
+//   available_balance?: string;
+// }
 
-/* -------------------------------------------------------------------------- */
-/* Filter shapes (shared between container and presentational layer)          */
-/* -------------------------------------------------------------------------- */
+
 
 export interface TransactionFilters {
   from_date: string;

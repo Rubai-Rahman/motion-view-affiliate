@@ -28,12 +28,12 @@ interface PaymentFilterProps {
   onReset: () => void;
 }
 
-const typeOptions = [
-  { value: '1', label: 'Commission' },
-  { value: '2', label: 'Withdrawal' },
-  { value: '3', label: 'Reversal' },
-  { value: '4', label: 'Refund' },
-  { value: '5', label: 'Adjustment' },
+const statusOptions = [
+  { value: '0', label: 'Pending' },
+  { value: '1', label: 'Processing' },
+  { value: '2', label: 'Paid' },
+  { value: '3', label: 'Rejected' },
+  { value: '4', label: 'Cancelled' },
 ];
 
 const PaymentFilter = ({
@@ -58,7 +58,7 @@ const PaymentFilter = ({
     filters.to_date !== '' ||
     filters.type !== 'all';
 
-  const selectedType = typeOptions.find(
+  const selectedType = statusOptions.find(
     (option) => option.value === filters.type,
   );
 
@@ -155,7 +155,7 @@ const PaymentFilter = ({
               <SelectContent>
                 <SelectItem value="all">All Types</SelectItem>
 
-                {typeOptions.map((option) => (
+                {statusOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
                   </SelectItem>

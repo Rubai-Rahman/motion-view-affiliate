@@ -25,6 +25,11 @@ interface DataTableProps<TData extends RowData> {
   pageCount?: number;
   isLoading?: boolean;
   title?: string;
+  pagination?: { pageIndex: number; pageSize: number };
+  onPaginationChange?: (pagination: {
+    pageIndex: number;
+    pageSize: number;
+  }) => void;
   hasPagination?: boolean;
 }
 
@@ -34,6 +39,8 @@ export function DataTable<TData extends RowData>({
   pageCount,
   isLoading,
   title,
+  pagination,
+  onPaginationChange,
   hasPagination = true,
 }: DataTableProps<TData>) {
   const table = useAppTable(
@@ -41,15 +48,16 @@ export function DataTable<TData extends RowData>({
       key: 'data-table',
       columns,
       data,
-
-      initialState: {
-        pagination: {
-          pageIndex: 0,
-          pageSize: 15,
-        },
-      },
-
+      ...(pagination
+        ? { state: { pagination } } // controlled
+        : { initialState: { pagination: { pageIndex: 0, pageSize: 15 } } }),
       ...(pageCount !== undefined ? { manualPagination: true, pageCount } : {}),
+      onPaginationChange: (updater) => {
+        if (!onPaginationChange || !pagination) return;
+        const next =
+          typeof updater === 'function' ? updater(pagination) : updater;
+        onPaginationChange(next);
+      },
     },
     (state) => ({
       pagination: state.pagination,
