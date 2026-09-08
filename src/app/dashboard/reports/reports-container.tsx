@@ -40,7 +40,12 @@ const ReportsContainer = () => {
       }),
   });
   console.log('transactioListData', transactionsListData);
-  const handleFiltersChange = (newFilters: typeof filters) => {
+  const handleFiltersChange = (newFilters: {
+    from_date: string;
+    to_date: string;
+    status?: number | null;
+    type?: number | null;
+  }) => {
     setFilters({
       from_date: newFilters.from_date,
       to_date: newFilters.to_date,
@@ -57,24 +62,24 @@ const ReportsContainer = () => {
     });
     setPagination({ pageIndex: 0, pageSize: 10 });
   };
-  const transactionSummary = transactionsListData?.data?.data?.reduce(
-    (summary, item) => {
-      summary.totalTransactions += 1;
-      summary.totalAmountIn += Number(item.amount_in || 0);
-      summary.totalAmountOut += Number(item.amount_out || 0);
+  // const transactionSummary = transactionsListData?.data?.data?.reduce(
+  //   (summary, item) => {
+  //     summary.totalTransactions += 1;
+  //     summary.totalAmountIn += Number(item.amount_in || 0);
+  //     summary.totalAmountOut += Number(item.amount_out || 0);
 
-      return summary;
-    },
-    {
-      totalTransactions: 0,
-      totalAmountIn: 0,
-      totalAmountOut: 0,
-    },
-  ) ?? {
-    totalTransactions: 0,
-    totalAmountIn: 0,
-    totalAmountOut: 0,
-  };
+  //     return summary;
+  //   },
+  //   {
+  //     totalTransactions: 0,
+  //     totalAmountIn: 0,
+  //     totalAmountOut: 0,
+  //   },
+  // ) ?? {
+  //   totalTransactions: 0,
+  //   totalAmountIn: 0,
+  //   totalAmountOut: 0,
+  // };
   return (
     <div className="space-y-8">
       <div className="relative">
@@ -115,7 +120,6 @@ const ReportsContainer = () => {
         ) : (
           <TransactionList
             transactionsListData={transactionsListData?.data}
-            transactionSummary={transactionSummary}
             pagination={pagination}
             onPaginationChange={setPagination}
           />

@@ -76,8 +76,16 @@ const PaymentContainer = () => {
     withdraw(formdata);
   };
 
-  const handleFiltersChange = (newFilters: typeof filters) => {
-    setFilters(newFilters);
+  const handleFiltersChange = (newFilters: {
+    from_date: string;
+    to_date: string;
+    status?: number | null;
+  }) => {
+    setFilters({
+      from_date: newFilters.from_date,
+      to_date: newFilters.to_date,
+      status: newFilters.status ?? null,
+    });
     setPagination((p) => ({ ...p, pageIndex: 0 }));
   };
 
