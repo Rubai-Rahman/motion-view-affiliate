@@ -100,7 +100,7 @@ export function DataTable<TData extends RowData>({
         </div>
       </div>
       <div className="px-6">
-        <div className="rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm">
+        <div className="rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm">
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (

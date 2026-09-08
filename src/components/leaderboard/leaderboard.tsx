@@ -407,12 +407,14 @@ const Leaderboard = ({ data }: LeaderboardProps) => {
         )}
       </div>
       <RankCard order={order} podium={podium} />
-      <DataTable
-        title="Leaderboard"
-        data={dummyLeaderboardData}
-        columns={columns}
-        hasPagination={false}
-      />
+      <div className="bg-muted rounded-md">
+        <DataTable
+          title="Leaderboard"
+          data={dummyLeaderboardData}
+          columns={columns}
+          hasPagination={false}
+        />
+      </div>
       {my_position && my_position.rank > 15 && (
         <div className="overflow-hidden rounded-md border bg-card">
           {/* Your Position Header */}

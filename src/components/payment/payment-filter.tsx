@@ -13,6 +13,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Calendar, Filter, FunnelX } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { statusOptions } from '@/constants/filter.constant';
 
 interface PaymentFilterProps {
   filters: {
@@ -27,14 +28,6 @@ interface PaymentFilterProps {
   }) => void;
   onReset: () => void;
 }
-
-const statusOptions = [
-  { value: 0, label: 'Pending' },
-  { value: 1, label: 'Processing' },
-  { value: 2, label: 'Paid' },
-  { value: 3, label: 'Rejected' },
-  { value: 4, label: 'Cancelled' },
-];
 
 const PaymentFilter = ({
   filters,

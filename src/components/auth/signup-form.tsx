@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
-import { accountType } from '@/constants/signup';
+import { accountType } from '@/constants/signup.constant';
 
 const signupSchema = z
   .object({
