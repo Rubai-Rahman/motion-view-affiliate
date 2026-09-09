@@ -4,17 +4,15 @@ import {
   AnimatePresence,
   motion,
   useMotionValue,
-  useSpring,
   useTransform,
 } from 'motion/react';
 import { ArrowRight, Menu, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { ease } from './motion-primitives';
 import { ModeToggle } from '../common/theme-toggle';
-import { useLenis, useLenisScrollTo } from '@/components/provider/smoothScroll';
 import { cn } from '@/lib/utils';
 
 /* -------------------------------------------------------------------------- */
@@ -36,48 +34,22 @@ const links: { label: string; target: string }[] = [
 export function HomeNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const scrollTo = useLenisScrollTo();
-  const lenis = useLenis();
-
   const scrollY = useMotionValue(0);
 
-  useEffect(() => {
-    if (!lenis) return;
+  const bgOpacity = useTransform(scrollY, [0, 100], [0, 1]);
 
-    const onScroll = ({ scroll }: { scroll: number }) => {
-      scrollY.set(scroll);
-    };
-
-    lenis.on('scroll', onScroll);
-
-    return () => {
-      lenis.off('scroll', onScroll);
-    };
-  }, [lenis, scrollY]);
-
-  /* Spring-smoothed navbar transitions */
-  const scrollYSpring = useSpring(scrollY, {
-    stiffness: 120,
-    damping: 24,
-  });
-
-  const bgOpacity = useTransform(scrollYSpring, [0, 100], [0, 1]);
-
-  const borderOpacity = useTransform(scrollYSpring, [0, 100], [0, 0.12]);
+  const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.12]);
 
   /* ---------------------------------------------------------------------- */
   /* Smooth section navigation without hash                                  */
   /* ---------------------------------------------------------------------- */
 
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    target: string,
-  ) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
     setMobileOpen(false);
 
-    scrollTo(target);
+    // scrollTo(target);
   };
 
   /* ---------------------------------------------------------------------- */
@@ -87,11 +59,11 @@ export function HomeNavbar() {
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
-    if (lenis) {
-      lenis.scrollTo(0, {
-        duration: 1.6,
-      });
-    }
+    // if (lenis) {
+    //   lenis.scrollTo(0, {
+    //     duration: 1.6,
+    //   });
+    // }
   };
 
   return (
@@ -187,7 +159,7 @@ export function HomeNavbar() {
             <motion.a
               key={label}
               href={target}
-              onClick={(e) => handleNavClick(e, target)}
+              onClick={(e) => handleNavClick(e)}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -331,7 +303,7 @@ export function HomeNavbar() {
                 <motion.a
                   key={label}
                   href={target}
-                  onClick={(e) => handleNavClick(e, target)}
+                  onClick={(e) => handleNavClick(e)}
                   initial={{
                     opacity: 0,
                     x: -15,

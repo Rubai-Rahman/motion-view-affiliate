@@ -4,10 +4,9 @@ import { motion } from 'motion/react';
 import { ArrowRight, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ease, MagneticButton } from './motion-primitives';
-import { useLenisScrollTo } from '@/components/provider/smoothScroll';
 
 export function FinalCTA() {
-  const scrollTo = useLenisScrollTo();
+  // const scrollTo = useLenisScrollTo();
   return (
     <section className="relative overflow-hidden bg-background py-28 sm:py-32 lg:py-40">
       {/* Ambient glows */}
@@ -110,7 +109,7 @@ export function FinalCTA() {
                     size="lg"
                     variant="outline"
                     onClick={() => {
-                      scrollTo('#faq');
+                      // scrollTo('#faq');
                     }}
                     className="h-12 border bg-white/3 px-7 text-slate-500 hover:bg-white/7 hover:text-slate-900 hover:dark:text-slate-100"
                   >

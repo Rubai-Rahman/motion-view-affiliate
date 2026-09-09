@@ -5,7 +5,6 @@ import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { ease } from './motion-primitives';
-import { useLenisScrollTo } from '@/components/provider/smoothScroll';
 
 const columns = [
   {
@@ -37,8 +36,6 @@ const columns = [
 ];
 
 export function Footer() {
-  const scrollTo = useLenisScrollTo();
-
   const handleScrollLink = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
@@ -46,7 +43,7 @@ export function Footer() {
     if (!href.startsWith('#')) return;
 
     e.preventDefault();
-    scrollTo(href);
+    // scrollTo(href);
   };
 
   return (
