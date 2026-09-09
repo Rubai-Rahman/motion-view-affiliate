@@ -59,8 +59,8 @@ function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
         'border-b border-slate-200/80 dark:border-slate-800',
         'transition-colors duration-150',
         'odd:bg-white even:bg-slate-50/80',
-        'dark:odd:bg-slate-950 dark:even:bg-slate-900/60',
-        'hover:bg-orange-50/70 dark:hover:bg-orange-950/20',
+        'dark:odd:bg-orange-950/10 dark:even:bg-olive-900/60',
+        'hover:bg-orange-50/70 dark:hover:bg-olive-950/10',
         'data-[state=selected]:bg-orange-50 dark:data-[state=selected]:bg-orange-950/30',
         className,
       )}
