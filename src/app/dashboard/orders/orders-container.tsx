@@ -65,36 +65,50 @@ const OrdersContainer = () => {
     setPagination({ pageIndex: 0, pageSize: 10 });
   };
 
-  console.log('orderData', orderListData);
-
   return (
-    <div>
-      <ListFilter
-        title={'OrderList'}
-        filters={filters}
-        onFiltersChange={handleFiltersChange}
-        onReset={handleResetFilters}
-        options={orderTypeOptions}
-      />
-      {isPending ? (
-        <TableSkeleton />
-      ) : isError ? (
-        <ErrorState />
-      ) : orderListData?.data === null ||
-        orderListData?.data?.data?.length === 0 ||
-        orderListData?.data === undefined ? (
-        <EmptyState
-          title="No orders found"
-          description="Try adjusting your filters or search query."
-          icon={<InboxIcon className="size-10 text-muted-foreground" />}
+    <div className="space-y-8">
+      <div className="relative">
+        <div className="absolute inset-0 bg-linear-to-r from-primary/10 via-transparent to-primary/10 opacity-50 blur-3xl" />
+        <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div className="space-y-2">
+            <h1 className="text-4xl font-bold bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+              Order List
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              Track your order history and manage your orders
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-6">
+        <ListFilter
+          title={'OrderList'}
+          filters={filters}
+          onFiltersChange={handleFiltersChange}
+          onReset={handleResetFilters}
+          options={orderTypeOptions}
         />
-      ) : (
-        <OrderList
-          orderListData={orderListData?.data}
-          pagination={pagination}
-          onPaginationChange={setPagination}
-        />
-      )}
+        {isPending ? (
+          <TableSkeleton />
+        ) : isError ? (
+          <ErrorState />
+        ) : orderListData?.data === null ||
+          orderListData?.data?.data?.length === 0 ||
+          orderListData?.data === undefined ? (
+          <EmptyState
+            title="No orders found"
+            description="Try adjusting your filters or search query."
+            icon={<InboxIcon className="size-10 text-muted-foreground" />}
+          />
+        ) : (
+          <OrderList
+            orderListData={orderListData?.data}
+            pagination={pagination}
+            onPaginationChange={setPagination}
+          />
+        )}
+      </div>
     </div>
   );
 };
