@@ -343,6 +343,11 @@ export function HomeNavbar() {
                   Sign Up
                 </Link>
               </div>
+
+              <div className="flex items-center justify-between px-4 pt-3">
+                <span className="text-sm text-muted-foreground">Theme</span>
+                <ModeToggle />
+              </div>
             </nav>
           </motion.div>
         )}

@@ -31,6 +31,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { logoutAction } from '@/serverAction/authAction';
 import useLocalStorage from '@/hooks/useSyncExterna';
+import { cn } from '@/lib/utils';
 
 const primaryNav = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -67,10 +68,20 @@ function NavItem({
         render={
           <Link
             href={item.href}
-            className={`flex items-center gap-2 group-data-[collapsible=icon]:justify-center ${isActive ? 'border border-border' : ''}`}
+            className={cn(
+              'flex items-center gap-2 group-data-[collapsible=icon]:justify-center rounded-lg transition-all duration-200',
+              isActive
+                ? 'bg-linear-to-r from-primary/20 to-primary/5 border border-primary/30 text-primary shadow-sm shadow-primary/10'
+                : 'hover:bg-primary/10 hover:border-primary/20 border border-transparent',
+            )}
           >
             <Icon
-              className={`size-4 shrink-0 ${isActive ? 'text-secondary' : ''}`}
+              className={cn(
+                'size-4 shrink-0 transition-colors',
+                isActive
+                  ? 'text-primary'
+                  : 'text-muted-foreground group-hover:text-foreground',
+              )}
             />
             <span className="text-sm font-medium group-data-[collapsible=icon]:hidden">
               {item.label}
@@ -97,13 +108,16 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-border bg-sidebar">
-      <SidebarContent className="bg-sidebar">
+    <Sidebar
+      collapsible="icon"
+      className="border-r border-border/50 bg-linear-to-br from-sidebar via-sidebar to-primary/5"
+    >
+      <SidebarContent className="bg-transparent">
         {/* Logo */}
         <div className="px-4 py-6">
           <div className="flex items-center gap-2.5">
-            <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-brand">
-              <span className="size-3 rotate-45 bg-brand-foreground" />
+            <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-linear-to-br from-primary to-primary/60 shadow-lg shadow-primary/20">
+              <span className="size-3 rotate-45 bg-primary-foreground" />
             </span>
 
             <span className="text-sm font-semibold tracking-tight text-foreground group-data-[collapsible=icon]:hidden">
@@ -117,7 +131,7 @@ export function AppSidebar() {
 
         {/* Performance */}
         <SidebarGroup>
-          <SidebarGroupLabel className="px-6 pb-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          <SidebarGroupLabel className="px-6 pb-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground/80 font-semibold">
             Performance
           </SidebarGroupLabel>
 
@@ -132,7 +146,7 @@ export function AppSidebar() {
 
         {/* Account */}
         <SidebarGroup className="mt-auto">
-          <SidebarGroupLabel className="px-6 pb-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          <SidebarGroupLabel className="px-6 pb-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground/80 font-semibold">
             Account
           </SidebarGroupLabel>
 
@@ -147,10 +161,10 @@ export function AppSidebar() {
       </SidebarContent>
 
       {/* User + Logout */}
-      <SidebarFooter className="border-t border-border p-2">
+      <SidebarFooter className="border-t border-border/50 p-2 bg-linear-to-t from-primary/5 to-transparent">
         <div className="space-y-2">
-          <div className="flex items-center gap-3 rounded-xl border border-border bg-surface-2 p-3 group-data-[collapsible=icon]:justify-center">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand/15 font-mono text-xs font-semibold text-brand">
+          <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-linear-to-br from-primary/10 to-transparent p-3 group-data-[collapsible=icon]:justify-center shadow-sm">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-primary to-primary/60 font-mono text-xs font-semibold text-primary-foreground shadow-md shadow-primary/20">
               MV
             </span>
 
@@ -167,7 +181,7 @@ export function AppSidebar() {
 
           <Button
             variant="ghost"
-            className="w-full justify-start gap-3 px-3 text-destructive hover:bg-destructive/10 hover:text-destructive group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0"
+            className="w-full justify-start gap-3 px-3 text-destructive hover:bg-destructive/10 hover:text-destructive group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0 transition-all duration-200"
             onClick={() => handleLogout()}
           >
             <LogOut className="size-4" />

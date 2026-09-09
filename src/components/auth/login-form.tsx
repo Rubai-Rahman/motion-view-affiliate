@@ -70,8 +70,10 @@ export function LoginForm({ onSubmit, isPending = false }: LogInProps) {
       onSubmit={handleSubmit(onSubmitHandler)}
     >
       <FieldGroup>
-        <div className="flex flex-col items-center gap-1 text-center">
-          <h1 className="text-2xl font-bold">Login to your account</h1>
+        <div className="flex flex-col items-center gap-2 text-center mb-2">
+          <h1 className="text-2xl font-bold bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+            Login to your account
+          </h1>
           <p className="text-sm text-balance text-muted-foreground">
             Enter your email below to login to your account
           </p>
