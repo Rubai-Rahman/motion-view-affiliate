@@ -153,21 +153,6 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
 
         <FormField
           control={control}
-          name="address"
-          label="Address"
-          render={(field) => (
-            <Input
-              {...field}
-              id="address"
-              type="text"
-              placeholder="Street, city, area"
-              autoComplete="street-address"
-            />
-          )}
-        />
-
-        <FormField
-          control={control}
           name="type"
           label="Account Type"
           render={(field) => (
@@ -195,7 +180,19 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
             </Select>
           )}
         />
-
+        <FormField
+          control={control}
+          name="address"
+          label="Address"
+          render={(field) => (
+            <Textarea
+              {...field}
+              id="address"
+              placeholder="Street, city, area"
+              autoComplete="street-address"
+            />
+          )}
+        />
         <FormField
           control={control}
           name="description"

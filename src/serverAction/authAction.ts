@@ -76,6 +76,7 @@ function createAuthSession(
     address: string;
     affiliate_code: string;
     description: string;
+    profile_picture: string;
   },
   token: string,
 ): AuthSession {
@@ -89,6 +90,7 @@ function createAuthSession(
       address: user.address,
       affiliate_code: user.affiliate_code,
       description: user.description,
+      profile_picture: user.profile_picture || '',
     },
     accessToken: token,
     expiresAt: Date.now() + 1000 * 60 * 60 * 24 * 7,
@@ -139,6 +141,7 @@ export async function loginAction(
         address: result.data.data.address,
         affiliate_code: result.data.data.affiliate_code,
         description: result.data.data.description,
+        profile_picture: result.data.data.profile_picture || '',
       },
       result.data.token,
     ),

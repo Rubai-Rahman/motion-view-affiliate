@@ -9,6 +9,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { ease } from './motion-primitives';
 import { ModeToggle } from '../common/theme-toggle';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 /* -------------------------------------------------------------------------- */
 /* Data                                                                       */
@@ -77,11 +78,7 @@ export function HomeNavbar() {
         className="absolute inset-x-0 bottom-0 h-px bg-foreground"
       />
 
-      <div className="relative mx-auto flex h-18 max-w-350 items-center justify-between px-5 sm:px-8">
-        {/* ---------------------------------------------------------------- */}
-        {/* Logo                                                              */}
-        {/* ---------------------------------------------------------------- */}
-
+      <div className="relative mx-auto flex h-18 items-center justify-between px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -92,55 +89,9 @@ export function HomeNavbar() {
             onClick={handleLogoClick}
             className="flex items-center gap-3"
           >
-            <motion.div
-              whileHover={{ rotate: 8, scale: 1.1 }}
-              transition={{
-                type: 'spring',
-                stiffness: 400,
-                damping: 15,
-              }}
-              className="relative flex size-9 items-center justify-center rounded-[11px] bg-secondary font-black text-secondary-foreground shadow-lg shadow-secondary/30"
-            >
-              M{/* Pulse ring */}
-              <motion.div
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.5, 0, 0.5],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                }}
-                className="absolute inset-0 rounded-[11px] bg-secondary"
-              />
-            </motion.div>
-
-            <div>
-              <p className="text-sm font-semibold tracking-tight text-foreground">
-                Motion View
-              </p>
-
-              <p className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] text-slate-500">
-                <motion.span
-                  animate={{
-                    opacity: [0.4, 1, 0.4],
-                    scale: [0.8, 1.2, 0.8],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                  }}
-                  className="size-1.5 rounded-full bg-emerald-500"
-                />
-                Affiliate platform
-              </p>
-            </div>
+            <Image src="/images/logo.webp" alt="Logo" width={140} height={40} />
           </Link>
         </motion.div>
-
-        {/* ---------------------------------------------------------------- */}
-        {/* Desktop navigation                                                */}
-        {/* ---------------------------------------------------------------- */}
 
         <motion.nav
           initial={{ opacity: 0, y: -10 }}

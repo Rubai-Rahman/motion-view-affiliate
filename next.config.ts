@@ -4,8 +4,8 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: '128.199.150.9',
+        protocol: 'https',
+        hostname: 'portal.motionview.com.bd',
         pathname: '/storage/**',
       },
     ],

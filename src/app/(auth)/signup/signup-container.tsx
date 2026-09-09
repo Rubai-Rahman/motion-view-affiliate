@@ -47,23 +47,16 @@ const SignupContainer = () => {
         <div className="absolute top-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
-        <div className="relative flex flex-1 items-center justify-center">
+        <div className="relative flex flex-1 items-center justify-center shadow-lg">
           <div className="relative w-full max-w-lg">
             {/* Logo */}
             <div className="mb-8 flex items-center justify-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-xl bg-linear-to-br from-secondary to-secondary/60 shadow-lg shadow-secondary/20">
-                <span className="text-2xl font-bold text-secondary-foreground">
-                  M
-                </span>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-foreground">
-                  Motion View
-                </h1>
-                <p className="text-xs text-muted-foreground">
-                  Affiliate Platform
-                </p>
-              </div>
+              <Image
+                src="/images/logo.webp"
+                alt="Logo"
+                width={140}
+                height={40}
+              />
             </div>
 
             {/* Form Card */}

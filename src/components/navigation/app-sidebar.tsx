@@ -32,6 +32,7 @@ import { Button } from '@/components/ui/button';
 import { logoutAction } from '@/serverAction/authAction';
 import useLocalStorage from '@/hooks/useSyncExterna';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 const primaryNav = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -71,8 +72,8 @@ function NavItem({
             className={cn(
               'flex items-center gap-2 group-data-[collapsible=icon]:justify-center rounded-lg transition-all duration-200',
               isActive
-                ? 'bg-linear-to-r from-primary/20 to-primary/5 border border-primary/30 text-primary shadow-sm shadow-primary/10'
-                : 'hover:bg-primary/10 hover:border-primary/20 border border-transparent',
+                ? 'bg-linear-to-r from-secondary/20 to-secondary/5 border border-secondary/30 text-secondary shadow-sm shadow-secondary/10'
+                : 'hover:bg-secondary/10 hover:border-secondary/20 border border-transparent',
             )}
           >
             <Icon
@@ -96,12 +97,14 @@ function NavItem({
 export function AppSidebar() {
   const router = useRouter();
   const name = useLocalStorage('name');
-
+  const profilePicture = useLocalStorage('profilePicture');
+  console.log('profilePicture', profilePicture);
   const handleLogout = async () => {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('phone');
       localStorage.removeItem('name');
       localStorage.removeItem('affiliateCode');
+      localStorage.removeItem('profilePicture');
     }
     await logoutAction();
     router.push('/login');
@@ -110,27 +113,18 @@ export function AppSidebar() {
   return (
     <Sidebar
       collapsible="icon"
-      className="border border-border/50 bg-linear-to-br from-sidebar via-sidebar to-primary/5"
+      className="border border-border/50 bg-linear-to-br from-sidebar via-sidebar to-secondary/5"
     >
-      <SidebarContent className="bg-transparent">
+      <SidebarContent className="bg-sidebar">
         {/* Logo */}
         <div className="px-4 py-6">
-          <div className="flex items-center gap-2.5">
-            <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-linear-to-br from-primary to-primary/60 shadow-lg shadow-primary/20">
-              <span className="size-3 rotate-45 bg-primary-foreground" />
-            </span>
-
-            <span className="text-sm font-semibold tracking-tight text-foreground group-data-[collapsible=icon]:hidden">
-              Motion View
-              <span className="ml-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                Affiliates
-              </span>
-            </span>
+          <div className="flex items-center gap-2.5 ">
+            <Image src="/images/logo.webp" alt="Logo" width={140} height={40} />
           </div>
         </div>
 
         {/* Performance */}
-        <SidebarGroup>
+        <SidebarGroup className="">
           <SidebarGroupLabel className="px-6 pb-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground/80 font-semibold">
             Performance
           </SidebarGroupLabel>
@@ -161,11 +155,17 @@ export function AppSidebar() {
       </SidebarContent>
 
       {/* User + Logout */}
-      <SidebarFooter className="border-t border-border/50 p-2 bg-linear-to-t from-primary/5 to-transparent">
+      <SidebarFooter className="border-t border-border/50 p-2 bg-linear-to-t from-secondary/5 to-transparent">
         <div className="space-y-2">
-          <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-linear-to-br from-primary/10 to-transparent p-3 group-data-[collapsible=icon]:justify-center shadow-sm">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-primary to-primary/60 font-mono text-xs font-semibold text-primary-foreground shadow-md shadow-primary/20">
-              MV
+          <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-linear-to-br from-secondary/10 to-transparent p-3 group-data-[collapsible=icon]:justify-center shadow-sm">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-secondary to-secondary/60 font-mono text-xs font-semibold text-secondary-foreground shadow-md shadow-secondary/20">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${profilePicture}`}
+                alt="Logo"
+                width={36}
+                height={36}
+                className="rounded-full"
+              />
             </span>
 
             <div className="min-w-0 group-data-[collapsible=icon]:hidden">

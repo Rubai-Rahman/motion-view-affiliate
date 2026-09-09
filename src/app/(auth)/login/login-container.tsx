@@ -24,11 +24,14 @@ const LoginContainer = () => {
         const phone = result.data.user.phone;
         const name = result.data.user.name;
         const affiliateCode = result.data.user.affiliate_code;
-        console.log('affiliateId in login', affiliateCode);
+        const profilePicture = result.data.user.profile_picture;
         if (phone) localStorage.setItem('phone', phone);
         if (name) localStorage.setItem('name', name);
         if (affiliateCode) {
           localStorage.setItem('affiliateCode', affiliateCode);
+        }
+        if (profilePicture) {
+          localStorage.setItem('profilePicture', profilePicture);
         }
         toast.add({
           title: 'Login Successful',
@@ -58,23 +61,16 @@ const LoginContainer = () => {
         <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
-        <div className="relative flex flex-1 items-center justify-center">
-          <div className="relative w-full max-w-md">
+        <div className="relative flex flex-1 items-center justify-center shadow-lg py-2">
+          <div className="relative w-full max-w-md ">
             {/* Logo */}
             <div className="mb-8 flex items-center justify-center gap-3">
-              <div className="flex size-12 items-center justify-center rounded-xl bg-linear-to-br from-primary to-primary/60 shadow-lg shadow-primary/20">
-                <span className="text-2xl font-bold text-primary-foreground">
-                  M
-                </span>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-foreground">
-                  Motion View
-                </h1>
-                <p className="text-xs text-muted-foreground">
-                  Affiliate Platform
-                </p>
-              </div>
+              <Image
+                src="/images/logo.webp"
+                alt="Logo"
+                width={140}
+                height={40}
+              />
             </div>
 
             {/* Form Card */}

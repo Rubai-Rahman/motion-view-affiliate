@@ -42,6 +42,7 @@ export interface AuthUser {
   address: string;
   affiliate_code: string;
   description: string;
+  profile_picture: string;
 }
 
 export interface AuthSession {

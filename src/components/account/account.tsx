@@ -72,7 +72,7 @@ const Account = ({ data }: AccountProps) => {
   const profileImageUrl = data.profile_picture_url
     ? data.profile_picture_url.startsWith('http')
       ? data.profile_picture_url
-      : `http://${data.profile_picture_url}`
+      : `https://${data.profile_picture_url}`
     : null;
 
   return (
