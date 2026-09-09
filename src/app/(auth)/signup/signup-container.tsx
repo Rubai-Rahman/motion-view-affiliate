@@ -83,7 +83,7 @@ const SignupContainer = () => {
           </div>
         </div>
       </div>
-      <div className="relative hidden lg:block bg-gradient-to-br from-secondary/20 via-secondary/10 to-primary/20">
+      <div className="relative hidden lg:block bg-linear-to-br from-secondary/20 via-secondary/10 to-primary/20">
         <div className="absolute inset-0 bg-linear-to-t from-background/80 to-transparent" />
         <Image
           src="/images/login.webp"

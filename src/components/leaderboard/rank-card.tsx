@@ -22,7 +22,13 @@ const RankCard = ({ order, podium }: RankCardProps) => {
           badge: 'border-yellow-500/30 bg-yellow-500/10 text-yellow-700',
           avatar:
             'ring-2 ring-yellow-500/30 ring-offset-2 ring-offset-background',
-          card: 'border-yellow-500/30 bg-yellow-500/[0.02]',
+          card: 'border-yellow-500/30 bg-linear-to-br from-yellow-500/[0.08] via-yellow-500/[0.02] to-transparent shadow-lg shadow-yellow-500/10',
+          size: 'sm:col-span-1',
+          height: 'h-auto',
+          padding: 'p-5',
+          avatarSize: 'size-14',
+          commissionSize: 'text-2xl',
+          offset: 'sm:translate-y-0',
         };
 
       case 2:
@@ -33,7 +39,13 @@ const RankCard = ({ order, podium }: RankCardProps) => {
           badge: 'border-slate-400/30 bg-slate-400/10 text-slate-600',
           avatar:
             'ring-2 ring-slate-400/30 ring-offset-2 ring-offset-background',
-          card: 'border-slate-400/25 bg-slate-400/[0.02]',
+          card: 'border-slate-400/25 bg-linear-to-br from-slate-400/[0.05] via-slate-400/[0.01] to-transparent shadow-md',
+          size: 'sm:col-span-1',
+          height: 'h-auto',
+          padding: 'p-4',
+          avatarSize: 'size-12',
+          commissionSize: 'text-xl',
+          offset: 'sm:translate-y-2',
         };
 
       case 3:
@@ -44,7 +56,13 @@ const RankCard = ({ order, podium }: RankCardProps) => {
           badge: 'border-amber-600/30 bg-amber-600/10 text-amber-700',
           avatar:
             'ring-2 ring-amber-600/30 ring-offset-2 ring-offset-background',
-          card: 'border-amber-600/25 bg-amber-600/[0.02]',
+          card: 'border-amber-600/25 bg-linear-to-br from-amber-600/[0.05] via-amber-600/[0.01] to-transparent shadow-md',
+          size: 'sm:col-span-1',
+          height: 'h-auto',
+          padding: 'p-4',
+          avatarSize: 'size-12',
+          commissionSize: 'text-xl',
+          offset: 'sm:translate-y-4',
         };
 
       default:
@@ -55,12 +73,18 @@ const RankCard = ({ order, podium }: RankCardProps) => {
           badge: 'border-border bg-muted text-muted-foreground',
           avatar: '',
           card: '',
+          size: '',
+          height: '',
+          padding: '',
+          avatarSize: 'size-12',
+          commissionSize: 'text-xl',
+          offset: '',
         };
     }
   };
 
   return (
-    <div className="grid gap-3 sm:grid-cols-3">
+    <div className="grid gap-3 sm:grid-cols-3 items-end">
       {order.map((rank) => {
         const p = podium[rank];
 
@@ -74,26 +98,42 @@ const RankCard = ({ order, podium }: RankCardProps) => {
             key={p.affiliate_id}
             className={cn(
               'relative overflow-hidden transition-all duration-200',
-              'hover:-translate-y-0.5 hover:shadow-md',
+              'hover:-translate-y-1 hover:shadow-xl',
               config.card,
-              p.is_me && 'ring-1 ring-primary/20',
+              config.size,
+              config.height,
+              config.padding,
+              config.offset,
+              p.is_me && 'ring-2 ring-primary/30',
             )}
           >
             {/* Rank accent */}
             <div
               className={cn(
-                'absolute inset-x-0 top-0 h-0.5',
-                p.rank === 1 && 'bg-yellow-500',
-                p.rank === 2 && 'bg-slate-400',
-                p.rank === 3 && 'bg-amber-600',
+                'absolute inset-x-0 top-0 h-1',
+                p.rank === 1 &&
+                  'bg-linear-to-r from-yellow-400 via-yellow-500 to-yellow-400',
+                p.rank === 2 &&
+                  'bg-linear-to-r from-slate-300 via-slate-400 to-slate-300',
+                p.rank === 3 &&
+                  'bg-linear-to-r from-amber-500 via-amber-600 to-amber-500',
               )}
             />
 
-            <CardContent className="p-4">
+            {/* Background glow for rank 1 */}
+            {p.rank === 1 && (
+              <div className="absolute -top-10 -right-10 size-32 bg-yellow-500/10 rounded-full blur-2xl" />
+            )}
+
+            <CardContent className="relative">
               {/* Header */}
               <div className="flex items-center gap-3">
                 <Avatar
-                  className={cn('size-12 shrink-0 bg-muted', config.avatar)}
+                  className={cn(
+                    'shrink-0 bg-muted',
+                    config.avatarSize,
+                    config.avatar,
+                  )}
                 >
                   <AvatarImage src={p.profile_picture} alt={p.name} />
 
@@ -104,7 +144,14 @@ const RankCard = ({ order, podium }: RankCardProps) => {
 
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5">
-                    <h3 className="truncate text-sm font-semibold">{p.name}</h3>
+                    <h3
+                      className={cn(
+                        'truncate font-semibold',
+                        p.rank === 1 ? 'text-base' : 'text-sm',
+                      )}
+                    >
+                      {p.name}
+                    </h3>
 
                     {p.is_me && (
                       <Badge
@@ -141,7 +188,8 @@ const RankCard = ({ order, podium }: RankCardProps) => {
 
                 <p
                   className={cn(
-                    'mt-0.5 text-xl font-bold tracking-tight',
+                    'mt-0.5 font-bold tracking-tight',
+                    config.commissionSize,
                     config.accent,
                   )}
                 >
@@ -150,7 +198,7 @@ const RankCard = ({ order, podium }: RankCardProps) => {
               </div>
 
               {/* Stats */}
-              <div className="mt-3 grid grid-cols-2 border-t pt-3">
+              <div className="mt-3 grid grid-cols-2 border-t border-border/50 pt-3">
                 <div>
                   <p className="text-[10px] text-muted-foreground">Sales</p>
 
@@ -159,7 +207,7 @@ const RankCard = ({ order, podium }: RankCardProps) => {
                   </p>
                 </div>
 
-                <div className="border-l pl-4">
+                <div className="border-l border-border/50 pl-4">
                   <p className="text-[10px] text-muted-foreground">Revenue</p>
 
                   <p className="mt-0.5 text-sm font-semibold">

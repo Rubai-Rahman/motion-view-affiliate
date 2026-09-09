@@ -94,7 +94,7 @@ const LoginContainer = () => {
           </div>
         </div>
       </div>
-      <div className="relative hidden lg:block bg-gradient-to-br from-primary/20 via-primary/10 to-secondary/20">
+      <div className="relative hidden lg:block bg-linear-to-br from-primary/20 via-primary/10 to-secondary/20">
         <div className="absolute inset-0 bg-linear-to-t from-background/80 to-transparent" />
         <Image
           src="/images/login.webp"
