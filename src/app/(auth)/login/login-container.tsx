@@ -66,6 +66,7 @@ const LoginContainer = () => {
             {/* Logo */}
             <div className="mb-8 flex items-center justify-center gap-3">
               <Image
+                className="dark:invert"
                 src="/images/logo.webp"
                 alt="Logo"
                 width={140}

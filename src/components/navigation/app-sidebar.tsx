@@ -119,7 +119,13 @@ export function AppSidebar() {
         {/* Logo */}
         <div className="px-4 py-6">
           <div className="flex items-center gap-2.5 ">
-            <Image src="/images/logo.webp" alt="Logo" width={140} height={40} />
+            <Image
+              src="/images/logo.webp"
+              alt="Logo"
+              width={140}
+              height={40}
+              className="dark:invert"
+            />
           </div>
         </div>
 
