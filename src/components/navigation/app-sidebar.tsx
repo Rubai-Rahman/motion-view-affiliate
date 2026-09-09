@@ -90,6 +90,7 @@ export function AppSidebar() {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('phone');
       localStorage.removeItem('name');
+      localStorage.removeItem('affiliateCode');
     }
     await logoutAction();
     router.push('/login');

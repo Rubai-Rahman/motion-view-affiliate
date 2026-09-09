@@ -22,8 +22,13 @@ const LoginContainer = () => {
       if (result.success && result.data) {
         const phone = result.data.user.phone;
         const name = result.data.user.name;
+        const affiliateCode = result.data.user.affiliate_code;
+        console.log('affiliateId in login', affiliateCode);
         if (phone) localStorage.setItem('phone', phone);
         if (name) localStorage.setItem('name', name);
+        if (affiliateCode) {
+          localStorage.setItem('affiliateCode', affiliateCode);
+        }
         toast.add({
           title: 'Login Successful',
           description: result.message || 'Login successful.',

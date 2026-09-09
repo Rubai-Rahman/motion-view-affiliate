@@ -39,6 +39,9 @@ export interface AuthUser {
   email: string;
   phone?: string;
   type: number;
+  address: string;
+  affiliate_code: string;
+  description: string;
 }
 
 export interface AuthSession {

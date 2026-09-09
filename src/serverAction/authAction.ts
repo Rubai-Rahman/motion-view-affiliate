@@ -73,6 +73,9 @@ function createAuthSession(
     email: string;
     phone?: string;
     type: number;
+    address: string;
+    affiliate_code: string;
+    description: string;
   },
   token: string,
 ): AuthSession {
@@ -83,6 +86,9 @@ function createAuthSession(
       email: user.email,
       ...(user.phone ? { phone: user.phone } : {}),
       type: user.type,
+      address: user.address,
+      affiliate_code: user.affiliate_code,
+      description: user.description,
     },
     accessToken: token,
     expiresAt: Date.now() + 1000 * 60 * 60 * 24 * 7,
@@ -130,6 +136,9 @@ export async function loginAction(
         email: result.data.data.email,
         phone: result.data.data.phone,
         type: result.data.data.type,
+        address: result.data.data.address,
+        affiliate_code: result.data.data.affiliate_code,
+        description: result.data.data.description,
       },
       result.data.token,
     ),
