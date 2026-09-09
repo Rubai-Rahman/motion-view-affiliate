@@ -208,7 +208,7 @@ export default function AffiliateLinkContainer() {
             className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
           >
             <Plus className="h-4 w-4 mr-2" />
-            Create Affiliate Link
+            Generate Affiliate Link
           </Button>
         </CardContent>
       </Card>
