@@ -87,7 +87,7 @@ const ReportsContainer = () => {
         <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="space-y-2">
             <h1 className="text-4xl font-bold bg-linear-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-              Payment Reports
+              Reports
             </h1>
             <p className="text-sm text-muted-foreground">
               Track your withdrawal history and manage your balance

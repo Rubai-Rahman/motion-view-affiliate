@@ -13,3 +13,14 @@ export const transactionTypeOptions = [
   { value: 4, label: 'Refund' },
   { value: 5, label: 'Adjustment' },
 ];
+
+export const orderTypeOptions = [
+  { value: 0, label: 'Pending' },
+  { value: 1, label: 'Approved' },
+  { value: 2, label: 'Shipped' },
+  { value: 3, label: 'Delivered' },
+  { value: 4, label: 'Walleted' },
+  { value: 5, label: 'Cancelled' },
+  { value: 6, label: 'Returned' },
+  { value: 7, label: 'Refunded' },
+];

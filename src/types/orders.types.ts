@@ -1,4 +1,4 @@
-import { Paginated } from './reports.types';
+import { RequestPagination } from './payment.types';
 
 /* -------------------------------------------------------------------------- */
 /* Orders                                                                     */
@@ -20,7 +20,8 @@ export interface OrderItem {
 export interface OrderListApiResponse {
   success: boolean;
   message: string;
-  data: Paginated<OrderItem>;
+  data: OrderItem[];
+  pagination: RequestPagination;
 }
 
 export interface OrderFilters {

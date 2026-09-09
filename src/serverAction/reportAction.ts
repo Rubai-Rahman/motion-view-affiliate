@@ -9,7 +9,6 @@ import {
   WithdrawRequestListApiResponse,
   WithdrawRequestResponse,
 } from '@/types/payment.types';
-import { OrderListApiResponse } from '@/types/orders.types';
 import { AccountServerResponse } from '@/types/dashboard.types';
 import { TransactionListApiResponse } from '@/types/reports.types';
 
@@ -146,39 +145,4 @@ export const submitWithdrawRequest = async (
   }
 
   return result.data;
-};
-
-export const getOrderListData = async (params?: {
-  page?: number;
-  from_date?: string;
-  to_date?: string;
-  status?: string;
-}) => {
-  const searchParams = new URLSearchParams();
-
-  if (params?.page && params.page > 1) {
-    searchParams.set('page', String(params.page));
-  }
-  if (params?.from_date) searchParams.set('from_date', params.from_date);
-  if (params?.to_date) searchParams.set('to_date', params.to_date);
-  if (params?.status && params.status !== 'all') {
-    searchParams.set('status', params.status);
-  }
-
-  const queryString = searchParams.toString();
-  const endpoint = queryString ? `/order-list?${queryString}` : `/order-list`;
-
-  const result = await apiGet<OrderListApiResponse>(endpoint);
-
-  if (!result.success) {
-    return {
-      success: false,
-      error: result.error,
-    };
-  }
-
-  return {
-    success: true,
-    data: result.data,
-  };
 };
