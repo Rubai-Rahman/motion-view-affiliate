@@ -16,6 +16,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Motion View Affiliate',
   description: 'Affiliate program for Motion View',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RootLayout({
