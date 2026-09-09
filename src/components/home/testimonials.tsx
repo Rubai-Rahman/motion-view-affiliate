@@ -82,7 +82,7 @@ export function Testimonials() {
 
                 {/* Quote text */}
                 <p className="mt-5 text-[15px] leading-[1.8] text-muted-foreground">
-                  "{item.quote}"
+                  &#34;{item.quote}&#34;
                 </p>
 
                 {/* Stat */}
