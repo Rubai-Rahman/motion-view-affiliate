@@ -79,7 +79,7 @@ function NavItem({
               className={cn(
                 'size-4 shrink-0 transition-colors',
                 isActive
-                  ? 'text-primary'
+                  ? 'text-secondary'
                   : 'text-muted-foreground group-hover:text-foreground',
               )}
             />
@@ -110,7 +110,7 @@ export function AppSidebar() {
   return (
     <Sidebar
       collapsible="icon"
-      className="border-r border-border/50 bg-linear-to-br from-sidebar via-sidebar to-primary/5"
+      className="border border-border/50 bg-linear-to-br from-sidebar via-sidebar to-primary/5"
     >
       <SidebarContent className="bg-transparent">
         {/* Logo */}
