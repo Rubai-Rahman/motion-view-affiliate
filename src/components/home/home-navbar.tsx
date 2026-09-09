@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useTransform,
-} from 'motion/react';
+import { AnimatePresence, motion, useTransform, useScroll } from 'motion/react';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -34,7 +29,7 @@ const links: { label: string; target: string }[] = [
 export function HomeNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const scrollY = useMotionValue(0);
+  const { scrollY } = useScroll();
 
   const bgOpacity = useTransform(scrollY, [0, 100], [0, 1]);
 
@@ -44,12 +39,18 @@ export function HomeNavbar() {
   /* Smooth section navigation without hash                                  */
   /* ---------------------------------------------------------------------- */
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    target: string,
+  ) => {
     e.preventDefault();
 
     setMobileOpen(false);
 
-    // scrollTo(target);
+    const element = document.querySelector(target);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   /* ---------------------------------------------------------------------- */
@@ -59,11 +60,7 @@ export function HomeNavbar() {
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
-    // if (lenis) {
-    //   lenis.scrollTo(0, {
-    //     duration: 1.6,
-    //   });
-    // }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -159,7 +156,7 @@ export function HomeNavbar() {
             <motion.a
               key={label}
               href={target}
-              onClick={(e) => handleNavClick(e)}
+              onClick={(e) => handleNavClick(e, target)}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -303,7 +300,7 @@ export function HomeNavbar() {
                 <motion.a
                   key={label}
                   href={target}
-                  onClick={(e) => handleNavClick(e)}
+                  onClick={(e) => handleNavClick(e, target)}
                   initial={{
                     opacity: 0,
                     x: -15,
@@ -325,7 +322,10 @@ export function HomeNavbar() {
 
               <div className="mt-3 flex gap-2 border-t border-border px-4 pt-3">
                 <Link
-                  className="flex-1 border-border bg-transparent text-muted-foreground"
+                  className={cn(
+                    buttonVariants({ variant: 'outline' }),
+                    'flex-1',
+                  )}
                   href="/login"
                   onClick={() => setMobileOpen(false)}
                 >
@@ -333,7 +333,10 @@ export function HomeNavbar() {
                 </Link>
 
                 <Link
-                  className="flex-1 bg-secondary text-secondary-foreground"
+                  className={cn(
+                    buttonVariants({ variant: 'secondary' }),
+                    'flex-1',
+                  )}
                   href="/signup"
                   onClick={() => setMobileOpen(false)}
                 >
