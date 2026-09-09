@@ -53,7 +53,7 @@ const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
   } = useForm<WithdrawFormValues>({
     resolver: zodResolver(withdrawSchema),
     defaultValues: {
-      paymentMethod: 0,
+      paymentMethod: 1,
       amount: 0,
       accountNo: '',
       accountDetails: '',
@@ -128,7 +128,7 @@ const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
               <FormField
                 control={control}
                 name="amount"
-                label="Amount"
+                label="Withdraw Amount"
                 render={(field) => (
                   <Input
                     {...field}
