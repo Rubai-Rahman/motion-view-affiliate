@@ -29,6 +29,13 @@ import {
   SelectValue,
 } from '../ui/select';
 import { paymentMethods } from '@/constants/withdraw.constant';
+import { Info } from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 const withdrawSchema = z.object({
   paymentMethod: z.number().min(1, 'Payment method is required'),
@@ -147,6 +154,21 @@ const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
                 control={control}
                 name="accountNo"
                 label="Account Number"
+                labelExtra={
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Info className="ml-2 size-4 text-muted-foreground cursor-help" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>
+                          Please include branch name and other details if bank
+                          account is selected
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                }
                 render={(field) => (
                   <Input
                     {...field}
@@ -157,7 +179,6 @@ const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
                   />
                 )}
               />
-
               {/* Account Details */}
               <div className="md:col-span-2">
                 <FormField
