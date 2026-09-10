@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import HomePage from '@/components/home/home';
 
 export const metadata: Metadata = {
-  title: 'Home',
-  description: 'Home page',
+  title: 'Motion View Affiliate',
+  description: 'Motion View Affiliate',
 };
 
 const Home = () => {
