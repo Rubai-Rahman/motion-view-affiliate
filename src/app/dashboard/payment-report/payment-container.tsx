@@ -61,7 +61,12 @@ const PaymentContainer = () => {
     isPending: isWithdrawalPending,
     isError: isWithdrawalError,
   } = useQuery({
-    queryKey: ['withdraw-request-list', filters, pagination],
+    queryKey: [
+      'withdraw-request-list',
+      filters.status,
+      filters.to_date,
+      pagination,
+    ],
     queryFn: () =>
       getWithdrawRequestListData({
         filters,

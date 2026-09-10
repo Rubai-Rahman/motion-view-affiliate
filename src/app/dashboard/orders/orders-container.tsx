@@ -32,7 +32,7 @@ const OrdersContainer = () => {
     isPending,
     isError,
   } = useQuery({
-    queryKey: ['order-list', filters, pagination],
+    queryKey: ['order-list', filters.status, filters.to_date, pagination],
     queryFn: () =>
       getOrderListData({
         from_date: filters.from_date,

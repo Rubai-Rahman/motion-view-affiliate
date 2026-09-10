@@ -29,7 +29,12 @@ const ReportsContainer = () => {
     isPending: isTransactionsPending,
     isError: isTransactionsError,
   } = useQuery({
-    queryKey: ['wallet-transaction-history', filters, pagination],
+    queryKey: [
+      'wallet-transaction-history',
+      filters.to_date,
+      filters.type,
+      pagination,
+    ],
     queryFn: () =>
       getWalletTransactionHistoryData({
         from_date: filters.from_date,
