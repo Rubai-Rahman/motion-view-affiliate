@@ -261,14 +261,18 @@ const WithdrawForm = ({
                 Cancel
               </DialogClose>
 
-              <Button
-                type="submit"
-                disabled={submitting}
-                isLoading={submitting}
-                className="min-w-32"
-              >
-                {submitting ? 'Processing...' : 'Submit Withdrawal'}
-              </Button>
+              <DialogClose
+                render={
+                  <Button
+                    type="submit"
+                    disabled={submitting}
+                    isLoading={submitting}
+                    className="min-w-32"
+                  >
+                    {submitting ? 'Processing...' : 'Submit Withdrawal'}
+                  </Button>
+                }
+              />
             </div>
           </FieldGroup>
         </form>
