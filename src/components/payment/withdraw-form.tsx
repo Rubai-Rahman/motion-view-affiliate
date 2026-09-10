@@ -133,6 +133,7 @@ const WithdrawForm = ({
                   control={control}
                   name="amount"
                   label="Withdraw Amount"
+                  required
                   labelExtra={
                     <TooltipProvider>
                       <Tooltip>
@@ -175,6 +176,7 @@ const WithdrawForm = ({
                   control={control}
                   name="paymentMethod"
                   label="Payment Method"
+                  required
                   render={(field) => (
                     <Select
                       value={String(field.value)}
@@ -206,6 +208,7 @@ const WithdrawForm = ({
                   control={control}
                   name="accountNo"
                   label="Account Number"
+                  required
                   render={(field) => (
                     <Input
                       {...field}

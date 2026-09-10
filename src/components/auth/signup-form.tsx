@@ -110,6 +110,7 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
           control={control}
           name="name"
           label="Full Name"
+          required
           render={(field) => (
             <Input
               {...field}
@@ -125,6 +126,7 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
           control={control}
           name="email"
           label="Email"
+          required
           render={(field) => (
             <Input
               {...field}
@@ -140,6 +142,7 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
           control={control}
           name="phone"
           label="Phone Number"
+          required
           render={(field) => (
             <Input
               {...field}
@@ -155,6 +158,7 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
           control={control}
           name="type"
           label="Account Type"
+          required
           render={(field) => (
             <Select
               value={String(field.value)}
@@ -184,6 +188,7 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
           control={control}
           name="address"
           label="Address"
+          required
           render={(field) => (
             <Textarea
               {...field}
@@ -211,6 +216,7 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
           control={control}
           name="password"
           label="Password"
+          required
           render={(field) => (
             <PasswordInput
               {...field}
@@ -224,6 +230,7 @@ export function SignupForm({ onSubmit, isPending = false }: SignupFormProps) {
           control={control}
           name="passwordConfirmation"
           label="Confirm Password"
+          required
           render={(field) => (
             <PasswordInput
               {...field}

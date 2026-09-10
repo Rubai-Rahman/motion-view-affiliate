@@ -1,4 +1,3 @@
-// components/form-field.tsx
 'use client';
 
 import {
@@ -15,7 +14,8 @@ type FormFieldProps<TFieldValues extends FieldValues> = {
   control: Control<TFieldValues>;
   name: FieldPath<TFieldValues>;
   label?: React.ReactNode;
-  labelExtra?: React.ReactNode; // e.g. "Forgot password?" link
+  labelExtra?: React.ReactNode;
+  required?: boolean;
   render: (
     field: ControllerRenderProps<TFieldValues, FieldPath<TFieldValues>>,
   ) => React.ReactNode;
@@ -26,6 +26,7 @@ export function FormField<TFieldValues extends FieldValues>({
   name,
   label,
   labelExtra,
+  required = false,
   render,
 }: FormFieldProps<TFieldValues>) {
   return (
@@ -36,7 +37,13 @@ export function FormField<TFieldValues extends FieldValues>({
         <Field>
           {(label || labelExtra) && (
             <div className="flex items-center">
-              {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
+              {label && (
+                <FieldLabel htmlFor={name}>
+                  {label}
+                  {required && <span className="ml-1 text-destructive">*</span>}
+                </FieldLabel>
+              )}
+
               {labelExtra}
             </div>
           )}

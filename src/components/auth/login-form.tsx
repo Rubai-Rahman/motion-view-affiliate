@@ -83,6 +83,7 @@ export function LoginForm({ onSubmit, isPending = false }: LogInProps) {
           control={control}
           name="identifier"
           label="Email or Phone Number"
+          required
           render={(field) => (
             <Input
               {...field}
@@ -98,6 +99,7 @@ export function LoginForm({ onSubmit, isPending = false }: LogInProps) {
           control={control}
           name="password"
           label="Password"
+          required
           labelExtra={
             <Link
               href="/forgot-password"
