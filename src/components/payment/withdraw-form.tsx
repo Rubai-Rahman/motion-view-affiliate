@@ -36,22 +36,34 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useState } from 'react';
 
 const createWithdrawSchema = (balance: number) =>
-  z.object({
-    paymentMethod: z.number().min(1, 'Payment method is required'),
+  z
+    .object({
+      paymentMethod: z.number().min(1, 'Payment method is required'),
 
-    amount: z
-      .number()
-      .min(1, 'Amount is required')
-      .max(balance, `Amount cannot exceed your balance of ${balance}`),
+      amount: z
+        .number()
+        .min(1, 'Amount is required')
+        .max(balance, `Amount cannot exceed your balance of ${balance}`),
 
-    accountNo: z.string().min(1, 'Account number is required'),
+      accountNo: z.string().min(1, 'Account number is required'),
 
-    accountDetails: z.string().optional(),
+      accountDetails: z.string().optional(),
 
-    affiliateNote: z.string().optional(),
-  });
+      affiliateNote: z.string().optional(),
+    })
+    .superRefine((data, ctx) => {
+      if (data.paymentMethod === 4 && !data.accountDetails?.trim()) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['accountDetails'],
+          message:
+            'Account details are required for Bank Payment Method. Please add account details',
+        });
+      }
+    });
 
 type WithdrawFormValues = z.infer<ReturnType<typeof createWithdrawSchema>>;
 
@@ -66,6 +78,7 @@ const WithdrawForm = ({
   isPending = false,
   balance,
 }: WithdrawFormProps) => {
+  const [open, setOpen] = useState(false);
   const withdrawSchema = createWithdrawSchema(balance ?? 0);
   const {
     control,
@@ -93,12 +106,13 @@ const WithdrawForm = ({
       affiliate_note: formData.affiliateNote,
     };
     onSubmit(payload);
+    setOpen(false);
   };
 
   const submitting = isSubmitting || isPending;
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button>Request Withdraw</Button>} />
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
@@ -192,21 +206,6 @@ const WithdrawForm = ({
                   control={control}
                   name="accountNo"
                   label="Account Number"
-                  labelExtra={
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Info className="ml-2 size-4 text-destructive cursor-help" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>
-                            Please include branch name and other details if bank
-                            account is selected
-                          </p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  }
                   render={(field) => (
                     <Input
                       {...field}
@@ -261,18 +260,14 @@ const WithdrawForm = ({
                 Cancel
               </DialogClose>
 
-              <DialogClose
-                render={
-                  <Button
-                    type="submit"
-                    disabled={submitting}
-                    isLoading={submitting}
-                    className="min-w-32"
-                  >
-                    {submitting ? 'Processing...' : 'Submit Withdrawal'}
-                  </Button>
-                }
-              />
+              <Button
+                type="submit"
+                disabled={submitting}
+                isLoading={submitting}
+                className="min-w-32"
+              >
+                {submitting ? 'Processing...' : 'Submit Withdrawal'}
+              </Button>
             </div>
           </FieldGroup>
         </form>
