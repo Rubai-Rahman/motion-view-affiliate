@@ -64,7 +64,11 @@ const Balance = ({
               Ready for withdrawal
             </p>
           </div>
-          <WithdrawForm onSubmit={handleWithdraw} isPending={isWithdrawing} />
+          <WithdrawForm
+            onSubmit={handleWithdraw}
+            isPending={isWithdrawing}
+            balance={balanceData?.data?.balance ?? null}
+          />
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="relative">

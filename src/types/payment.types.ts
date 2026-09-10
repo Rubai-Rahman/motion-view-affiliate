@@ -9,7 +9,7 @@ export interface WithdrawPayload {
 export interface BalanceInquiryResponse {
   success: boolean;
   message: string;
-  balance: string | number;
+  balance: number;
 }
 
 export interface WithdrawRequestItem {

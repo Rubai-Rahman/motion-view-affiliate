@@ -37,22 +37,36 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 
-const withdrawSchema = z.object({
-  paymentMethod: z.number().min(1, 'Payment method is required'),
-  amount: z.number().min(1, 'Amount is required'),
-  accountNo: z.string().min(1, 'Account number is required'),
-  accountDetails: z.string().optional(),
-  affiliateNote: z.string().optional(),
-});
+const createWithdrawSchema = (balance: number) =>
+  z.object({
+    paymentMethod: z.number().min(1, 'Payment method is required'),
 
-type WithdrawFormValues = z.infer<typeof withdrawSchema>;
+    amount: z
+      .number()
+      .min(1, 'Amount is required')
+      .max(balance, `Amount cannot exceed your balance of ${balance}`),
+
+    accountNo: z.string().min(1, 'Account number is required'),
+
+    accountDetails: z.string().optional(),
+
+    affiliateNote: z.string().optional(),
+  });
+
+type WithdrawFormValues = z.infer<ReturnType<typeof createWithdrawSchema>>;
 
 type WithdrawFormProps = {
   onSubmit: (data: WithdrawPayload) => void;
   isPending?: boolean;
+  balance: number | null;
 };
 
-const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
+const WithdrawForm = ({
+  onSubmit,
+  isPending = false,
+  balance,
+}: WithdrawFormProps) => {
+  const withdrawSchema = createWithdrawSchema(balance ?? 0);
   const {
     control,
     handleSubmit,
@@ -99,86 +113,111 @@ const WithdrawForm = ({ onSubmit, isPending = false }: WithdrawFormProps) => {
 
         <form onSubmit={handleSubmit(onSubmitHandler)} className="mt-2">
           <FieldGroup>
-            <div className="grid grid-cols-1 gap-5">
-              {/* Payment Method */}
-              <FormField
-                control={control}
-                name="paymentMethod"
-                label="Payment Method"
-                render={(field) => (
-                  <Select
-                    value={String(field.value)}
-                    onValueChange={(value) => field.onChange(Number(value))}
-                  >
-                    <SelectTrigger id="paymentMethod" className="h-10 w-full">
-                      <SelectValue placeholder="Select payment method">
-                        {
-                          paymentMethods.find(
-                            (method) => method.value === field.value,
-                          )?.label
-                        }
-                      </SelectValue>
-                    </SelectTrigger>
+            <div className="grid grid-cols-2 gap-5">
+              <div className="col-span-2 grid w-full grid-cols-2 gap-5">
+                <FormField
+                  control={control}
+                  name="amount"
+                  label="Withdraw Amount"
+                  labelExtra={
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Info className="ml-2 size-4 text-destructive cursor-help" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{`Maximum withdrawal amount can not be more than ${balance} BDT`}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  }
+                  render={(field) => (
+                    <Input
+                      {...field}
+                      id="amount"
+                      type="number"
+                      min={1}
+                      max={balance ?? 0}
+                      placeholder="Enter withdrawal amount"
+                      autoComplete="off"
+                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                    />
+                  )}
+                />
 
-                    <SelectContent>
-                      {paymentMethods.map((method) => (
-                        <SelectItem key={method.value} value={method.value}>
-                          {method.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                )}
-              />
+                <div className="mt-6 flex h-8 items-center justify-between rounded-lg border p-2 bg-background">
+                  <span className="text-sm text-muted-foreground">
+                    Available balance
+                  </span>
 
-              {/* Amount */}
-              <FormField
-                control={control}
-                name="amount"
-                label="Withdraw Amount"
-                render={(field) => (
-                  <Input
-                    {...field}
-                    id="amount"
-                    type="number"
-                    min={1}
-                    placeholder="Enter withdrawal amount"
-                    autoComplete="off"
-                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  />
-                )}
-              />
+                  <span className="text-sm font-semibold">
+                    ৳{(balance ?? 0).toLocaleString()}
+                  </span>
+                </div>
+              </div>
+              <div className="col-span-2 grid grid-cols-2 gap-x-4">
+                {/* Payment Method */}
+                <FormField
+                  control={control}
+                  name="paymentMethod"
+                  label="Payment Method"
+                  render={(field) => (
+                    <Select
+                      value={String(field.value)}
+                      onValueChange={(value) => field.onChange(Number(value))}
+                    >
+                      <SelectTrigger id="paymentMethod" className="h-10 w-full">
+                        <SelectValue placeholder="Select payment method">
+                          {
+                            paymentMethods.find(
+                              (method) => method.value === field.value,
+                            )?.label
+                          }
+                        </SelectValue>
+                      </SelectTrigger>
 
-              {/* Account Number */}
-              <FormField
-                control={control}
-                name="accountNo"
-                label="Account Number"
-                labelExtra={
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Info className="ml-2 size-4 text-muted-foreground cursor-help" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>
-                          Please include branch name and other details if bank
-                          account is selected
-                        </p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                }
-                render={(field) => (
-                  <Input
-                    {...field}
-                    id="accountNo"
-                    type="text"
-                    placeholder="Enter account number"
-                    autoComplete="off"
-                  />
-                )}
-              />
+                      <SelectContent>
+                        {paymentMethods.map((method) => (
+                          <SelectItem key={method.value} value={method.value}>
+                            {method.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+
+                {/* Account Number */}
+                <FormField
+                  control={control}
+                  name="accountNo"
+                  label="Account Number"
+                  labelExtra={
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Info className="ml-2 size-4 text-destructive cursor-help" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>
+                            Please include branch name and other details if bank
+                            account is selected
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  }
+                  render={(field) => (
+                    <Input
+                      {...field}
+                      id="accountNo"
+                      type="text"
+                      placeholder="Enter account number"
+                      autoComplete="off"
+                    />
+                  )}
+                />
+              </div>
               {/* Account Details */}
               <div className="md:col-span-2">
                 <FormField
