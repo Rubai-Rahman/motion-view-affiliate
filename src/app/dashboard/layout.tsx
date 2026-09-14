@@ -1,19 +1,12 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { Menu, Moon, Sun } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-
-import { useTheme } from 'next-themes';
 import { AppSidebar } from '@/components/navigation/app-sidebar';
+import { ModeToggle } from '@/components/common/theme-toggle';
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
-  const { theme, setTheme } = useTheme();
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-linear-to-br from-background via-background to-muted/20">
@@ -29,18 +22,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               </SidebarTrigger>
 
               {/* Theme Toggle */}
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="flex size-9 items-center justify-center rounded-lg transition-all duration-200 hover:bg-primary/10 hover:scale-105 border border-border/50"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="size-5 text-amber-400" />
-                ) : (
-                  <Moon className="size-5 text-primary" />
-                )}
-              </button>
+              <ModeToggle />
             </div>
           </header>
 

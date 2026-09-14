@@ -30,7 +30,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { logoutAction } from '@/serverAction/authAction';
-import useLocalStorage from '@/hooks/useSyncExterna';
+import { useSyncExterna } from '@/hooks';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
@@ -96,8 +96,8 @@ function NavItem({
 
 export function AppSidebar() {
   const router = useRouter();
-  const name = useLocalStorage('name');
-  const profilePicture = useLocalStorage('profilePicture');
+  const name = useSyncExterna('name');
+  const profilePicture = useSyncExterna('profilePicture');
   console.log('profilePicture', profilePicture);
   const handleLogout = async () => {
     if (typeof window !== 'undefined') {

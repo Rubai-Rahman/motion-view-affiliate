@@ -3,16 +3,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-  Link2,
-  Copy,
-  CheckCircle,
-  Plus,
-  AlertCircle,
-  Trash2,
-} from 'lucide-react';
+import { Link2, Copy, CheckCircle, AlertCircle, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import useLocalStorage from '@/hooks/useSyncExterna';
+import { useLocalStorage, useSyncExterna } from '@/hooks';
 import { toast } from '@/components/ui/toast';
 
 interface AffiliateLink {
@@ -29,16 +22,6 @@ const STRIPPED_PATH_SEGMENTS = ['campaign'];
 // Query params we never want to keep in the final affiliate link.
 const STRIPPED_QUERY_PARAMS = ['campaign_id', 'campaign'];
 
-/**
- * Takes a raw destination URL (e.g. a product page the user pasted) and:
- *  1. Removes tracking-only path segments like "/campaign/"
- *  2. Removes tracking-only query params like "?campaign_id=67"
- *  3. Appends/overwrites a "ref" query param with the affiliate code
- *
- * Example:
- *  in:  https://motionview.com.bd/product/campaign/foneng-combo-bl138-earbuds-px150-powerbank?campaign_id=67
- *  out: https://motionview.com.bd/product/foneng-combo-bl138-earbuds-px150-powerbank?ref=johndoe
- */
 function buildAffiliateLink(
   rawUrl: string,
   affiliateCode: string,
@@ -70,12 +53,12 @@ export default function AffiliateLinkContainer() {
   const [newLinkName, setNewLinkName] = useState('');
   const [destinationUrl, setDestinationUrl] = useState('');
   const [urlError, setUrlError] = useState('');
-  const [links, setLinks] = useState<AffiliateLink[]>([]);
+  const [links, setLinks] = useLocalStorage<AffiliateLink[]>(
+    'affiliateLinks',
+    [],
+  );
 
-  // Adjust this destructure if your useLocalStorage hook has a different
-  // return shape. Common shapes are `const [value, setValue] = useLocalStorage(...)`
-  // or `const value = useLocalStorage(...)`.
-  const affiliateCode = useLocalStorage('affiliateCode');
+  const affiliateCode = useSyncExterna('affiliateCode');
 
   const previewLink = destinationUrl
     ? buildAffiliateLink(destinationUrl, affiliateCode)
@@ -100,7 +83,6 @@ export default function AffiliateLinkContainer() {
 
   const handleCreateLink = () => {
     if (!destinationUrl.trim()) return;
-
     const generatedUrl = buildAffiliateLink(destinationUrl, affiliateCode);
 
     if (!generatedUrl) {
@@ -196,20 +178,20 @@ export default function AffiliateLinkContainer() {
             <p className="text-sm text-gray-700 dark:text-gray-300">
               <strong>Preview:</strong> Your link will look like:
             </p>
-            <p className="text-sm font-mono text-blue-600 dark:text-blue-400 mt-1 break-all">
-              {previewLink ||
-                `https://your-pasted-link.com?ref=${affiliateCode}`}
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-mono text-blue-600 dark:text-blue-400 mt-1 break-all">
+                {previewLink ||
+                  `https://your-pasted-link.com?ref=${affiliateCode}`}
+              </p>
+              <Button
+                onClick={handleCreateLink}
+                disabled={!destinationUrl.trim()}
+                className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Create Link
+              </Button>
+            </div>
           </div>
-
-          <Button
-            onClick={handleCreateLink}
-            disabled={!destinationUrl.trim()}
-            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Generate Affiliate Link
-          </Button>
         </CardContent>
       </Card>
 
