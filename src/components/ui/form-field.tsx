@@ -36,11 +36,13 @@ export function FormField<TFieldValues extends FieldValues>({
       render={({ field, fieldState }) => (
         <Field>
           {(label || labelExtra) && (
-            <div className="flex items-center">
+            <div className="flex place-items-end-safe">
               {label && (
                 <FieldLabel htmlFor={name}>
                   {label}
-                  {required && <span className="ml-1 text-destructive">*</span>}
+                  {required && (
+                    <span className="relative top-1.5 text-destructive">*</span>
+                  )}
                 </FieldLabel>
               )}
 
