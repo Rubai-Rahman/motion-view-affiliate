@@ -11,40 +11,40 @@ import { ease, SectionHeading } from './motion-primitives';
 
 const faqs = [
   {
-    question: 'Motion View Affiliate Program কী?',
-    bangla: 'সহজভাবে শুরু করার নিয়ম',
+    question: 'What is Motion View Affiliate?',
+    sub: 'Understanding the program',
     answer:
-      'Motion View Affiliate Program-এর মাধ্যমে creators এবং publishers unique trackable link ব্যবহার করে Motion View-এর পণ্য প্রচার করতে পারেন এবং qualifying purchase থেকে কমিশন আয় করতে পারেন।',
+      'Motion View Affiliate is an affiliate program that allows eligible participants to promote selected Motion View products through unique affiliate links and earn commission from qualifying sales according to the applicable program terms. You join, generate links, promote products to your audience, and earn from sales you help generate.',
   },
   {
-    question: 'কীভাবে Affiliate হবো?',
-    bangla: 'আজই আপনার journey শুরু করুন',
+    question: 'How can I earn money with Motion View Affiliate?',
+    sub: 'Your path to commission',
     answer:
-      'একটি affiliate account তৈরি করুন, প্রয়োজনীয় তথ্য দিন এবং onboarding process সম্পন্ন করুন।',
+      'Join the program, choose eligible products, create your affiliate links, and promote them through permitted marketing channels. Qualifying purchases attributed to your affiliate activity generate commission under the program&apos;s current rules. The more relevant and useful your content, the better your conversion potential.',
   },
   {
-    question: 'Affiliate Link কীভাবে কাজ করে?',
-    bangla: 'প্রতিটি click-এর হিসাব থাকুক',
+    question: 'Do I need a website to join the affiliate program?',
+    sub: 'Multiple channels welcome',
     answer:
-      'প্রতিটি affiliate নিজের unique link তৈরি করতে পারেন। আপনার audience সেই link দিয়ে এলে eligible activity আপনার account-এর সাথে যুক্ত হয়।',
+      'A website can provide a strong platform for SEO and long-term content marketing, but affiliate promotion can also work through social media, video platforms, online communities, and other permitted channels. Check the current Motion View Affiliate requirements before applying to confirm eligible promotional methods.',
   },
   {
-    question: 'কখন কমিশন পাবো?',
-    bangla: 'সফল অর্ডারেই আয়',
+    question: 'What products can I promote?',
+    sub: 'Eligible product catalog',
     answer:
-      'Motion View-এর প্রযোজ্য affiliate terms এবং attribution rules অনুযায়ী qualifying purchase হলে commission যুক্ত হয়।',
+      'You can promote products that the Motion View Affiliate platform currently makes eligible for affiliate marketing. This includes smart gadgets, electronics, and eco products from the Motion View catalog. Check your affiliate account for the latest available products, categories, and applicable conditions. Visit motionview.com.bd to explore the full range.',
   },
   {
-    question: 'আমার আয় কীভাবে দেখবো?',
-    bangla: 'Dashboard-এ সবকিছু এক নজরে',
+    question: 'Is Motion View Affiliate suitable for beginners?',
+    sub: 'Getting started as a new creator',
     answer:
-      'আপনার affiliate dashboard-এ clicks, orders, conversions এবং commission performance-এর সম্পূর্ণ চিত্র দেখা যাবে।',
+      'Beginners can explore affiliate marketing through the program, especially those who already create technology, gadget, lifestyle, deal, or shopping-related content. You don\'t need a massive following — audience relevance and trust can matter more than follower count. Learning content creation, SEO, and conversion-focused promotion will improve your results over time.',
   },
   {
-    question: 'কীভাবে টাকা উত্তোলন করবো?',
-    bangla: 'সহজ ও স্বচ্ছ withdrawal',
+    question: 'How much can I earn from Motion View Affiliate?',
+    sub: 'Earnings potential',
     answer:
-      'Available withdrawal methods, verification requirements এবং processing timeline প্রযোজ্য affiliate terms অনুযায়ী নির্ধারিত হবে।',
+      'Affiliate earnings can vary based on eligible commission rates, qualifying sales, product selection, traffic quality, audience intent, and your promotional strategy. There is no fixed cap — your income scales with the quality and volume of the affiliate sales you generate. Review the affiliate dashboard and official program conditions for current commission and payment information.',
   },
 ];
 
@@ -63,28 +63,51 @@ export function FAQ() {
           <div className="lg:sticky lg:top-28">
             <SectionHeading
               eyebrow="FAQ"
-              title="শুরু করার আগে কিছু জানতে চান?"
-              bangla="সবচেয়ে গুরুত্বপূর্ণ উত্তরগুলো এক জায়গায়।"
-              description="আপনার প্রশ্নের উত্তর না পেলে আমাদের support team সবসময় আপনার পাশে আছে।"
+              title="Frequently asked questions"
+              description="Everything you need to know before starting your affiliate journey with Motion View."
             />
 
             {/* Quick stats */}
             <div className="mt-10 grid grid-cols-2 gap-3">
               {[
-                ['6+', 'Common questions answered'],
+                ['6+', 'Questions answered'],
                 ['24/7', 'Support available'],
               ].map(([val, label]) => (
                 <div
                   key={label}
                   className="rounded-xl border border-border bg-secondary-background p-4"
                 >
-                  <p className="text-2xl font-semibold text-secondary-background-foreground">
+                  <p className="text-2xl font-semibold text-foreground">
                     {val}
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">{label}</p>
                 </div>
               ))}
             </div>
+
+            {/* Support link */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, ease }}
+              className="mt-5 rounded-xl border border-secondary/20 bg-secondary/5 p-4"
+            >
+              <p className="text-xs font-medium text-foreground">
+                Still have questions?
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Our support team is ready to help you get started.
+              </p>
+              <a
+                href="https://motionview.com.bd/contact"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-secondary hover:underline"
+              >
+                Contact Support →
+              </a>
+            </motion.div>
           </div>
 
           {/* Right — accordion */}
@@ -104,11 +127,11 @@ export function FAQ() {
                   >
                     <AccordionTrigger className="py-5 text-left hover:no-underline data-[state=open]:text-secondary">
                       <div className="pr-4">
-                        <p className="font-medium text-secondary-background data-[state=open]:text-secondary">
+                        <p className="font-medium text-foreground data-[state=open]:text-secondary">
                           {faq.question}
                         </p>
                         <p className="mt-0.5 text-xs font-medium text-secondary">
-                          {faq.bangla}
+                          {faq.sub}
                         </p>
                       </div>
                     </AccordionTrigger>

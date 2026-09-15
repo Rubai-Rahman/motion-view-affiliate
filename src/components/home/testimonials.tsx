@@ -10,9 +10,9 @@ const testimonials = [
   {
     initials: 'TC',
     name: 'Tech Creator',
-    role: 'YouTube • Tech educator',
+    role: 'YouTube · Tech educator',
     quote:
-      'The dashboard makes it easy to see which recommendations are actually converting. Everything is clear and the data is real.',
+      'The dashboard makes it easy to see which recommendations are actually converting. The data is clear and completely transparent.',
     stat: '32% conversion lift',
     color: 'from-violet-500/10 to-transparent',
     avatarBg: 'bg-violet-400/10 text-violet-400',
@@ -20,9 +20,9 @@ const testimonials = [
   {
     initials: 'LC',
     name: 'Lifestyle Creator',
-    role: 'Instagram • Lifestyle creator',
+    role: 'Instagram · Lifestyle creator',
     quote:
-      'I can share products that fit my audience and track every result in one calm workspace. No clutter, no guesswork.',
+      'I can promote products that genuinely fit my audience and track every result in one workspace. No clutter, no guesswork.',
     stat: '৳48K+ earned',
     color: 'from-(--secondary)/10 to-transparent',
     avatarBg: 'bg-(--secondary)/10 text-(--secondary)',
@@ -30,7 +30,7 @@ const testimonials = [
   {
     initials: 'CC',
     name: 'Content Creator',
-    role: 'Facebook • Content creator',
+    role: 'Facebook · Content creator',
     quote:
       'The link tools are simple enough to use between posts, while the numbers stay completely transparent at all times.',
     stat: '12K+ clicks tracked',
@@ -48,9 +48,8 @@ export function Testimonials() {
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
         <SectionHeading
           eyebrow="Creator stories"
-          title="আপনার মতো creators-এর জন্য তৈরি।"
-          bangla="আপনার content-ই আপনার সবচেয়ে বড় asset।"
-          description="নিচের গল্পগুলো example হিসেবে দেখানো হয়েছে; launch-এর আগে verified affiliate feedback দিয়ে replace করুন।"
+          title="Built for creators like you."
+          description="Content creators, marketers, and gadget enthusiasts across Bangladesh are turning their reach into affiliate income with Motion View."
           centered
         />
 
@@ -65,7 +64,7 @@ export function Testimonials() {
             >
               {/* Gradient blob on hover */}
               <div
-                className={`absolute inset-0 bg-bg-linear-to-br ${item.color} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
+                className={`absolute inset-0 bg-linear-to-br ${item.color} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
               />
 
               <div className="relative">
@@ -76,7 +75,7 @@ export function Testimonials() {
                     variant="outline"
                     className="border-border text-[9px] font-normal text-muted-foreground"
                   >
-                    Creator preview
+                    Affiliate preview
                   </Badge>
                 </div>
 
@@ -129,9 +128,9 @@ export function Testimonials() {
           className="mt-14 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground"
         >
           {[
-            '50,000+ customers',
+            '50,000+ happy customers',
             '100,000+ orders delivered',
-            '4.8★ average rating',
+            '4.8★ average customer rating',
           ].map((item) => (
             <div key={item} className="flex items-center gap-2">
               <span className="size-1.5 rounded-full bg-secondary" />

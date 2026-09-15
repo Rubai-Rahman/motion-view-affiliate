@@ -17,20 +17,21 @@ const columns = [
     ],
   },
   {
-    heading: 'Support',
+    heading: 'Affiliate',
     links: [
+      ['Register as Affiliate', '/auth/signup'],
+      ['Affiliate Login', '/auth/login'],
       ['FAQ', '#faq'],
-      ['Contact', '#contact'],
-      ['Login', '/login'],
-      ['Sign Up', '/signup'],
+      ['Terms & Conditions', '/dashboard/terms'],
     ],
   },
   {
-    heading: 'Legal',
+    heading: 'Motion View',
     links: [
-      ['Terms & Conditions', '/terms'],
-      ['Privacy Policy', '/privacy'],
-      ['Affiliate Terms', '/affiliate-terms'],
+      ['Shop Products', 'https://motionview.com.bd'],
+      ['Product Categories', 'https://motionview.com.bd/category'],
+      ['Contact & Support', 'https://motionview.com.bd/contact'],
+      ['Privacy Policy', 'https://motionview.com.bd/privacy-policy'],
     ],
   },
 ];
@@ -41,10 +42,13 @@ export function Footer() {
     href: string,
   ) => {
     if (!href.startsWith('#')) return;
-
     e.preventDefault();
-    // scrollTo(href);
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const isExternal = (href: string) =>
+    href.startsWith('http') || href.startsWith('https');
 
   return (
     <footer className="relative bg-background text-muted">
@@ -67,20 +71,30 @@ export function Footer() {
                 <p className="text-sm font-semibold text-foreground">
                   Motion View
                 </p>
-
                 <p className="text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
-                  Affiliate
+                  Affiliate Program
                 </p>
               </div>
             </motion.div>
 
             <p className="mt-6 max-w-65 text-sm leading-[1.75] text-muted-foreground">
-              Promote products you love. Earn from qualifying sales. Track
-              everything in one place.
+              Promote smart gadgets, electronics, and eco products. Earn commission from qualifying sales.
+              Track everything from one dashboard.
             </p>
 
+            {/* motionview.com.bd link */}
+            <a
+              href="https://motionview.com.bd"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex items-center gap-1.5 text-xs text-secondary hover:underline"
+            >
+              motionview.com.bd
+              <ArrowUpRight className="size-3" />
+            </a>
+
             {/* Status */}
-            <div className="mt-6 flex items-center gap-2">
+            <div className="mt-5 flex items-center gap-2">
               <motion.span
                 animate={{
                   opacity: [0.4, 1, 0.4],
@@ -92,7 +106,6 @@ export function Footer() {
                 }}
                 className="size-2 rounded-full bg-emerald-500"
               />
-
               <span className="text-[11px] text-muted-foreground">
                 All systems operational
               </span>
@@ -109,6 +122,7 @@ export function Footer() {
               <ul className="mt-5 space-y-3">
                 {col.links.map(([label, href], i) => {
                   const isAnchor = href.startsWith('#');
+                  const isExt = isExternal(href);
 
                   return (
                     <motion.li
@@ -128,7 +142,16 @@ export function Footer() {
                           className="group flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
                         >
                           {label}
-
+                          <ArrowUpRight className="size-3 -translate-y-0.5 translate-x-0.5 opacity-0 transition-all group-hover:opacity-100" />
+                        </a>
+                      ) : isExt ? (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                          {label}
                           <ArrowUpRight className="size-3 -translate-y-0.5 translate-x-0.5 opacity-0 transition-all group-hover:opacity-100" />
                         </a>
                       ) : (
@@ -137,7 +160,6 @@ export function Footer() {
                           className="group flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
                         >
                           {label}
-
                           <ArrowUpRight className="size-3 -translate-y-0.5 translate-x-0.5 opacity-0 transition-all group-hover:opacity-100" />
                         </Link>
                       )}
@@ -155,11 +177,16 @@ export function Footer() {
           <p>© {new Date().getFullYear()} Motion View. All rights reserved.</p>
 
           <div className="flex items-center gap-4">
-            <p>Motion View Affiliate Program</p>
-
+            <a
+              href="https://motionview.com.bd"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              motionview.com.bd
+            </a>
             <span className="size-1 rounded-full bg-muted-foreground" />
-
-            <p>Bangladesh</p>
+            <p>Affiliate Program · Bangladesh</p>
           </div>
         </div>
       </div>

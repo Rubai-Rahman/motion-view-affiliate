@@ -3,12 +3,14 @@
 import { HomeNavbar } from './home-navbar';
 import { Hero } from './hero';
 import { TrustStats } from './trust-stats';
+import { AboutProgram } from './about-program';
 import { HowItWorks } from './how-it-works';
 import { Benefits } from './benefits';
 import { Analytics } from './analytics';
 import { CommissionSection } from './commission';
 import { Products } from './products';
 import { Testimonials } from './testimonials';
+import { WhoCanJoin } from './who-can-join';
 import { FAQ } from './faq';
 import { FinalCTA } from './final-cta';
 import { Footer } from './footer';
@@ -21,6 +23,8 @@ export default function HomePage() {
       <Hero />
       <TrustStats />
       <GlowDivider />
+      <AboutProgram />
+      <GlowDivider />
       <HowItWorks />
       <GlowDivider />
       <Benefits />
@@ -29,6 +33,9 @@ export default function HomePage() {
       <CommissionSection />
       <Products />
       <Testimonials />
+      <GlowDivider />
+      <WhoCanJoin />
+      <GlowDivider />
       <FAQ />
       <FinalCTA />
       <Footer />

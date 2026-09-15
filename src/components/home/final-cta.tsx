@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { ease, MagneticButton } from './motion-primitives';
 
 export function FinalCTA() {
-  // const scrollTo = useLenisScrollTo();
   return (
     <section className="relative overflow-hidden bg-background py-28 sm:py-32 lg:py-40">
       {/* Ambient glows */}
@@ -20,7 +19,7 @@ export function FinalCTA() {
       <div className="relative mx-auto max-w-350 px-5 sm:px-8">
         <div className="relative overflow-hidden rounded-[32px] border border-white/8 bg-white/2.5 backdrop-blur-2xl">
           {/* Inner glow border */}
-          <div className="absolute inset-0 rounded-[32px] bg-bg-linear-to-br from-white/4 via-transparent to-secondary/4" />
+          <div className="absolute inset-0 rounded-[32px] bg-linear-to-br from-white/4 via-transparent to-secondary/4" />
 
           {/* Giant background letter */}
           <div
@@ -40,7 +39,7 @@ export function FinalCTA() {
                 transition={{ ease }}
                 className="text-[10px] font-semibold uppercase tracking-[0.22em] text-secondary"
               >
-                Your next revenue stream
+                Start your affiliate journey today
               </motion.p>
 
               <motion.h2
@@ -50,14 +49,14 @@ export function FinalCTA() {
                 transition={{ delay: 0.1, duration: 0.9, ease }}
                 className="mt-5 text-4xl font-semibold tracking-[-0.055em] text-foreground sm:text-5xl lg:text-[62px] lg:leading-[0.97]"
               >
-                আপনার content-এর value আছে।
+                Your content has value.
                 <br />
                 <motion.span
                   animate={{ opacity: [0.65, 1, 0.65] }}
                   transition={{ duration: 3.5, repeat: Infinity }}
                   className="text-secondary"
                 >
-                  এবার সেটিকে কাজে লাগান।
+                  Now put it to work.
                 </motion.span>
               </motion.h2>
 
@@ -68,7 +67,7 @@ export function FinalCTA() {
                 transition={{ delay: 0.2, ease }}
                 className="mt-5 text-base font-medium text-secondary"
               >
-                আপনার content-এর value থেকে নতুন income stream তৈরি করুন।
+                Affiliate marketing works best when useful content connects the right customer with the right product.
               </motion.p>
 
               <motion.p
@@ -78,8 +77,10 @@ export function FinalCTA() {
                 transition={{ delay: 0.25, ease }}
                 className="mt-3 max-w-lg text-base leading-7 text-muted-foreground"
               >
-                Motion View affiliate community-তে যোগ দিন এবং product
-                recommendation-কে measurable income-এ পরিণত করুন।
+                Motion View Affiliate gives Bangladeshi creators, marketers, and gadget enthusiasts
+                an opportunity to turn their reach into potential affiliate income — without managing
+                their own product inventory. Create content that answers real buying questions,
+                recommend relevant products, and build trust with your audience.
               </motion.p>
 
               {/* CTA buttons */}
@@ -97,7 +98,7 @@ export function FinalCTA() {
                   }}
                   className="h-12 bg-secondary px-7 text-secondary-foreground shadow-2xl shadow-secondary/25 hover:bg-secondary"
                 >
-                  Affiliate হিসেবে শুরু করুন
+                  Create Your Affiliate Account
                   <ArrowRight className="size-4" />
                 </MagneticButton>
 
@@ -109,14 +110,15 @@ export function FinalCTA() {
                     size="lg"
                     variant="outline"
                     onClick={() => {
-                      // scrollTo('#faq');
+                      window.open('https://motionview.com.bd', '_blank');
                     }}
                     className="h-12 border bg-white/3 px-7 text-slate-500 hover:bg-white/7 hover:text-slate-900 hover:dark:text-slate-100"
                   >
-                    আরও জানুন
+                    Explore motionview.com.bd
                   </Button>
                 </motion.div>
               </motion.div>
+
               {/* Trust micro-text */}
               <motion.p
                 initial={{ opacity: 0 }}
@@ -125,7 +127,7 @@ export function FinalCTA() {
                 transition={{ delay: 0.45 }}
                 className="mt-5 text-[11px] text-muted-foreground"
               >
-                Free to join · No monthly fees · Withdraw anytime
+                Free to join · No monthly fees · No inventory needed · Withdraw anytime
               </motion.p>
             </div>
 
@@ -138,7 +140,7 @@ export function FinalCTA() {
               className="grid grid-cols-3 gap-3 lg:w-[320px] lg:grid-cols-1"
             >
               {[
-                { value: '50K+', label: 'Customers', icon: '👥' },
+                { value: '50K+', label: 'Happy customers', icon: '👥' },
                 { value: '100K+', label: 'Orders delivered', icon: '📦' },
                 { value: '4.8★', label: 'Customer rating', icon: '⭐' },
               ].map(({ value, label, icon }) => (
@@ -147,7 +149,7 @@ export function FinalCTA() {
                   className="rounded-2xl border border-white/[0.07] bg-white/4 p-5 backdrop-blur-xl"
                 >
                   <span className="text-lg">{icon}</span>
-                  <p className="mt-2 text-2xl font-semibold text-motion">
+                  <p className="mt-2 text-2xl font-semibold text-foreground">
                     {value}
                   </p>
                   <p className="mt-0.5 text-[10px] text-muted-foreground">
@@ -159,7 +161,7 @@ export function FinalCTA() {
           </div>
 
           {/* Bottom accent strip */}
-          <div className="h-px bg-bg-linear-to-r from-transparent via-secondary/30 to-transparent" />
+          <div className="h-px bg-linear-to-r from-transparent via-secondary/30 to-transparent" />
           <div className="flex items-center justify-center gap-3 py-4">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
@@ -168,7 +170,7 @@ export function FinalCTA() {
               />
             ))}
             <span className="text-[10px] text-muted-foreground">
-              Trusted by creators across Bangladesh
+              Trusted by creators and marketers across Bangladesh
             </span>
           </div>
         </div>

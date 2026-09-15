@@ -7,9 +7,10 @@ import { cardReveal, ease, SectionHeading, Stagger } from './motion-primitives';
 const steps = [
   {
     number: '01',
-    title: 'অ্যাকাউন্ট তৈরি',
-    bangla: 'শুরু করুন',
-    description: 'একটি অ্যাকাউন্ট তৈরি করে affiliate dashboard-এ প্রবেশ করুন।',
+    title: 'Join the Program',
+    sub: 'Create your account',
+    description:
+      'Sign up for a free affiliate account and complete your profile to access the affiliate dashboard.',
     icon: Users,
     color: 'from-violet-500/20 to-violet-500/5',
     iconColor: 'text-violet-400',
@@ -17,9 +18,10 @@ const steps = [
   },
   {
     number: '02',
-    title: 'পণ্য বেছে নিন',
-    bangla: 'সঠিক পণ্য খুঁজুন',
-    description: 'Motion View-এর আপনার পছন্দের পণ্য খুঁজে নিন।',
+    title: 'Explore Products',
+    sub: 'Find the right fit',
+    description:
+      'Browse eligible Motion View gadgets, electronics, and eco products that match your audience.',
     icon: Link2,
     color: 'from-sky-500/20 to-sky-500/5',
     iconColor: 'text-sky-400',
@@ -27,9 +29,10 @@ const steps = [
   },
   {
     number: '03',
-    title: 'লিংক শেয়ার',
-    bangla: 'Audience-এ পৌঁছান',
-    description: 'Unique affiliate link আপনার audience-এর সাথে শেয়ার করুন।',
+    title: 'Share Affiliate Links',
+    sub: 'Reach your audience',
+    description:
+      'Generate unique tracking links and share them through your website, social media, videos, or communities.',
     icon: BarChart3,
     color: 'from-emerald-500/20 to-emerald-500/5',
     iconColor: 'text-emerald-400',
@@ -37,9 +40,10 @@ const steps = [
   },
   {
     number: '04',
-    title: 'কমিশন আয়',
-    bangla: 'ফলাফল পান',
-    description: 'সফল অর্ডার হলে আপনার commission automatically track হবে।',
+    title: 'Earn Commission',
+    sub: 'Get rewarded',
+    description:
+      'Qualifying purchases attributed to your affiliate activity generate commission tracked automatically.',
     icon: CircleDollarSign,
     color: 'from-amber-500/20 to-amber-500/5',
     iconColor: 'text-secondary',
@@ -59,10 +63,9 @@ export function HowItWorks() {
       <div className="relative mx-auto max-w-350 px-5 sm:px-8">
         <div className="flex flex-col items-start gap-4 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
-            eyebrow="Creator journey"
-            title="কনটেন্ট থেকে কমিশন"
-            bangla="মাত্র চারটি সহজ ধাপে আপনার journey শুরু করুন"
-            description="আপনার কাজের ধরন অনুযায়ী তৈরি একটি সহজ, স্বচ্ছ এবং সম্পূর্ণ affiliate experience।"
+            eyebrow="How it works"
+            title="From content to commission"
+            description="A simple, transparent affiliate experience built around your workflow. Join, promote, and earn — no inventory or logistics required."
             light
           />
 
@@ -133,10 +136,8 @@ export function HowItWorks() {
                       <h3 className="mt-5 text-lg font-semibold text-foreground">
                         {step.title}
                       </h3>
-                      <p
-                        className={`mt-0.5 text-xs font-medium ${step.iconColor}`}
-                      >
-                        {step.bangla}
+                      <p className={`mt-0.5 text-xs font-medium ${step.iconColor}`}>
+                        {step.sub}
                       </p>
                       <p className="mt-3 text-sm leading-6 text-foreground/65">
                         {step.description}

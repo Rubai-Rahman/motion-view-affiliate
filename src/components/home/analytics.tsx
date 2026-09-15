@@ -27,9 +27,9 @@ export function Analytics() {
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8">
         <SectionHeading
           eyebrow="Inside your dashboard"
-          title="আপনার content-এর আসল performance জানুন।"
-          bangla="কোন content কতটা কাজ করছে, সবকিছু দেখুন এক নজরে।"
-          description="Click গুরুত্বপূর্ণ, order আরও ভালো, আর revenue পুরো গল্পটি বলে।"
+          title="Know the real performance of your content."
+          bangla="See how well each piece of content is performing, all at a glance."
+          description="Clicks matter, orders matter more, and revenue tells the full story."
           light
         />
 

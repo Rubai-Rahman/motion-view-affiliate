@@ -5,6 +5,7 @@ import {
   ArrowRight,
   ChevronDown,
   Copy,
+  ExternalLink,
   Link2,
   Search,
   Sparkles,
@@ -63,9 +64,8 @@ export function Products() {
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <SectionHeading
             eyebrow="Product marketplace"
-            title="Share করার মতো পণ্য খুঁজে নিন।"
-            bangla="আপনার audience-এর জন্য সঠিক product বেছে নিন।"
-            description="Motion View-এর growing catalog থেকে এমন product খুঁজে নিন যা আপনার content-এর সাথে স্বাভাবিকভাবে মিলে যায়।"
+            title="Find products worth sharing."
+            description="Browse Motion Views growing catalog of gadgets, electronics, and eco products. Pick what resonates with your audience and start promoting today."
           />
 
           <motion.div
@@ -77,9 +77,10 @@ export function Products() {
             <Button
               variant="outline"
               className="w-fit border-border bg-secondary-background text-secondary-background-foreground border hover:border-border"
+              onClick={() => window.open('https://motionview.com.bd', '_blank')}
             >
-              সব পণ্য দেখুন
-              <ArrowRight className="size-4" />
+              Browse All Products
+              <ExternalLink className="size-4" />
             </Button>
           </motion.div>
         </div>
@@ -95,21 +96,21 @@ export function Products() {
           <div className="flex h-12 flex-1 items-center gap-3 rounded-xl border border-border bg-card px-4 transition-colors focus-within:border-secondary/40">
             <Search className="size-4 shrink-0 text-muted-foreground" />
             <span className="text-sm text-muted-foreground">
-              Promote করার জন্য product খুঁজুন...
+              Search products to promote...
             </span>
           </div>
           <Button
             variant="outline"
             className="h-12 border-border bg-card text-secondary-background-foreground"
           >
-            সব category
+            All categories
             <ChevronDown className="size-4" />
           </Button>
         </motion.div>
 
         {/* Product grid */}
         <Stagger className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product, i) => (
+          {products.map((product) => (
             <motion.div
               key={product.name}
               variants={cardReveal}
@@ -121,7 +122,7 @@ export function Products() {
               <div className="relative flex aspect-4/3 items-center justify-center overflow-hidden bg-secondary-background">
                 {/* Gradient bg */}
                 <div
-                  className={`absolute inset-0 bg-bg-linear-to-br ${product.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
+                  className={`absolute inset-0 bg-linear-to-br ${product.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
                 />
 
                 {/* Product initials mockup */}
@@ -168,7 +169,7 @@ export function Products() {
                   {product.name}
                 </h3>
                 <p className="mt-0.5 text-xs text-muted-foreground">
-                  Promote করার জন্য প্রস্তুত
+                  Ready to promote
                 </p>
 
                 <Separator className="my-4 bg-border" />
@@ -179,7 +180,7 @@ export function Products() {
                       {product.price}
                     </p>
                     <p className="mt-0.5 text-[10px] text-muted-foreground">
-                      Commission product অনুযায়ী
+                      Commission per product
                     </p>
                   </div>
 
@@ -189,7 +190,7 @@ export function Products() {
                     type="button"
                     className="flex items-center gap-1.5 rounded-xl bg-secondary-background px-3.5 py-2 text-xs font-semibold text-secondary-background-foreground transition-colors hover:bg-secondary border border-border"
                   >
-                    Link তৈরি করুন
+                    Create Link
                     <Copy className="size-3" />
                   </motion.button>
                 </div>
@@ -204,12 +205,21 @@ export function Products() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, ease }}
-          className="mt-10 flex justify-center"
+          className="mt-10 flex flex-col items-center gap-2"
         >
           <p className="text-sm text-muted-foreground">
             <span className="font-semibold">10+ brands</span>, hundreds of
-            products — more added regularly.
+            eligible products — more added regularly.
           </p>
+          <a
+            href="https://motionview.com.bd"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs text-secondary hover:underline"
+          >
+            Visit motionview.com.bd to explore the full catalog
+            <ArrowRight className="size-3" />
+          </a>
         </motion.div>
       </div>
     </section>

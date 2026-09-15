@@ -16,38 +16,44 @@ const benefits = [
   {
     icon: CircleDollarSign,
     title: 'Competitive commissions',
-    bangla: 'আকর্ষণীয় কমিশন',
-    description: 'প্রতিটি qualifying sale থেকে সর্বোচ্চ commission rate পান।',
+    sub: 'Earn from every qualifying sale',
+    description:
+      'Receive commission from eligible purchases made through your affiliate links, according to the current program terms.',
   },
   {
     icon: BarChart3,
     title: 'Real-time analytics',
-    bangla: 'রিয়েল-টাইম analytics',
-    description: 'Clicks, conversions ও revenue — সবকিছু live dashboard-এ।',
+    sub: 'Know what is working',
+    description:
+      'Track clicks, conversions, and revenue in your live affiliate dashboard — all in one transparent view.',
   },
   {
     icon: Link2,
     title: 'Easy link generation',
-    bangla: 'সহজে link তৈরি',
-    description: 'এক click-এ shareable affiliate link তৈরি করুন।',
+    sub: 'One click, shareable anywhere',
+    description:
+      'Generate unique tracking links for any eligible product instantly and share across all your permitted channels.',
   },
   {
     icon: Package,
     title: 'Wide product selection',
-    bangla: 'বিভিন্ন ধরনের পণ্য',
-    description: 'Gadgets, audio, smart home — growing catalog থেকে বেছে নিন।',
+    sub: 'Gadgets, audio, smart home & more',
+    description:
+      'Choose from a growing catalog of Motion View products — smart gadgets, electronics, and eco products your audience will love.',
   },
   {
     icon: TrendingUp,
     title: 'Transparent earnings',
-    bangla: 'স্বচ্ছ earning',
-    description: 'আপনার প্রতিটি commission সম্পূর্ণ স্বচ্ছভাবে track করা হয়।',
+    sub: 'Full visibility, no surprises',
+    description:
+      'Every commission is tracked clearly against your affiliate activity so you always know where your earnings come from.',
   },
   {
     icon: Wallet,
     title: 'Easy withdrawals',
-    bangla: 'সহজ withdrawal',
-    description: 'নির্ধারিত threshold পূরণ হলে সহজেই earnings withdraw করুন।',
+    sub: 'Your money, your timeline',
+    description:
+      'Once you meet the applicable threshold, withdraw your earnings through the available payment methods under program terms.',
   },
 ];
 
@@ -65,10 +71,9 @@ export function Benefits() {
           {/* Left column — heading + highlight */}
           <div className="sticky top-28">
             <SectionHeading
-              eyebrow="কেন Motion View"
-              title="আপনার audience-এর বিশ্বাসকে আয়ে পরিণত করুন।"
-              bangla="আপনার recommendation-ই হতে পারে পরবর্তী income stream।"
-              description="পণ্য খুঁজে নেওয়া, link তৈরি, performance বোঝা এবং earnings manage করার জন্য প্রয়োজনীয় সব tool এক জায়গায়।"
+              eyebrow="Why Motion View Affiliate"
+              title="Turn your audience apos;s trust into income."
+              description="Everything you need to find products, generate links, understand your performance, and manage earnings — all in one place."
             />
 
             {/* Feature callout card */}
@@ -85,10 +90,11 @@ export function Benefits() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">
-                    আপনার workflow-এর জন্য তৈরি
+                    Built for your workflow
                   </p>
                   <p className="mt-0.5 text-sm text-muted-foreground">
-                    আপনার content workflow-এর সাথে সহজেই মানিয়ে যায়।
+                    Fits seamlessly into your existing content process — no
+                    operational overhead.
                   </p>
                 </div>
               </div>
@@ -117,7 +123,7 @@ export function Benefits() {
 
           {/* Right column — benefit grid */}
           <Stagger className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:gap-4">
-            {benefits.map((b, i) => {
+            {benefits.map((b) => {
               const Icon = b.icon;
               return (
                 <motion.div
@@ -156,7 +162,7 @@ export function Benefits() {
                       {b.title}
                     </h3>
                     <p className="mt-0.5 text-xs font-medium text-secondary">
-                      {b.bangla}
+                      {b.sub}
                     </p>
                     <p className="mt-2.5 text-sm leading-6 text-foreground/65">
                       {b.description}

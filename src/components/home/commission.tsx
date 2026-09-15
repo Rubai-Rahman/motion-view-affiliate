@@ -15,8 +15,9 @@ import { ease, Reveal, SectionHeading } from './motion-primitives';
 const flow = [
   {
     number: '01',
-    title: 'আপনার কনটেন্ট',
-    description: 'একটি helpful recommendation তৈরি করুন।',
+    title: 'Your Content',
+    description:
+      'Create a helpful review, comparison, buying guide, or recommendation your audience trusts.',
     icon: Sparkles,
     color: 'text-violet-400',
     bg: 'bg-violet-400/10',
@@ -24,31 +25,35 @@ const flow = [
   {
     number: '02',
     title: 'Affiliate Link',
-    description: 'এক click-এ trackable link তৈরি করুন।',
+    description:
+      'Generate a unique trackable link for the product in one click from your dashboard.',
     icon: Link2,
     color: 'text-sky-400',
     bg: 'bg-sky-400/10',
   },
   {
     number: '03',
-    title: 'Motion View পণ্য',
-    description: 'Audience-কে সঠিক পণ্যের সাথে যুক্ত করুন।',
+    title: 'Motion View Products',
+    description:
+      'Connect your audience with the right gadget or tech product from the eligible catalog.',
     icon: Package,
     color: 'text-amber-400',
     bg: 'bg-amber-400/10',
   },
   {
     number: '04',
-    title: 'সফল অর্ডার',
-    description: 'প্রতিটি qualifying order dashboard-এ দেখুন।',
+    title: 'Qualifying Order',
+    description:
+      'A successful eligible purchase is attributed to your affiliate activity and tracked in your dashboard.',
     icon: ShoppingBag,
     color: 'text-emerald-400',
     bg: 'bg-emerald-400/10',
   },
   {
     number: '05',
-    title: 'আপনার কমিশন',
-    description: 'স্বচ্ছভাবে earnings track ও manage করুন।',
+    title: 'Your Commission',
+    description:
+      'Commission is credited transparently according to the applicable program terms — track and withdraw anytime.',
     icon: Wallet,
     color: 'text-secondary',
     bg: 'bg-secondary/10',
@@ -69,9 +74,8 @@ export function CommissionSection() {
           <div>
             <SectionHeading
               eyebrow="Commission journey"
-              title="আপনার audience কিনলেই আপনার আয়।"
-              bangla="একটি সহজ flow, সম্পূর্ণ স্বচ্ছতা।"
-              description="আপনার content থেকে শুরু করে successful order পর্যন্ত প্রতিটি গুরুত্বপূর্ণ ধাপ এক জায়গায় track করুন।"
+              title="Your audience buys. You earn."
+              description="From your content to a confirmed order — every step is transparent, trackable, and credited to your affiliate account."
             />
 
             {/* Example commission card */}
@@ -84,7 +88,7 @@ export function CommissionSection() {
             >
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-foreground">
-                  Example commission
+                  Example commission breakdown
                 </p>
                 <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-600">
                   +৳349
@@ -102,7 +106,7 @@ export function CommissionSection() {
                     key={key}
                     className="flex items-center justify-between text-sm"
                   >
-                    <span className="text-foreground">{key}</span>
+                    <span className="text-foreground/70">{key}</span>
                     <span className="font-medium text-foreground">{val}</span>
                   </div>
                 ))}
@@ -113,7 +117,7 @@ export function CommissionSection() {
                   <Check className="size-3.5 text-emerald-600" />
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Sample transaction tracked successfully
+                  Sample transaction — tracked and confirmed successfully
                 </p>
               </div>
             </motion.div>
@@ -129,7 +133,7 @@ export function CommissionSection() {
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.6, delay: 0.3, ease }}
-                className="absolute inset-0 origin-top bg-bg-linear-to-b from-secondary to-secondary/20"
+                className="absolute inset-0 origin-top bg-linear-to-b from-secondary to-secondary/20"
               />
             </div>
 
@@ -160,10 +164,10 @@ export function CommissionSection() {
                             <p className="font-mono text-[10px] font-semibold tracking-[0.14em] text-secondary">
                               {step.number}
                             </p>
-                            <h3 className="mt-0.5 font-semibold text-secondary">
+                            <h3 className="mt-0.5 font-semibold text-foreground">
                               {step.title}
                             </h3>
-                            <p className="mt-1 text-sm text-foreground">
+                            <p className="mt-1 text-sm text-foreground/65">
                               {step.description}
                             </p>
                           </div>

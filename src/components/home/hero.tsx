@@ -88,7 +88,7 @@ export function Hero() {
               <Sparkles className="size-3 text-white" />
             </motion.span>
             <span className="text-[11px] font-medium text-foreground/70 dark:text-slate-400">
-              Motion View Affiliate Program
+              Motion View Affiliate Program · Bangladesh
             </span>
             <span className="rounded-full bg-secondary/15 px-2 py-0.5 text-[9px] font-semibold text-secondary">
               New
@@ -98,11 +98,11 @@ export function Hero() {
           {/* Headline */}
           <motion.h1
             variants={reveal}
-            className="mt-8 text-[52px] font-semibold leading-[0.94] tracking-[-0.06em] text-foreground sm:text-6xl lg:text-[80px]"
+            className="mt-8 text-[52px] font-semibold leading-[0.94] tracking-[-0.06em] text-foreground sm:text-6xl lg:text-[76px]"
           >
-            আপনার Audience
+            Earn Money by
             <br />
-            থেকেই{' '}
+            Promoting{' '}
             <span className="relative inline-block">
               <motion.span
                 className="text-secondary"
@@ -115,7 +115,7 @@ export function Hero() {
                 }}
                 transition={{ duration: 3.5, repeat: Infinity }}
               >
-                আয় করুন।
+                Gadgets.
               </motion.span>
               {/* Underline squiggle */}
               <motion.svg
@@ -143,16 +143,16 @@ export function Hero() {
             variants={reveal}
             className="mt-5 text-lg font-medium text-secondary"
           >
-            আপনার পছন্দের পণ্য share করুন, প্রতিটি successful order থেকে
-            commission আয় করুন।
+            Join the Motion View Affiliate Program and turn your audience into income.
           </motion.p>
 
           <motion.p
             variants={reveal}
             className="mt-3 text-base leading-[1.75] text-muted-foreground"
           >
-            Motion View-এর smart gadgets, electronics ও lifestyle products আপনার
-            audience-এর সাথে share করুন এবং সবকিছু এক dashboard থেকে track করুন।
+            Promote smart gadgets, electronics, and eco products from Motion View.
+            Share your affiliate links, drive qualifying sales, and earn commission —
+            no inventory, no logistics, no hassle.
           </motion.p>
 
           {/* CTAs */}
@@ -167,7 +167,7 @@ export function Hero() {
                 window.location.href = '/auth/signup';
               }}
             >
-              Affiliate হিসেবে শুরু করুন
+              Start Your Affiliate Journey
               <ArrowRight className="size-4" />
             </MagneticButton>
 
@@ -176,7 +176,8 @@ export function Hero() {
                 size="lg"
                 variant="outline"
                 onClick={() => {
-                  // scrollTo('#how-it-works');
+                  const el = document.querySelector('#how-it-works');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className="group h-12 border-border bg-card/60 px-7 text-foreground/70 backdrop-blur-xl hover:bg-muted hover:text-foreground dark:bg-white/3 dark:text-foreground/40 dark:border-white/10"
               >
@@ -186,7 +187,7 @@ export function Hero() {
                 >
                   <Play className="size-3 fill-current ml-0.5" />
                 </motion.span>
-                কীভাবে কাজ করে দেখুন
+                See How It Works
               </Button>
             </motion.div>
           </motion.div>
@@ -197,9 +198,9 @@ export function Hero() {
             className="mt-7 flex flex-wrap justify-center gap-x-5 gap-y-2 lg:justify-start"
           >
             {[
-              'Join করা free',
-              'প্রতিটি click track করুন',
-              'Creators-এর জন্য তৈরি',
+              'Free to join',
+              'Track every click',
+              'Built for creators',
             ].map((item, i) => (
               <motion.div
                 key={item}
@@ -228,15 +229,12 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, x: 60, scale: 0.92 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.35, ease }}
+          transition={{ delay: 0.4, duration: 1, ease }}
+          className="relative hidden lg:block"
         >
           <HeroDashboard />
         </motion.div>
       </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 inset-x-0 h-24 bg-linear-to-b from-transparent to-background" />
-      <div className="h-px bg-linear-to-r from-transparent via-border to-transparent" />
     </section>
   );
 }
